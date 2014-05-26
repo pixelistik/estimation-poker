@@ -21,11 +21,19 @@
 			<div class="btn-group" data-bind="estimationSelect: localUser().estimation, click: localUser().broadcast"></div>
 		</p>
 		<h2>The Team</h2>
-		<ul data-bind="foreach: users">
-			<li>
-				<span data-bind="text: name"></span> (<span data-bind="text: estimation"></span>)
-			</li>
-		</ul>
+		<table class="table" data-bind="foreach: users">
+			<tr>
+				<td data-bind="text: name"></td>
+				<td>
+					<span data-bind="
+						text: estimation,
+						css: {
+							max: estimation() == $root.highestEstimation(),
+							min: estimation() == $root.lowestEstimation()
+						}"></span>
+				</td>
+			</tr>
+		</table>
 	</div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<!--<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>-->

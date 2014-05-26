@@ -29,6 +29,21 @@
 
 		self.users = ko.observableArray([]);
 
+		// http://stackoverflow.com/a/6102340/376138
+		self.highestEstimation = ko.computed(function() {
+			var estimations = $.map(self.users(), function(val, i) {
+				return val.estimation();
+			});
+			return Math.max.apply(null, estimations);
+		});
+
+		self.lowestEstimation = ko.computed(function() {
+			var estimations = $.map(self.users(), function(val, i) {
+				return val.estimation();
+			});
+			return Math.min.apply(null, estimations);
+		});
+
 		self.update = function (data) {
 			var received = JSON.parse(data);
 			console.log(received);

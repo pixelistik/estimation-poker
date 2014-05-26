@@ -1,0 +1,16 @@
+.max, .min {
+	border-radius: 2px;
+	padding: 2px 4px;
+}
+
+.max {
+	background-color: #69f;
+}
+
+.min {
+	background-color: #99f;
+}
+
+.max.min {
+	background-color: transparent;
+}

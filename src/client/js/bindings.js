@@ -46,6 +46,34 @@
 		defaultThousandSeparator: ",",
 		defaultCurrencySymbol: "€"
 	};
+
+	ko.bindingHandlers.estimationSelect = {
+		init: function(element, valueAccessor) {
+			var values = [0, 1, 2, 3, 5, 8, 13, 20, 40, 100];
+
+			$(element).addClass("estimationSelect");
+
+			for(var i = 0; i < values.length; i++) {
+				$('<button type="button" class="btn">' + values[i] + '</button>').appendTo(element);
+			}
+
+			$("button", element).each(function() {
+				$(this).click(function() {
+					var observable = valueAccessor();
+					observable($(this).text());
+				});
+			});
+		},
+		update: function(element, valueAccessor) {
+			var observable = valueAccessor();
+			$("button", element).each(function() {
+				$(this).removeClass("active");
+				if($(this).text() == observable()) {
+					$(this).addClass("active");
+				}
+			});
+		}
+	};
 })(ko);
 
 

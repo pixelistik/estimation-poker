@@ -6,7 +6,7 @@
 
 		self.uuid = uuid || EP.Tools.uuid();
 		self.name = ko.observable("");
-		self.estimation = ko.observable(0);
+		self.estimation = ko.observable();
 
 		self.broadcast = function () {
 			console.log("broadcasting user");

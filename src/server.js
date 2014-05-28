@@ -31,7 +31,9 @@ io.sockets.on('connection', function (socket) {
 	var group;
 	socket.on('join', function (data) {
 		socket.join(data.groupName);
+
 		group = data.groupName;
+		socket.broadcast.to(group).emit('who is there');
 		console.log("Client joined group " + data.groupName);
 	});
 

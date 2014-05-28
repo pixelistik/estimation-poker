@@ -25,6 +25,10 @@
 			self.update(data);
 		});
 
+		socket.on('who is there', function () {
+			self.localUser().broadcast();
+		});
+
 		self.localUser = ko.observable(new EP.User(socket));
 
 		self.users = ko.observableArray([]);

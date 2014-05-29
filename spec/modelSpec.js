@@ -1,5 +1,16 @@
 describe("Model", function() {
-
+	window.io = {
+		connect: function() {
+			return {
+				emit: function() {
+					return null;
+				},
+				on: function() {
+					return null;
+				}
+			};
+		}
+	};
 	describe("User", function() {
 		var user;
 
@@ -9,6 +20,18 @@ describe("Model", function() {
 
 		it("should instantiate", function() {
 			expect(user).toBeDefined();
+		});
+	});
+
+	describe("PokerView", function() {
+		var user;
+
+		beforeEach(function() {
+			pokerView = new EP.PokerView();
+		});
+
+		it("should instantiate", function() {
+			expect(pokerView).toBeDefined();
 		});
 	});
 });

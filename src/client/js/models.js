@@ -18,6 +18,27 @@
 	EP.PokerView = function (groupName) {
 		var self = this;
 
+		var getAllEstimations = function() {
+			var estimations = $.map(self.users(), function(val, i) {
+				if(val.estimation()) {
+					return val.estimation();
+				}
+			});
+			if(self.localUser().estimation()) {
+				estimations.push(self.localUser().estimation());
+			}
+			return estimations;
+		};
+
+		var getExistingUserByUuid = function (uuid) {
+			for(var i=0; i < self.users().length; i++) {
+				if (self.users()[i].uuid === uuid) {
+					return self.users()[i];
+				}
+			}
+			return false;
+		}
+
 		var socket = io.connect('http://localhost:8080');
 		socket.emit('join', {groupName: groupName});
 
@@ -35,15 +56,10 @@
 
 		// http://stackoverflow.com/a/6102340/376138
 		self.highestEstimation = ko.computed(function() {
-			var estimations = $.map(self.users(), function(val, i) {
-				if(val.estimation()) {
-					return val.estimation();
-				}
-			});
-			if(self.localUser().estimation()) {
-				estimations.push(self.localUser().estimation());
-			}
+			var estimations = getAllEstimations();
+
 			var result = Math.max.apply(null, estimations);
+
 			if(result === -Infinity) {
 				return false;
 			}
@@ -51,15 +67,10 @@
 		});
 
 		self.lowestEstimation = ko.computed(function() {
-			var estimations = $.map(self.users(), function(val, i) {
-				if(val.estimation()) {
-					return val.estimation();
-				}
-			});
-			if(self.localUser().estimation()) {
-				estimations.push(self.localUser().estimation());
-			}
+			var estimations = getAllEstimations();
+
 			var result = Math.min.apply(null, estimations);
+
 			if(result === Infinity) {
 				return false;
 			}
@@ -91,15 +102,6 @@
 
 			user.name(received.name);
 			user.estimation(received.estimation);
-		}
-
-		var getExistingUserByUuid = function (uuid) {
-			for(var i=0; i < self.users().length; i++) {
-				if (self.users()[i].uuid === uuid) {
-					return self.users()[i];
-				}
-			}
-			return false;
 		}
 	}
 })(window.EP = window.EP || {});

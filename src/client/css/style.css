@@ -14,3 +14,10 @@
 .max.min {
 	background-color: transparent;
 }
+
+.incomplete .estimation {
+	width: 2em;
+	display: inline-block;
+	color: #666;
+	background-color: #666;
+}

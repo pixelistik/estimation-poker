@@ -21,11 +21,11 @@
 			<div class="btn-group" data-bind="estimationSelect: localUser().estimation, click: localUser().broadcast"></div>
 		</p>
 		<h2>The Team</h2>
-		<table class="table" data-bind="foreach: users">
+		<table class="table" data-bind="foreach: users, css: {incomplete: !$root.estimationsComplete()}">
 			<tr>
-				<td data-bind="text: name"></td>
+				<td class="name" data-bind="text: name"></td>
 				<td>
-					<span data-bind="
+					<span class="estimation" data-bind="
 						text: estimation,
 						css: {
 							max: estimation() == $root.highestEstimation(),

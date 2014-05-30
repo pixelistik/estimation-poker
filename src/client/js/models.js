@@ -6,7 +6,7 @@
 
 		self.uuid = uuid || EP.Tools.uuid();
 		self.name = ko.observable("");
-		self.estimation = ko.observable();
+		self.estimation = ko.observable(false);
 
 		self.broadcast = function () {
 			console.log("broadcasting user");
@@ -36,16 +36,46 @@
 		// http://stackoverflow.com/a/6102340/376138
 		self.highestEstimation = ko.computed(function() {
 			var estimations = $.map(self.users(), function(val, i) {
-				return val.estimation();
+				if(val.estimation()) {
+					return val.estimation();
+				}
 			});
-			return Math.max.apply(null, estimations);
+			if(self.localUser().estimation()) {
+				estimations.push(self.localUser().estimation());
+			}
+			var result = Math.max.apply(null, estimations);
+			if(result === -Infinity) {
+				return false;
+			}
+			return result;
 		});
 
 		self.lowestEstimation = ko.computed(function() {
 			var estimations = $.map(self.users(), function(val, i) {
-				return val.estimation();
+				if(val.estimation()) {
+					return val.estimation();
+				}
 			});
-			return Math.min.apply(null, estimations);
+			if(self.localUser().estimation()) {
+				estimations.push(self.localUser().estimation());
+			}
+			var result = Math.min.apply(null, estimations);
+			if(result === Infinity) {
+				return false;
+			}
+			return result;
+		});
+
+		self.estimationsComplete = ko.computed(function() {
+			for(var i=0; i < self.users().length; i++) {
+				if (self.users()[i].estimation() === false) {
+					return false;
+				}
+			}
+			if(self.localUser().estimation() === false) {
+				return false;
+			}
+			return true;
 		});
 
 		self.update = function (data) {

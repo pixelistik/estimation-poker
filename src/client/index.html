@@ -17,24 +17,39 @@
 		<p>Your name: <b data-bind="text: localUser().name"></b></p>
 		<p><input data-bind="value: localUser().name, click: localUser().broadcast" /></p>
 
-		<p>Your estimation:</b></p>
-		<p>
-			<div class="btn-group" data-bind="estimationSelect: localUser().estimation, click: localUser().broadcast"></div>
-		</p>
-		<h2>The Team</h2>
-		<table class="table" data-bind="foreach: users, css: {incomplete: !$root.estimationsComplete()}">
-			<tr>
-				<td class="name" data-bind="text: name"></td>
-				<td>
-					<span class="estimation" data-bind="
-						text: estimation,
-						css: {
-							estimated: estimation() != false,
-							max: estimation() == $root.highestEstimation(),
-							min: estimation() == $root.lowestEstimation()
-						}"></span>
-				</td>
-			</tr>
+		<h2>The Estimations</h2>
+		<table class="table" data-bind="css: {incomplete: !$root.estimationsComplete()}">
+			<tbody class="localUser">
+				<tr>
+					<td>
+						<span data-bind="text: localUser().name"></span>
+						<span class="btn-group" data-bind="estimationSelect: localUser().estimation, click: localUser().broadcast"></span>
+					</td>
+					<td>
+						<span class="estimation" data-bind="
+							text: localUser().estimation,
+							css: {
+								estimated: localUser().estimation() != false,
+								max: localUser().estimation() == $root.highestEstimation(),
+								min: localUser().estimation() == $root.lowestEstimation()
+							}"></span>
+					</td>
+				</tr>
+			</tbody>
+			<tbody  class="remoteUsers" data-bind="foreach: users">
+				<tr>
+					<td class="name" data-bind="text: name"></td>
+					<td>
+						<span class="estimation" data-bind="
+							text: estimation,
+							css: {
+								estimated: estimation() != false,
+								max: estimation() == $root.highestEstimation(),
+								min: estimation() == $root.lowestEstimation()
+							}"></span>
+					</td>
+				</tr>
+			</tbody>
 		</table>
 	</div>
 	<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->

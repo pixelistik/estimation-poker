@@ -29,6 +29,7 @@
 					<span class="estimation" data-bind="
 						text: estimation,
 						css: {
+							estimated: estimation() != false,
 							max: estimation() == $root.highestEstimation(),
 							min: estimation() == $root.lowestEstimation()
 						}"></span>

@@ -5,11 +5,6 @@
 	padding: 2px 4px;
 }
 
-.incomplete .estimation {
-	color: #666;
-	background-color: #666;
-}
-
 .max {
 	background-color: #69f;
 }
@@ -20,4 +15,21 @@
 
 .max.min {
 	background-color: transparent;
+}
+
+/*
+ * While the team's estimation is incomplete, the estimation
+ * values are completely hidden by default
+ */
+.incomplete .estimation {
+	color: transparent;
+}
+
+/*
+ * While the team's estimation is incomplete, received estimation
+ * values are shown in an unreadably teaser style
+ */
+.incomplete .estimated {
+	color: #666;
+	background-color: #666;
 }

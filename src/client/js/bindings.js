@@ -60,7 +60,12 @@
 			$("button", element).each(function() {
 				$(this).click(function() {
 					var observable = valueAccessor();
-					observable($(this).text());
+					// Unset value if the button was already active
+					if($(this).hasClass("active")) {
+						observable(false);
+					} else {
+						observable($(this).text());
+					}
 				});
 			});
 		},
@@ -68,7 +73,7 @@
 			var observable = valueAccessor();
 			$("button", element).each(function() {
 				$(this).removeClass("active");
-				if($(this).text() == observable()) {
+				if(observable() && $(this).text() == observable()) {
 					$(this).addClass("active");
 				}
 			});

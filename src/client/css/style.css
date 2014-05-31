@@ -1,6 +1,13 @@
-.max, .min {
+.estimation {
+	width: 2em;
+	display: inline-block;
 	border-radius: 2px;
 	padding: 2px 4px;
+}
+
+.incomplete .estimation {
+	color: #666;
+	background-color: #666;
 }
 
 .max {
@@ -13,11 +20,4 @@
 
 .max.min {
 	background-color: transparent;
-}
-
-.incomplete .estimation {
-	width: 2em;
-	display: inline-block;
-	color: #666;
-	background-color: #666;
 }

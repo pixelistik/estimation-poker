@@ -4,8 +4,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Estimation Poker Prototype</title>
-	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/ui-darkness/jquery-ui.css">
+	<!--<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
+	<link rel="stylesheet" href="css/lib/bootstrap.min.css">
+	<!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/ui-darkness/jquery-ui.css">-->
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -35,11 +36,16 @@
 			</tr>
 		</table>
 	</div>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+	<script>window.jQuery || document.write('<script src="js/lib/jquery.min.js"><\/script>')</script>
+
 	<!--<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>-->
-	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<!--<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>-->
+
 	<!--<script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js"></script>-->
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-debug.js"></script>
+	<!--<script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-debug.js"></script>-->
+	<script>window.ko || document.write('<script src="js/lib/knockout-debug.js"><\/script>')</script>
+
 	<script src="http://localhost:8080/socket.io/socket.io.js"></script>
 	<script src="js/tools.js"></script>
 	<script src="js/models.js"></script>

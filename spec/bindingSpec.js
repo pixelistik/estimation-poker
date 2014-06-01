@@ -70,10 +70,6 @@ describe("Binding", function() {
 			expect($(".et-display", fixture).css("display")).not.toEqual("none");
 			expect($(".et-form",    fixture).css("display")).toEqual("none");
 		});
-
-		it("should ", function() {});
-		it("should ", function() {});
-		it("should ", function() {});
-		it("should ", function() {});
 	});
 });
+

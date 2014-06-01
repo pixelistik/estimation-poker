@@ -85,7 +85,7 @@
 
 			$(element).addClass("editableText");
 
-			$('<span class="et-display"><span class="et-label"></span><span class="et-hint"></span></span><span class="et-form"><input/><button type="button" class="btn">save</button></span>').appendTo(element);
+			$('<span class="et-display"><span class="et-label"></span><span class="et-hint"></span></span><span class="et-form"><input/><button type="submit" class="btn">save</button></span>').appendTo(element);
 
 			$(".et-form", element).hide();
 
@@ -95,14 +95,24 @@
 				$(".et-form", element).show();
 			});
 
-			$("button", element).click(function() {
+			var save = function() {
 				$(element).removeClass("editing");
 				$(".et-display", element).show();
 				$(".et-form", element).hide();
 
 				var observable = valueAccessor();
 				observable($("input", element).val());
-			});
+			};
+
+			var abort = function() {
+				$(element).removeClass("editing");
+				$(".et-display", element).show();
+				$(".et-form", element).hide();
+			};
+
+			$("button", element).on("click", save);
+			$("input", element).on("keypress", function(e) {if(e.keyCode === 13) {save();}});
+			$("input", element).on("keypress", function(e) {if(e.keyCode === 27) {abort();}});
 		},
 		update: function(element, valueAccessor) {
 			var observable = valueAccessor();

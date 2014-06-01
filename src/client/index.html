@@ -32,7 +32,7 @@
 					</td>
 				</tr>
 			</tbody>
-			<tbody  class="remoteUsers" data-bind="foreach: users">
+			<tbody class="remoteUsers" data-bind="foreach: users">
 				<tr>
 					<td class="name" data-bind="text: name"></td>
 					<td>
@@ -43,6 +43,14 @@
 								max: estimation() == $root.highestEstimation(),
 								min: estimation() == $root.lowestEstimation()
 							}"></span>
+					</td>
+				</tr>
+			</tbody>
+			<tbody class="summary">
+				<tr>
+					<td>Team estimation (max)</td>
+					<td>
+						<span class="estimation" data-bind="text: $root.highestEstimation()"></span>
 					</td>
 				</tr>
 			</tbody>

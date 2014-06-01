@@ -79,6 +79,43 @@
 			});
 		}
 	};
+
+	ko.bindingHandlers.editableText = {
+		init: function(element, valueAccessor) {
+
+			$(element).addClass("editableText");
+
+			$('<div class="et-display"><span class="et-label"></span><span class="et-hint">edit</span></div><div class="et-form"><input/><button type="button" class="btn">save</button></div>').appendTo(element);
+
+			$(".et-form", element).hide();
+
+			$(".et-display", element).click(function() {
+				$(element).addClass("editing");
+				$(".et-display", element).hide();
+				$(".et-form", element).show();
+			});
+
+			$("button", element).click(function() {
+				$(element).removeClass("editing");
+				$(".et-display", element).show();
+				$(".et-form", element).hide();
+
+				var observable = valueAccessor();
+				observable($("input", element).val());
+			});
+		},
+		update: function(element, valueAccessor) {
+			var observable = valueAccessor();
+			$(".et-label", element).text(observable());
+			$("input", element).val(observable());
+
+			if(observable()) {
+				$(".et-hint", element).hide();
+			} else {
+				$(".et-hint", element).show();
+			}
+		}
+	};
 })(ko);
 
 

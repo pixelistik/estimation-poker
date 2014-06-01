@@ -33,3 +33,17 @@
 	color: #666;
 	background-color: #666;
 }
+
+.et-display {
+	cursor: pointer;
+}
+
+.et-label,
+.et-hint {
+	border-bottom: 1px dotted #333;
+}
+
+.et-label:hover,
+.et-hint:hover {
+	background-color: #ff9;
+}

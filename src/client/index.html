@@ -14,9 +14,7 @@
 		<h1>Estimation Poker</h1>
 
 		<h2>You</h2>
-		<p>Your name: <b data-bind="text: localUser().name"></b></p>
-		<p><input data-bind="value: localUser().name, click: localUser().broadcast" /></p>
-
+		<p><span data-bind="editableText: localUser().name, click: localUser().broadcast"> </span></p>
 		<h2>The Estimations</h2>
 		<table class="table" data-bind="css: {incomplete: !$root.estimationsComplete()}">
 			<tbody class="localUser">

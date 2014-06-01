@@ -13,14 +13,12 @@
 	<div class="container">
 		<h1>Estimation Poker</h1>
 
-		<h2>You</h2>
-		<p><span data-bind="editableText: localUser().name, click: localUser().broadcast"> </span></p>
 		<h2>The Estimations</h2>
 		<table class="table" data-bind="css: {incomplete: !$root.estimationsComplete()}">
 			<tbody class="localUser">
 				<tr>
 					<td>
-						<span data-bind="text: localUser().name"></span>
+						<span data-bind="editableText: localUser().name, click: localUser().broadcast" data-edit-hint="<your name>"></span>
 						<span class="btn-group" data-bind="estimationSelect: localUser().estimation, click: localUser().broadcast"></span>
 					</td>
 					<td>

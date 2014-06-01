@@ -85,7 +85,7 @@
 
 			$(element).addClass("editableText");
 
-			$('<div class="et-display"><span class="et-label"></span><span class="et-hint">edit</span></div><div class="et-form"><input/><button type="button" class="btn">save</button></div>').appendTo(element);
+			$('<span class="et-display"><span class="et-label"></span><span class="et-hint"></span></span><span class="et-form"><input/><button type="button" class="btn">save</button></span>').appendTo(element);
 
 			$(".et-form", element).hide();
 
@@ -112,6 +112,8 @@
 			if(observable()) {
 				$(".et-hint", element).hide();
 			} else {
+				//if(element.data("edit-hint") {}
+				$(".et-hint", element).text($(element).data("edit-hint") || "edit");
 				$(".et-hint", element).show();
 			}
 		}

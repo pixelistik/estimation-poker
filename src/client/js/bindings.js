@@ -89,11 +89,12 @@
 
 			$(".et-form", element).hide();
 
-			$(".et-display", element).click(function() {
+			var startEditing = function() {
 				$(element).addClass("editing");
 				$(".et-display", element).hide();
 				$(".et-form", element).show();
-			});
+				$(".et-form input", element).focus();
+			};
 
 			var save = function() {
 				$(element).removeClass("editing");
@@ -110,6 +111,7 @@
 				$(".et-form", element).hide();
 			};
 
+			$(".et-display", element).on("click", startEditing);
 			$("button", element).on("click", save);
 			$("input", element).on("keypress", function(e) {if(e.keyCode === 13) {save();}});
 			$("input", element).on("keypress", function(e) {if(e.keyCode === 27) {abort();}});

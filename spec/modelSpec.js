@@ -32,6 +32,32 @@ describe("Model", function() {
 			user = new EP.User();
 			expect(user.uuid).toEqual("a-mock-uuid");
 		});
+
+		it("should be able to be loaded from cookie", function() {
+			spyOn($, "cookie").and.callFake(function(param) {
+				var returnValues = {
+					"ep.user.name": "a test user",
+					"ep.user.uuid": "some-test-uuid",
+				};
+				return returnValues[param];
+			});
+
+			user.loadFromCookie();
+
+			expect(user.name()).toEqual("a test user");
+			expect(user.uuid  ).toEqual("some-test-uuid");
+		});
+
+		it("should be able to be saved to a cookie", function() {
+			spyOn($, "cookie");
+
+			user.name("test user");
+			user.uuid = "test user";
+
+			user.saveToCookie();
+
+			expect($.cookie.calls.allArgs()).toEqual([["ep.user.name", "test user"], ["ep.user.uuid", "test user"]]);
+		});
 	});
 
 	describe("PokerView", function() {

@@ -13,6 +13,21 @@
 			console.log(ko.toJSON(self));
 			socket.emit('update', ko.toJSON(self));
 		}
+
+		self.loadFromCookie = function() {
+			if(
+				$.cookie("ep.user.name") &&
+				$.cookie("ep.user.uuid")
+			) {
+				self.name($.cookie("ep.user.name"));
+				self.uuid = $.cookie("ep.user.uuid");
+			}
+		};
+
+		self.saveToCookie = function() {
+			$.cookie("ep.user.name", self.name());
+			$.cookie("ep.user.uuid", self.uuid);
+		};
 	};
 
 	EP.PokerView = function (groupName) {

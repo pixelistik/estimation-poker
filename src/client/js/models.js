@@ -66,6 +66,12 @@
 		});
 
 		self.localUser = ko.observable(new EP.User(socket));
+		self.localUser().loadFromCookie();
+
+		self.localUser().name.subscribe(function() {
+			self.localUser().broadcast();
+			self.localUser().saveToCookie();
+		});
 
 		self.users = ko.observableArray([]);
 

@@ -189,5 +189,19 @@ describe("Model", function() {
 				expect(pokerView.estimationsComplete()).toBeTruthy();
 			});
 		});
+
+		describe("Local user", function() {
+			it("should broadcast and save to cookie when the name changes", function() {
+				var localUser = pokerView.localUser();
+				spyOn(localUser, "broadcast");
+				spyOn(localUser, "saveToCookie");
+
+				pokerView.localUser().name("An updated test name");
+
+				expect(localUser.broadcast).toHaveBeenCalled();
+				expect(localUser.saveToCookie).toHaveBeenCalled();
+			});
+		});
 	});
 });
+

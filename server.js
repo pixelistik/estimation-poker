@@ -12,20 +12,6 @@ function handler (request, response) {
 		clientFiles.serve(request, response);
 	}).resume();
 }
-/*
-function handler (req, res) {
-  fs.readFile(__dirname + '/index.html',
-  function (err, data) {
-    if (err) {
-      res.writeHead(500);
-      return res.end('Error loading index.html');
-    }
-
-    res.writeHead(200);
-    res.end(data);
-  });
-}
-*/
 
 io.sockets.on('connection', function (socket) {
 	var group;
@@ -42,3 +28,4 @@ io.sockets.on('connection', function (socket) {
 		console.log(data);
 	});
 });
+

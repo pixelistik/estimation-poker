@@ -47,3 +47,18 @@
 .et-hint:hover {
 	background-color: #ff9;
 }
+
+.estimationSelect .active {
+	color: #fff;
+	background-color: rgb(255, 152, 64);
+}
+
+.localUser .username {
+	margin-right: 1em;
+	display: inline-block;
+}
+
+.localUser .username,
+.localUser .btn {
+	margin-bottom: 0.4em;
+}

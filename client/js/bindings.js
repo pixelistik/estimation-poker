@@ -85,7 +85,7 @@
 
 			$(element).addClass("editableText");
 
-			$('<span class="et-display"><span class="et-label"></span><span class="et-hint"></span></span><span class="et-form"><input/><button type="submit" class="btn">save</button></span>').appendTo(element);
+			$('<span class="et-display"><span class="et-label"></span><span class="et-hint"></span></span><span class="et-form"><input/><button type="submit" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-ok"></span></button></span>').appendTo(element);
 
 			$(".et-form", element).hide();
 

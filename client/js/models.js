@@ -54,7 +54,7 @@
 			return false;
 		}
 
-		var socket = io.connect('http://localhost:8080');
+		var socket = io.connect('/');
 		socket.emit('join', {groupName: groupName});
 
 		socket.on('update', function (data) {

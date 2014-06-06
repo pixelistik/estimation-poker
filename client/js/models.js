@@ -58,7 +58,7 @@
 		socket.emit('join', {groupName: groupName});
 
 		socket.on('update', function (data) {
-			self.update(data);
+			update(data);
 		});
 
 		socket.on('who is there', function () {
@@ -110,7 +110,7 @@
 			return true;
 		});
 
-		self.update = function (data) {
+		var update = function (data) {
 			var received = JSON.parse(data);
 			console.log(received);
 

@@ -103,6 +103,9 @@
 		self.users = ko.observableArray([]);
 
 		self.storyTitle = ko.observable("");
+		self.storyTitle.subscribe(function() {
+			broadcast();
+		});
 
 		// http://stackoverflow.com/a/6102340/376138
 		self.highestEstimation = ko.computed(function() {
@@ -139,19 +142,32 @@
 			return true;
 		});
 
+		var broadcast = function () {
+			var me = {
+				storyTitle: self.storyTitle()
+			};
+			socket.emit("update", JSON.stringify(me));
+		};
+
 		var update = function (data) {
 			var received = JSON.parse(data);
 			console.log(received);
 
-			var user = getExistingUserByUuid(received.uuid);
+			if(received.uuid !== undefined) {
+				// A user object was received:
+				var user = getExistingUserByUuid(received.uuid);
 
-			if (!user) {
-				 user = new EP.User(socket, received.uuid);
-				 self.users.push(user);
+				if (!user) {
+					 user = new EP.User(socket, received.uuid);
+					 self.users.push(user);
+				}
+
+				user.name(received.name);
+				user.estimation(received.estimation);
+			} else {
+				// A story object was received:
+				self.storyTitle(received.storyTitle);
 			}
-
-			user.name(received.name);
-			user.estimation(received.estimation);
 		}
 
 		var removeUser = function (uuid) {

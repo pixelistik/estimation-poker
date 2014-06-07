@@ -248,6 +248,46 @@ describe("Model", function() {
 				});
 			});
 		});
+
+		describe("Data update", function() {
+			it("should update the users when user data is received", function() {
+				var user1 = new EP.User();
+				user1.uuid = "a-test-user";
+
+				pokerView.users.push(user1);
+
+				var storyTitleCache = pokerView.storyTitle();
+
+				var data = {
+					uuid: "a-test-user",
+					estimation: 99
+				};
+				socketMock.handlers["update"](JSON.stringify(data));
+
+				expect(pokerView.users()[0].estimation()).toEqual(99);
+
+				// Story should not be touched
+				expect(pokerView.storyTitle()).toEqual(storyTitleCache);
+			});
+
+			it("should update the story when story data is received", function() {
+				var user1 = new EP.User();
+
+				pokerView.users.push(user1);
+
+				var usersCache = pokerView.users();
+
+				var data = {
+					storyTitle: "a test story title"
+				};
+				socketMock.handlers["update"](JSON.stringify(data));
+
+				expect(pokerView.storyTitle()).toEqual("a test story title");
+
+				// Users should not be touched
+				expect(pokerView.users()).toEqual(usersCache);
+			});
+		});
 	});
 });
 

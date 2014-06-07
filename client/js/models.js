@@ -72,6 +72,7 @@
 
 		socket.on("who is there", function () {
 			self.localUser().broadcast();
+			broadcast();
 		});
 
 		socket.on("user disconnected", function (data) {

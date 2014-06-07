@@ -25,7 +25,7 @@
 						<span class="estimation" data-bind="
 							text: localUser().estimation,
 							css: {
-								estimated: localUser().estimation() != false,
+								estimated: localUser().estimation() !== false,
 								max: localUser().estimation() == $root.highestEstimation(),
 								min: localUser().estimation() == $root.lowestEstimation()
 							}"></span>
@@ -39,7 +39,7 @@
 						<span class="estimation" data-bind="
 							text: estimation,
 							css: {
-								estimated: estimation() != false,
+								estimated: estimation() !== false,
 								max: estimation() == $root.highestEstimation(),
 								min: estimation() == $root.lowestEstimation()
 							}"></span>

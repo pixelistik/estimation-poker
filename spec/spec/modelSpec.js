@@ -134,6 +134,20 @@ describe("Model", function() {
 				expect(pokerView.lowestEstimation()).toEqual(3);
 			});
 
+			it("should return 0 correctly as minimum", function() {
+				var user1 = new EP.User();
+				var user2 = new EP.User();
+
+				user1.estimation(0);
+				user2.estimation(3);
+
+				pokerView.users.push(user1);
+				pokerView.users.push(user2);
+
+				expect(pokerView.highestEstimation()).toEqual(3);
+				expect(pokerView.lowestEstimation()).toEqual(0);
+			});
+
 			it("should include the local user into the calculation", function() {
 				var user1 = new EP.User();
 				var user2 = new EP.User();

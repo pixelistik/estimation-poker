@@ -35,11 +35,11 @@
 
 		var getAllEstimations = function() {
 			var estimations = $.map(self.users(), function(val, i) {
-				if(val.estimation()) {
+				if(val.estimation() !== false) {
 					return val.estimation();
 				}
 			});
-			if(self.localUser().estimation()) {
+			if(self.localUser().estimation() !== false) {
 				estimations.push(self.localUser().estimation());
 			}
 			return estimations;

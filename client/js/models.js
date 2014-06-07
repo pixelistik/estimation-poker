@@ -11,7 +11,7 @@
 		self.broadcast = function () {
 			console.log("broadcasting user");
 			console.log(ko.toJSON(self));
-			socket.emit('update', ko.toJSON(self));
+			socket.emit("update", ko.toJSON(self));
 		}
 
 		self.loadFromCookie = function() {
@@ -64,18 +64,18 @@
 			return false;
 		}
 
-		var socket = io.connect('/');
-		socket.emit('join', {groupName: groupName});
+		var socket = io.connect("/");
+		socket.emit("join", {groupName: groupName});
 
-		socket.on('update', function (data) {
+		socket.on("update", function (data) {
 			update(data);
 		});
 
-		socket.on('who is there', function () {
+		socket.on("who is there", function () {
 			self.localUser().broadcast();
 		});
 
-		socket.on('user disconnected', function (data) {
+		socket.on("user disconnected", function (data) {
 			removeUser(data);
 		});
 

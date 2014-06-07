@@ -234,8 +234,6 @@ describe("Model", function() {
 					socketMock.handlers["user disconnected"](data);
 
 					expect(pokerView.users().length).toEqual(0);
-
-					expect(socketMock.on).toHaveBeenCalled();
 				});
 			});
 		});

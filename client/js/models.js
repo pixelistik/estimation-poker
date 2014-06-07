@@ -48,10 +48,10 @@
 		var getExistingUserByUuid = function (uuid) {
 			var i = getExistingUserIndexByUuid(uuid);
 
-			if (i) {
-				return self.users()[i];
-			} else {
+			if (i === false) {
 				return false;
+			} else {
+				return self.users()[i];
 			}
 		}
 

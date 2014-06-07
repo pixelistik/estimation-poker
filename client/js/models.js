@@ -65,7 +65,6 @@
 		}
 
 		var socket = io.connect("/");
-		socket.emit("join", {groupName: groupName});
 
 		socket.on("update", function (data) {
 			update(data);
@@ -86,6 +85,14 @@
 			self.localUser().broadcast();
 			self.localUser().saveToCookie();
 		});
+
+		socket.emit(
+			"join",
+			{
+				groupName: groupName,
+				userUuid: self.localUser().uuid
+			}
+		);
 
 		self.users = ko.observableArray([]);
 

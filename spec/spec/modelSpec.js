@@ -1,16 +1,29 @@
 describe("Model", function() {
+	// socket.io stub
 	window.io = {
-		connect: function() {
-			return {
-				emit: function() {
-					return null;
-				},
-				on: function() {
-					return null;
-				}
-			};
-		}
+		connect: function() {}
 	};
+
+	var socketMock;
+
+	beforeEach(function() {
+		// Mock the essential parts of socket.io by
+		// returning a mock socket on io.connect().
+		socketMock = {
+			handlers: {}
+		};
+
+		socketMock.on = jasmine.createSpy("on")
+			.and.callFake(function(eventName, handler) {
+				// Store references to all callback functions:
+				this.handlers[eventName] = handler;
+			});
+
+		socketMock.emit = jasmine.createSpy("emit");
+
+		spyOn(io, "connect").and.returnValue(socketMock);
+	});
+
 	describe("User", function() {
 		var user;
 

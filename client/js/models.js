@@ -94,6 +94,8 @@
 			}
 		);
 
+		self.localUser().broadcast();
+
 		self.users = ko.observableArray([]);
 
 		// http://stackoverflow.com/a/6102340/376138

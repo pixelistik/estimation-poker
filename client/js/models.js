@@ -46,9 +46,19 @@
 		};
 
 		var getExistingUserByUuid = function (uuid) {
+			var i = getExistingUserIndexByUuid(uuid);
+
+			if (i) {
+				return self.users()[i];
+			} else {
+				return false;
+			}
+		}
+
+		var getExistingUserIndexByUuid = function (uuid) {
 			for(var i=0; i < self.users().length; i++) {
 				if (self.users()[i].uuid === uuid) {
-					return self.users()[i];
+					return i;
 				}
 			}
 			return false;
@@ -63,6 +73,10 @@
 
 		socket.on('who is there', function () {
 			self.localUser().broadcast();
+		});
+
+		socket.on('user disconnected', function (data) {
+			removeUser(data);
 		});
 
 		self.localUser = ko.observable(new EP.User(socket));
@@ -124,5 +138,13 @@
 			user.name(received.name);
 			user.estimation(received.estimation);
 		}
+
+		var removeUser = function (data) {
+			var received = JSON.parse(data);
+
+			var userIndex = getExistingUserIndexByUuid(received.uuid);
+
+			self.users.splice(userIndex, 1);
+		};
 	}
 })(window.EP = window.EP || {});

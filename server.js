@@ -23,12 +23,10 @@ io.sockets.on("connection", function (socket) {
 
 		group = data.groupName;
 		socket.broadcast.to(group).emit("who is there");
-		console.log("Client joined group " + data.groupName);
 	});
 
 	socket.on("update", function (data) {
 		socket.broadcast.to(group).emit("update", data);
-		console.log(data);
 	});
 
 	socket.on("disconnect", function () {

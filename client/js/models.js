@@ -9,8 +9,6 @@
 		self.estimation = ko.observable(false);
 
 		self.broadcast = function () {
-			console.log("broadcasting user");
-			console.log(ko.toJSON(self));
 			socket.emit("update", ko.toJSON(self));
 		}
 
@@ -161,7 +159,6 @@
 
 		var update = function (data) {
 			var received = JSON.parse(data);
-			console.log(received);
 
 			if(received.uuid !== undefined) {
 				// A user object was received:

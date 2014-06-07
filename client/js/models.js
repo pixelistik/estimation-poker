@@ -86,6 +86,10 @@
 			self.localUser().saveToCookie();
 		});
 
+		self.localUser().estimation.subscribe(function() {
+			self.localUser().broadcast();
+		});
+
 		socket.emit(
 			"join",
 			{

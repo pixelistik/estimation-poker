@@ -1,7 +1,7 @@
-(function(EP) {
+(function (EP) {
 	"use strict";
 
-	EP.User = function(socket, uuid) {
+	EP.User = function (socket, uuid) {
 		var self = this;
 
 		self.uuid = uuid || EP.Tools.uuid();
@@ -14,7 +14,7 @@
 			socket.emit("update", ko.toJSON(self));
 		}
 
-		self.loadFromCookie = function() {
+		self.loadFromCookie = function () {
 			if(
 				$.cookie("ep.user.name") &&
 				$.cookie("ep.user.uuid")
@@ -24,7 +24,7 @@
 			}
 		};
 
-		self.saveToCookie = function() {
+		self.saveToCookie = function () {
 			$.cookie("ep.user.name", self.name());
 			$.cookie("ep.user.uuid", self.uuid);
 		};
@@ -33,8 +33,8 @@
 	EP.PokerView = function (groupName) {
 		var self = this;
 
-		var getAllEstimations = function() {
-			var estimations = $.map(self.users(), function(val, i) {
+		var getAllEstimations = function () {
+			var estimations = $.map(self.users(), function (val, i) {
 				if(val.estimation() !== false) {
 					return val.estimation();
 				}
@@ -91,12 +91,12 @@
 		self.localUser = ko.observable(new EP.User(socket));
 		self.localUser().loadFromCookie();
 
-		self.localUser().name.subscribe(function() {
+		self.localUser().name.subscribe(function () {
 			self.localUser().broadcast();
 			self.localUser().saveToCookie();
 		});
 
-		self.localUser().estimation.subscribe(function() {
+		self.localUser().estimation.subscribe(function () {
 			self.localUser().broadcast();
 		});
 
@@ -113,12 +113,12 @@
 		self.users = ko.observableArray([]);
 
 		self.storyTitle = ko.observable("");
-		self.storyTitle.subscribe(function() {
+		self.storyTitle.subscribe(function () {
 			broadcast();
 		});
 
 		// http://stackoverflow.com/a/6102340/376138
-		self.highestEstimation = ko.computed(function() {
+		self.highestEstimation = ko.computed(function () {
 			var estimations = getAllEstimations();
 
 			var result = Math.max.apply(null, estimations);
@@ -129,7 +129,7 @@
 			return result;
 		});
 
-		self.lowestEstimation = ko.computed(function() {
+		self.lowestEstimation = ko.computed(function () {
 			var estimations = getAllEstimations();
 
 			var result = Math.min.apply(null, estimations);
@@ -140,7 +140,7 @@
 			return result;
 		});
 
-		self.estimationsComplete = ko.computed(function() {
+		self.estimationsComplete = ko.computed(function () {
 			for(var i=0; i < self.users().length; i++) {
 				if (self.users()[i].estimation() === false) {
 					return false;

@@ -1,8 +1,8 @@
-describe("Binding", function() {
-	describe("editableText", function() {
+describe("Binding", function () {
+	describe("editableText", function () {
 		var fixture, model, observable;
 
-		beforeEach(function() {
+		beforeEach(function () {
 			fixture = $('<div data-bind="editableText: prop"></div>');
 			observable = ko.observable("text");
 			model = {prop: observable};
@@ -10,18 +10,18 @@ describe("Binding", function() {
 			ko.applyBindings(model, fixture[0]);
 		});
 
-		it("should show the display by default", function() {
+		it("should show the display by default", function () {
 			expect($(".et-display", fixture).css("display")).not.toEqual("none");
 			expect($(".et-form",    fixture).css("display")).toEqual("none");
 		});
 
-		it("should show the form when clicked", function() {
+		it("should show the form when clicked", function () {
 			$(".et-display", fixture).trigger("click");
 			expect($(".et-display", fixture).css("display")).toEqual("none");
 			expect($(".et-form",    fixture).css("display")).not.toEqual("none");
 		});
 
-		it("should update the value using the button", function() {
+		it("should update the value using the button", function () {
 			spyOn(model, "prop");
 
 			$(".et-display", fixture).trigger("click");
@@ -34,7 +34,7 @@ describe("Binding", function() {
 			expect($(".et-form",    fixture).css("display")).toEqual("none");
 		});
 
-		it("should update the value using the ENTER key", function() {
+		it("should update the value using the ENTER key", function () {
 			spyOn(model, "prop");
 
 			$(".et-display", fixture).trigger("click");
@@ -49,14 +49,14 @@ describe("Binding", function() {
 			expect($(".et-form",    fixture).css("display")).toEqual("none");
 		});
 
-		it("should update the label when the value changes", function() {
+		it("should update the label when the value changes", function () {
 			model.prop("changed value");
 
 			expect($(".et-label", fixture).text()).toEqual("changed value");
 			expect($("input",     fixture).val() ).toEqual("changed value");
 		});
 
-		it("should stop editing using the ESC key", function() {
+		it("should stop editing using the ESC key", function () {
 			spyOn(model, "prop");
 
 			$(".et-display", fixture).trigger("click");

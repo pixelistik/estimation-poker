@@ -1,12 +1,12 @@
-describe("Model", function() {
+describe("Model", function () {
 	// socket.io stub
 	window.io = {
-		connect: function() {}
+		connect: function () {}
 	};
 
 	var socketMock;
 
-	beforeEach(function() {
+	beforeEach(function () {
 		// Mock the essential parts of socket.io by
 		// returning a mock socket on io.connect().
 		socketMock = {
@@ -14,7 +14,7 @@ describe("Model", function() {
 		};
 
 		socketMock.on = jasmine.createSpy("on")
-			.and.callFake(function(eventName, handler) {
+			.and.callFake(function (eventName, handler) {
 				// Store references to all callback functions:
 				this.handlers[eventName] = handler;
 			});
@@ -24,30 +24,30 @@ describe("Model", function() {
 		spyOn(io, "connect").and.returnValue(socketMock);
 	});
 
-	describe("User", function() {
+	describe("User", function () {
 		var user;
 
-		beforeEach(function() {
+		beforeEach(function () {
 			user = new EP.User();
 		});
 
-		it("should instantiate", function() {
+		it("should instantiate", function () {
 			expect(user).toBeDefined();
 		});
 
-		it("should use a passed UUID", function() {
+		it("should use a passed UUID", function () {
 			user = new EP.User({}, "a-fake-uuid");
 			expect(user.uuid).toEqual("a-fake-uuid");
 		});
 
-		it("should generate a UUID if none is passed", function() {
+		it("should generate a UUID if none is passed", function () {
 			spyOn(EP.Tools, "uuid").and.returnValue("a-mock-uuid");
 			user = new EP.User();
 			expect(user.uuid).toEqual("a-mock-uuid");
 		});
 
-		it("should be able to be loaded from cookie", function() {
-			spyOn($, "cookie").and.callFake(function(param) {
+		it("should be able to be loaded from cookie", function () {
+			spyOn($, "cookie").and.callFake(function (param) {
 				var returnValues = {
 					"ep.user.name": "a test user",
 					"ep.user.uuid": "some-test-uuid",
@@ -61,7 +61,7 @@ describe("Model", function() {
 			expect(user.uuid  ).toEqual("some-test-uuid");
 		});
 
-		it("should be able to be saved to a cookie", function() {
+		it("should be able to be saved to a cookie", function () {
 			spyOn($, "cookie");
 
 			user.name("test user");
@@ -73,19 +73,19 @@ describe("Model", function() {
 		});
 	});
 
-	describe("PokerView", function() {
+	describe("PokerView", function () {
 		var user;
 
-		beforeEach(function() {
+		beforeEach(function () {
 			pokerView = new EP.PokerView();
 		});
 
-		it("should instantiate", function() {
+		it("should instantiate", function () {
 			expect(pokerView).toBeDefined();
 		});
 
-		describe("Highest and lowest estimation", function() {
-			it("should return false when there are no estimations", function() {
+		describe("Highest and lowest estimation", function () {
+			it("should return false when there are no estimations", function () {
 				expect(pokerView.highestEstimation()).toBeFalsy();
 				expect(pokerView.lowestEstimation()).toBeFalsy();
 
@@ -94,7 +94,7 @@ describe("Model", function() {
 				expect(pokerView.lowestEstimation()).toBeFalsy();
 			});
 
-			it("should return the same value if there is only one estimation", function() {
+			it("should return the same value if there is only one estimation", function () {
 				var user = new EP.User();
 				user.estimation(3);
 				pokerView.users.push(user);
@@ -102,7 +102,7 @@ describe("Model", function() {
 				expect(pokerView.lowestEstimation()).toEqual(3);
 			});
 
-			it("should return the correct value if one user has no estimation yet", function() {
+			it("should return the correct value if one user has no estimation yet", function () {
 				var user1 = new EP.User();
 				var user2 = new EP.User();
 
@@ -115,7 +115,7 @@ describe("Model", function() {
 				expect(pokerView.lowestEstimation()).toEqual(5);
 			});
 
-			it("should return the correct values with two users", function() {
+			it("should return the correct values with two users", function () {
 				var user1 = new EP.User();
 				var user2 = new EP.User();
 
@@ -134,7 +134,7 @@ describe("Model", function() {
 				expect(pokerView.lowestEstimation()).toEqual(3);
 			});
 
-			it("should return 0 correctly as minimum", function() {
+			it("should return 0 correctly as minimum", function () {
 				var user1 = new EP.User();
 				var user2 = new EP.User();
 
@@ -148,7 +148,7 @@ describe("Model", function() {
 				expect(pokerView.lowestEstimation()).toEqual(0);
 			});
 
-			it("should include the local user into the calculation", function() {
+			it("should include the local user into the calculation", function () {
 				var user1 = new EP.User();
 				var user2 = new EP.User();
 
@@ -168,8 +168,8 @@ describe("Model", function() {
 			});
 		});
 
-		describe("Completed estimations", function() {
-			it("should correctly tell if no estimations are there", function() {
+		describe("Completed estimations", function () {
+			it("should correctly tell if no estimations are there", function () {
 				var user1 = new EP.User();
 				var user2 = new EP.User();
 
@@ -179,7 +179,7 @@ describe("Model", function() {
 				expect(pokerView.estimationsComplete()).toBeFalsy();
 			});
 
-			it("should correctly tell if one remote user is missing", function() {
+			it("should correctly tell if one remote user is missing", function () {
 				var user1 = new EP.User();
 				var user2 = new EP.User();
 
@@ -191,7 +191,7 @@ describe("Model", function() {
 				expect(pokerView.estimationsComplete()).toBeFalsy();
 			});
 
-			it("should correctly tell if the local user is missing", function() {
+			it("should correctly tell if the local user is missing", function () {
 				var user1 = new EP.User();
 				var user2 = new EP.User();
 
@@ -203,7 +203,7 @@ describe("Model", function() {
 				expect(pokerView.estimationsComplete()).toBeFalsy();
 			});
 
-			it("should correctly tell if all estimations are there", function() {
+			it("should correctly tell if all estimations are there", function () {
 				var user1 = new EP.User();
 				var user2 = new EP.User();
 
@@ -217,8 +217,8 @@ describe("Model", function() {
 			});
 		});
 
-		describe("Local user", function() {
-			it("should broadcast and save to cookie when the name changes", function() {
+		describe("Local user", function () {
+			it("should broadcast and save to cookie when the name changes", function () {
 				var localUser = pokerView.localUser();
 				spyOn(localUser, "broadcast");
 				spyOn(localUser, "saveToCookie");
@@ -230,9 +230,9 @@ describe("Model", function() {
 			});
 		});
 
-		describe("Remote users", function() {
-			describe("disconnect", function() {
-				it("should remove a remote user", function() {
+		describe("Remote users", function () {
+			describe("disconnect", function () {
+				it("should remove a remote user", function () {
 					pokerView = new EP.PokerView();
 
 					var user1 = new EP.User();
@@ -249,8 +249,8 @@ describe("Model", function() {
 			});
 		});
 
-		describe("Data update", function() {
-			it("should update the users when user data is received", function() {
+		describe("Data update", function () {
+			it("should update the users when user data is received", function () {
 				var user1 = new EP.User();
 				user1.uuid = "a-test-user";
 
@@ -270,7 +270,7 @@ describe("Model", function() {
 				expect(pokerView.storyTitle()).toEqual(storyTitleCache);
 			});
 
-			it("should update the story when story data is received", function() {
+			it("should update the story when story data is received", function () {
 				var user1 = new EP.User();
 
 				pokerView.users.push(user1);
@@ -289,8 +289,8 @@ describe("Model", function() {
 			});
 		});
 
-		describe("Reset", function() {
-			it("triggered locally: should send the event and reset local user's estimation", function() {
+		describe("Reset", function () {
+			it("triggered locally: should send the event and reset local user's estimation", function () {
 				var user1 = new EP.User();
 				user1.estimation(3);
 				pokerView.localUser(user1);
@@ -301,7 +301,7 @@ describe("Model", function() {
 				expect(socketMock.emit).toHaveBeenCalledWith("new round");
 			});
 
-			it("triggered by event: should reset local user's estimation", function() {
+			it("triggered by event: should reset local user's estimation", function () {
 				var user1 = new EP.User();
 				user1.estimation(3);
 				pokerView.localUser(user1);

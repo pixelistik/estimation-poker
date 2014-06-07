@@ -14,6 +14,9 @@
 		<h1>Estimation Poker</h1>
 
 		<h2>The Estimations</h2>
+		<blockquote class="storyTitle">
+			<p data-bind="editableText: storyTitle" data-edit-hint="<edit story title>"></p>
+		</blockquote>
 		<table class="table" data-bind="css: {incomplete: !$root.estimationsComplete()}">
 			<tbody class="localUser">
 				<tr>

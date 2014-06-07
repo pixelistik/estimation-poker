@@ -62,3 +62,11 @@
 .localUser .btn {
 	margin-bottom: 0.4em;
 }
+
+.storyTitle .et-form {
+	display: block;
+}
+
+.storyTitle .et-form input {
+	width: 80%;
+}

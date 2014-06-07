@@ -102,6 +102,8 @@
 
 		self.users = ko.observableArray([]);
 
+		self.storyTitle = ko.observable("");
+
 		// http://stackoverflow.com/a/6102340/376138
 		self.highestEstimation = ko.computed(function() {
 			var estimations = getAllEstimations();

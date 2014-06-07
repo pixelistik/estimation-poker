@@ -215,6 +215,30 @@ describe("Model", function() {
 				expect(localUser.saveToCookie).toHaveBeenCalled();
 			});
 		});
+
+		describe("Remote users", function() {
+			describe("disconnect", function() {
+				it("should remove a remote user", function() {
+					pokerView = new EP.PokerView();
+
+					var user1 = new EP.User();
+					user1.uuid = "a-user-to-remove"
+
+					pokerView.users.push(user1);
+
+					var data = JSON.stringify({
+						uuid: "a-user-to-remove"
+					});
+
+					// Manually call the event handler
+					socketMock.handlers["user disconnected"](data);
+
+					expect(pokerView.users().length).toEqual(0);
+
+					expect(socketMock.on).toHaveBeenCalled();
+				});
+			});
+		});
 	});
 });
 

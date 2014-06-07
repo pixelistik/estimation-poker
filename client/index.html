@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Estimation Poker Prototype</title>
+	<title>Planning Poker Prototype</title>
 	<!--<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
 	<link rel="stylesheet" href="css/lib/bootstrap.min.css">
 	<!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/ui-darkness/jquery-ui.css">-->
@@ -11,57 +11,66 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Estimation Poker</h1>
+		<div class="col-lg-12">
+			<h1>Planning Poker</h1>
+		</div>
+		<div class="story col-lg-4">
+			<h2>The Story</h2>
+			<blockquote class="storyTitle">
+				<p data-bind="editableText: storyTitle" data-edit-hint="<edit story title>"></p>
+			</blockquote>
+		</div>
 
-		<h2>The Estimations</h2>
-		<blockquote class="storyTitle">
-			<p data-bind="editableText: storyTitle" data-edit-hint="<edit story title>"></p>
-		</blockquote>
-		<table class="table" data-bind="css: {incomplete: !$root.estimationsComplete()}">
-			<tbody class="localUser">
-				<tr>
-					<td>
-						<span class="username" data-bind="editableText: localUser().name" data-edit-hint="<your name>"></span>
-						<span class="btn-group" data-bind="estimationSelect: localUser().estimation"></span>
-					</td>
-					<td>
-						<span class="estimation" data-bind="
-							text: localUser().estimation,
-							css: {
-								estimated: localUser().estimation() !== false,
-								max: localUser().estimation() === $root.highestEstimation(),
-								min: localUser().estimation() === $root.lowestEstimation()
-							}"></span>
-					</td>
-				</tr>
-			</tbody>
-			<tbody class="remoteUsers" data-bind="foreach: users">
-				<tr>
-					<td class="name" data-bind="text: name"></td>
-					<td>
-						<span class="estimation" data-bind="
-							text: estimation,
-							css: {
-								estimated: estimation() !== false,
-								max: estimation() === $root.highestEstimation(),
-								min: estimation() === $root.lowestEstimation()
-							}"></span>
-					</td>
-				</tr>
-			</tbody>
-			<tbody class="summary">
-				<tr>
-					<td>Team estimation (max)</td>
-					<td>
-						<span class="estimation" data-bind="text: $root.highestEstimation()"></span>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<button class="btn btn-sm" data-bind="click: initNewRound()">
-			<span class="glyphicon glyphicon-repeat"></span>
-			New Round
-		</button>
+		<div class="estimations col-lg-8">
+			<h2>The Estimations</h2>
+			<table class="table" data-bind="css: {incomplete: !$root.estimationsComplete()}">
+				<tbody class="localUser">
+					<tr>
+						<td>
+							<span class="username" data-bind="editableText: localUser().name" data-edit-hint="<your name>"></span>
+							<span class="btn-group" data-bind="estimationSelect: localUser().estimation"></span>
+						</td>
+						<td>
+							<span class="estimation" data-bind="
+								text: localUser().estimation,
+								css: {
+									estimated: localUser().estimation() !== false,
+									max: localUser().estimation() === $root.highestEstimation(),
+									min: localUser().estimation() === $root.lowestEstimation()
+								}"></span>
+						</td>
+					</tr>
+				</tbody>
+				<tbody class="remoteUsers" data-bind="foreach: users">
+					<tr>
+						<td class="name" data-bind="text: name"></td>
+						<td>
+							<span class="estimation" data-bind="
+								text: estimation,
+								css: {
+									estimated: estimation() !== false,
+									max: estimation() === $root.highestEstimation(),
+									min: estimation() === $root.lowestEstimation()
+								}"></span>
+						</td>
+					</tr>
+				</tbody>
+				<tbody class="summary">
+					<tr>
+						<td>Team estimation (max)</td>
+						<td>
+							<span class="estimation" data-bind="text: $root.highestEstimation()"></span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<button class="btn btn-sm" data-bind="click: initNewRound()">
+				<span class="glyphicon glyphicon-repeat"></span>
+				New Round
+			</button>
+		</div>
+
+
 	</div>
 	<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
 	<script>window.jQuery || document.write('<script src="js/lib/jquery.min.js"><\/script>')</script>

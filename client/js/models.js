@@ -79,6 +79,15 @@
 			removeUser(data);
 		});
 
+		socket.on("new round", function () {
+			self.localUser().estimation(false);
+		});
+
+		self.initNewRound = function () {
+			self.localUser().estimation(false);
+			socket.emit("new round");
+		};
+
 		self.localUser = ko.observable(new EP.User(socket));
 		self.localUser().loadFromCookie();
 

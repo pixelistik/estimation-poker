@@ -34,5 +34,9 @@ io.sockets.on("connection", function (socket) {
 	socket.on("disconnect", function () {
 		socket.broadcast.to(group).emit("user disconnected", socket.userUuid);
 	});
+
+	socket.on("new round", function () {
+		socket.broadcast.to(group).emit("new round");
+	});
 });
 

@@ -288,6 +288,29 @@ describe("Model", function() {
 				expect(pokerView.users()).toEqual(usersCache);
 			});
 		});
+
+		describe("Reset", function() {
+			it("triggered locally: should send the event and reset local user's estimation", function() {
+				var user1 = new EP.User();
+				user1.estimation(3);
+				pokerView.localUser(user1);
+
+				pokerView.initNewRound();
+
+				expect(pokerView.localUser().estimation()).toEqual(false);
+				expect(socketMock.emit).toHaveBeenCalledWith("new round");
+			});
+
+			it("triggered by event: should reset local user's estimation", function() {
+				var user1 = new EP.User();
+				user1.estimation(3);
+				pokerView.localUser(user1);
+
+				socketMock.handlers["new round"]();
+
+				expect(pokerView.localUser().estimation()).toEqual(false);
+			});
+		});
 	});
 });
 

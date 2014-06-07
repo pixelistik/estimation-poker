@@ -139,10 +139,8 @@
 			user.estimation(received.estimation);
 		}
 
-		var removeUser = function (data) {
-			var received = JSON.parse(data);
-
-			var userIndex = getExistingUserIndexByUuid(received.uuid);
+		var removeUser = function (uuid) {
+			var userIndex = getExistingUserIndexByUuid(uuid);
 
 			self.users.splice(userIndex, 1);
 		};

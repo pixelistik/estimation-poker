@@ -225,13 +225,10 @@ describe("Model", function() {
 					user1.uuid = "a-user-to-remove"
 
 					pokerView.users.push(user1);
-
-					var data = JSON.stringify({
-						uuid: "a-user-to-remove"
-					});
+					expect(pokerView.users().length).toEqual(1);
 
 					// Manually call the event handler
-					socketMock.handlers["user disconnected"](data);
+					socketMock.handlers["user disconnected"]("a-user-to-remove");
 
 					expect(pokerView.users().length).toEqual(0);
 				});

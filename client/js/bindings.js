@@ -64,7 +64,7 @@
 					if($(this).hasClass("active")) {
 						observable(false);
 					} else {
-						observable($(this).text());
+						observable(+$(this).text());
 					}
 				});
 			});
@@ -73,7 +73,8 @@
 			var observable = valueAccessor();
 			$("button", element).each(function() {
 				$(this).removeClass("active");
-				if(observable() && $(this).text() == observable()) {
+
+				if(+$(this).text() === observable()) {
 					$(this).addClass("active");
 				}
 			});

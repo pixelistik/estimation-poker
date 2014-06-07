@@ -26,8 +26,8 @@
 							text: localUser().estimation,
 							css: {
 								estimated: localUser().estimation() !== false,
-								max: localUser().estimation() == $root.highestEstimation(),
-								min: localUser().estimation() == $root.lowestEstimation()
+								max: localUser().estimation() === $root.highestEstimation(),
+								min: localUser().estimation() === $root.lowestEstimation()
 							}"></span>
 					</td>
 				</tr>
@@ -40,8 +40,8 @@
 							text: estimation,
 							css: {
 								estimated: estimation() !== false,
-								max: estimation() == $root.highestEstimation(),
-								min: estimation() == $root.lowestEstimation()
+								max: estimation() === $root.highestEstimation(),
+								min: estimation() === $root.lowestEstimation()
 							}"></span>
 					</td>
 				</tr>

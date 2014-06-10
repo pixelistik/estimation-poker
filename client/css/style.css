@@ -1,8 +1,9 @@
 .estimation {
-	width: 2em;
+	width: 2.5em;
 	display: inline-block;
 	border-radius: 2px;
 	padding: 2px 4px;
+	text-align: center;
 }
 
 .max {
@@ -50,7 +51,7 @@
 
 .estimationSelect .active {
 	color: #fff;
-	background-color: rgb(255, 152, 64);
+	background-color: #ff9840;
 }
 
 .localUser .username {

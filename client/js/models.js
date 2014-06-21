@@ -14,17 +14,17 @@
 
 		self.loadFromCookie = function () {
 			if(
-				$.cookie("ep.user.name") &&
-				$.cookie("ep.user.uuid")
+				EP.Tools.readCookie("ep.user.name") &&
+				EP.Tools.readCookie("ep.user.uuid")
 			) {
-				self.name($.cookie("ep.user.name"));
-				self.uuid = $.cookie("ep.user.uuid");
+				self.name(EP.Tools.readCookie("ep.user.name"));
+				self.uuid = EP.Tools.readCookie("ep.user.uuid");
 			}
 		};
 
 		self.saveToCookie = function () {
-			$.cookie("ep.user.name", self.name());
-			$.cookie("ep.user.uuid", self.uuid);
+			EP.Tools.createCookie("ep.user.name", self.name());
+			EP.Tools.createCookie("ep.user.uuid", self.uuid);
 		};
 	};
 

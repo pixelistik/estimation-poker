@@ -5,33 +5,40 @@
 		init: function (element, valueAccessor) {
 			var values = [0, 1, 2, 3, 5, 8, 13, 20, 40, 100];
 
-			$(element).addClass("estimationSelect");
+			element.classList.add("estimationSelect");
 
 			for(var i = 0; i < values.length; i++) {
-				$('<button type="button" class="btn">' + values[i] + '</button>').appendTo(element);
+				var markup = '<button type="button" class="btn">' + values[i] + '</button>';
+				element.insertAdjacentHTML('beforeend', markup);
 			}
 
-			$("button", element).each(function () {
-				$(this).click(function () {
+
+			var buttons = element.querySelectorAll("button");
+
+			for (var i = 0; i < buttons.length; i++) {
+				buttons[i].addEventListener("click", function () {
 					var observable = valueAccessor();
 					// Unset value if the button was already active
-					if($(this).hasClass("active")) {
+					if(this.classList.contains("active")) {
 						observable(false);
 					} else {
 						observable(+$(this).text());
 					}
 				});
-			});
+			}
 		},
 		update: function (element, valueAccessor) {
 			var observable = valueAccessor();
-			$("button", element).each(function () {
-				$(this).removeClass("active");
 
-				if(+$(this).text() === observable()) {
-					$(this).addClass("active");
+			var buttons = element.querySelectorAll("button");
+
+			for (var i = 0; i < buttons.length; i++) {
+				if(+buttons[i].textContent === observable()) {
+					buttons[i].classList.add("active");
+				} else {
+					buttons[i].classList.remove("active");
 				}
-			});
+			}
 		}
 	};
 

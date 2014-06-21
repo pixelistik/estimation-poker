@@ -4,6 +4,7 @@ describe("Binding", function () {
 
 		beforeEach(function () {
 			fixture = $('<div data-bind="editableText: prop"></div>');
+
 			observable = ko.observable("text");
 			model = {prop: observable};
 
@@ -39,9 +40,9 @@ describe("Binding", function () {
 
 			$(".et-display", fixture).trigger("click");
 			$("input", fixture).val("entered value");
-			e = jQuery.Event("keypress");
-			e.keyCode = 13 //ENTER key
-			$("input", fixture).trigger(e);
+
+			e = generateKeypressEvent(13); // ENTER key
+			fixture[0].querySelector("input").dispatchEvent(e);
 
 			expect(model.prop).toHaveBeenCalledWith("entered value");
 
@@ -61,9 +62,9 @@ describe("Binding", function () {
 
 			$(".et-display", fixture).trigger("click");
 			$("input", fixture).val("entered value");
-			e = jQuery.Event("keypress");
-			e.keyCode = 27 //ESC key
-			$("input", fixture).trigger(e);
+
+			e = generateKeypressEvent(27); //ESC key
+			fixture[0].querySelector("input").dispatchEvent(e);
 
 			expect(model.prop).not.toHaveBeenCalledWith("entered value");
 
@@ -71,5 +72,39 @@ describe("Binding", function () {
 			expect($(".et-form",    fixture).css("display")).toEqual("none");
 		});
 	});
+
+	// Create a keypress event for testing
+	// see http://stackoverflow.com/a/23700583/376138
+	function generateKeypressEvent(code) {
+		var oEvent = document.createEvent('KeyboardEvent');
+
+		// Chromium Hack: filter this otherwise Safari will complain
+		if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
+			Object.defineProperty(oEvent, 'keyCode', {
+				get: function () {
+					return this.keyCodeVal;
+				}
+			});
+			Object.defineProperty(oEvent, 'which', {
+				get: function () {
+					return this.keyCodeVal;
+				}
+			});
+		}
+
+		if (oEvent.initKeyboardEvent) {
+			oEvent.initKeyboardEvent("keypress", true, true, document.defaultView, false, false, false, false, code, code);
+		} else {
+			oEvent.initKeyEvent("keypress", true, true, document.defaultView, false, false, false, false, code, 0);
+		}
+
+		oEvent.keyCodeVal = code;
+
+		if (oEvent.keyCode !== code) {
+			console.log("keyCode mismatch " + oEvent.keyCode + "(" + oEvent.which + ") -> " + code);
+		}
+
+		return oEvent;
+	}
 });
 

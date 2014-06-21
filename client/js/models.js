@@ -14,17 +14,17 @@
 
 		self.loadFromCookie = function () {
 			if(
-				$.cookie("ep.user.name") &&
-				$.cookie("ep.user.uuid")
+				EP.Tools.readCookie("ep.user.name") &&
+				EP.Tools.readCookie("ep.user.uuid")
 			) {
-				self.name($.cookie("ep.user.name"));
-				self.uuid = $.cookie("ep.user.uuid");
+				self.name(EP.Tools.readCookie("ep.user.name"));
+				self.uuid = EP.Tools.readCookie("ep.user.uuid");
 			}
 		};
 
 		self.saveToCookie = function () {
-			$.cookie("ep.user.name", self.name());
-			$.cookie("ep.user.uuid", self.uuid);
+			EP.Tools.createCookie("ep.user.name", self.name());
+			EP.Tools.createCookie("ep.user.uuid", self.uuid);
 		};
 	};
 
@@ -32,11 +32,14 @@
 		var self = this;
 
 		var getAllEstimations = function () {
-			var estimations = $.map(self.users(), function (val, i) {
+			var estimations = [];
+
+			self.users().forEach(function (val, i) {
 				if(val.estimation() !== false) {
-					return val.estimation();
+					estimations.push(val.estimation());
 				}
 			});
+
 			if(self.localUser().estimation() !== false) {
 				estimations.push(self.localUser().estimation());
 			}

@@ -47,7 +47,7 @@ describe("Model", function () {
 		});
 
 		it("should be able to be loaded from cookie", function () {
-			spyOn($, "cookie").and.callFake(function (param) {
+			spyOn(EP.Tools, "readCookie").and.callFake(function (param) {
 				var returnValues = {
 					"ep.user.name": "a test user",
 					"ep.user.uuid": "some-test-uuid",
@@ -62,14 +62,14 @@ describe("Model", function () {
 		});
 
 		it("should be able to be saved to a cookie", function () {
-			spyOn($, "cookie");
+			spyOn(EP.Tools, "createCookie");
 
 			user.name("test user");
 			user.uuid = "test user";
 
 			user.saveToCookie();
 
-			expect($.cookie.calls.allArgs()).toEqual([["ep.user.name", "test user"], ["ep.user.uuid", "test user"]]);
+			expect(EP.Tools.createCookie.calls.allArgs()).toEqual([["ep.user.name", "test user"], ["ep.user.uuid", "test user"]]);
 		});
 	});
 

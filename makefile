@@ -1,0 +1,15 @@
+all: client/js/client.prod.min.js.gzip
+
+client/js/client.prod.js: client/js/tools.js client/js/models.js client/js/bindings.js client/js/app.js
+	@cat client/js/tools.js client/js/models.js client/js/bindings.js client/js/app.js > client/js/client.prod.js
+
+client/js/client.prod.min.js: client/js/client.prod.js
+	@curl --silent --data "output_info=compiled_code" --data-urlencode "js_code@client/js/client.prod.js" "http://closure-compiler.appspot.com/compile" -o client/js/client.prod.min.js
+
+client/js/client.prod.min.js.gzip: client/js/client.prod.min.js
+	@gzip --keep --force client/js/client.prod.min.js
+
+clean:
+	@rm client/js/client.prod.js
+	@rm client/js/client.prod.min.js
+	@rm client/js/client.prod.min.js.gz

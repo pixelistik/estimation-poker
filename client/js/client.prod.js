@@ -36,105 +36,6 @@
 	}
 
 })(window.EP = window.EP || {});
-(function (ko) {
-	"use strict";
-
-	ko.bindingHandlers.estimationSelect = {
-		init: function (element, valueAccessor) {
-			var values = [0, 1, 2, 3, 5, 8, 13, 20, 40, 100];
-
-			element.classList.add("estimationSelect");
-
-			for(var i = 0; i < values.length; i++) {
-				var markup = '<button type="button" class="btn">' + values[i] + '</button>';
-				element.insertAdjacentHTML('beforeend', markup);
-			}
-
-
-			var buttons = element.querySelectorAll("button");
-
-			for (var i = 0; i < buttons.length; i++) {
-				buttons[i].addEventListener("click", function () {
-					var observable = valueAccessor();
-					// Unset value if the button was already active
-					if(this.classList.contains("active")) {
-						observable(false);
-					} else {
-						observable(+this.textContent);
-					}
-				});
-			}
-		},
-		update: function (element, valueAccessor) {
-			var observable = valueAccessor();
-
-			var buttons = element.querySelectorAll("button");
-
-			for (var i = 0; i < buttons.length; i++) {
-				if(+buttons[i].textContent === observable()) {
-					buttons[i].classList.add("active");
-				} else {
-					buttons[i].classList.remove("active");
-				}
-			}
-		}
-	};
-
-	ko.bindingHandlers.editableText = {
-		init: function (element, valueAccessor) {
-
-			element.classList.add("editableText");
-
-			var markup = '<span class="et-display"><span class="et-label"></span><span class="et-hint"></span></span><span class="et-form"><input/><button type="submit" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-ok"></span></button></span>';
-			element.insertAdjacentHTML('beforeend', markup);
-
-			element.querySelector(".et-form").style.display = 'none';
-
-			var startEditing = function () {
-				element.classList.add("editing");
-				element.querySelector(".et-display").style.display = 'none';
-				element.querySelector(".et-form").style.display = '';
-				element.querySelector(".et-form input").focus();
-			};
-
-			var save = function () {
-				element.classList.remove("editing");
-				element.querySelector(".et-display").style.display = '';
-				element.querySelector(".et-form").style.display = 'none';
-
-				var observable = valueAccessor();
-				observable(element.querySelector("input").value);
-			};
-
-			var abort = function () {
-				element.classList.remove("editing");
-				element.querySelector(".et-display").style.display = '';
-				element.querySelector(".et-form").style.display = 'none';
-			};
-
-			element.querySelector(".et-display").addEventListener("click", startEditing);
-
-
-			element.querySelector("button").addEventListener("click", save);
-
-			element.querySelector("input").addEventListener("keypress", function (e) {if(e.keyCode === 13) {save();}});
-			element.querySelector("input").addEventListener("keypress", function (e) {if(e.keyCode === 27) {abort();}});
-		},
-		update: function (element, valueAccessor) {
-			var observable = valueAccessor();
-			element.querySelector(".et-label").textContent = observable();
-			element.querySelector("input").value = observable();
-
-			if(observable()) {
-				element.querySelector(".et-hint").style.display = 'none';
-			} else {
-				element.querySelector(".et-hint").textContent = element.getAttribute("data-edit-hint") || "edit";
-				element.querySelector(".et-hint").style.display = '';
-			}
-		}
-	};
-})(ko);
-
 (function (EP) {
 	"use strict";
 
@@ -324,6 +225,105 @@
 		};
 	}
 })(window.EP = window.EP || {});
+(function (ko) {
+	"use strict";
+
+	ko.bindingHandlers.estimationSelect = {
+		init: function (element, valueAccessor) {
+			var values = [0, 1, 2, 3, 5, 8, 13, 20, 40, 100];
+
+			element.classList.add("estimationSelect");
+
+			for(var i = 0; i < values.length; i++) {
+				var markup = '<button type="button" class="btn">' + values[i] + '</button>';
+				element.insertAdjacentHTML('beforeend', markup);
+			}
+
+
+			var buttons = element.querySelectorAll("button");
+
+			for (var i = 0; i < buttons.length; i++) {
+				buttons[i].addEventListener("click", function () {
+					var observable = valueAccessor();
+					// Unset value if the button was already active
+					if(this.classList.contains("active")) {
+						observable(false);
+					} else {
+						observable(+this.textContent);
+					}
+				});
+			}
+		},
+		update: function (element, valueAccessor) {
+			var observable = valueAccessor();
+
+			var buttons = element.querySelectorAll("button");
+
+			for (var i = 0; i < buttons.length; i++) {
+				if(+buttons[i].textContent === observable()) {
+					buttons[i].classList.add("active");
+				} else {
+					buttons[i].classList.remove("active");
+				}
+			}
+		}
+	};
+
+	ko.bindingHandlers.editableText = {
+		init: function (element, valueAccessor) {
+
+			element.classList.add("editableText");
+
+			var markup = '<span class="et-display"><span class="et-label"></span><span class="et-hint"></span></span><span class="et-form"><input/><button type="submit" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-ok"></span></button></span>';
+			element.insertAdjacentHTML('beforeend', markup);
+
+			element.querySelector(".et-form").style.display = 'none';
+
+			var startEditing = function () {
+				element.classList.add("editing");
+				element.querySelector(".et-display").style.display = 'none';
+				element.querySelector(".et-form").style.display = '';
+				element.querySelector(".et-form input").focus();
+			};
+
+			var save = function () {
+				element.classList.remove("editing");
+				element.querySelector(".et-display").style.display = '';
+				element.querySelector(".et-form").style.display = 'none';
+
+				var observable = valueAccessor();
+				observable(element.querySelector("input").value);
+			};
+
+			var abort = function () {
+				element.classList.remove("editing");
+				element.querySelector(".et-display").style.display = '';
+				element.querySelector(".et-form").style.display = 'none';
+			};
+
+			element.querySelector(".et-display").addEventListener("click", startEditing);
+
+
+			element.querySelector("button").addEventListener("click", save);
+
+			element.querySelector("input").addEventListener("keypress", function (e) {if(e.keyCode === 13) {save();}});
+			element.querySelector("input").addEventListener("keypress", function (e) {if(e.keyCode === 27) {abort();}});
+		},
+		update: function (element, valueAccessor) {
+			var observable = valueAccessor();
+			element.querySelector(".et-label").textContent = observable();
+			element.querySelector("input").value = observable();
+
+			if(observable()) {
+				element.querySelector(".et-hint").style.display = 'none';
+			} else {
+				element.querySelector(".et-hint").textContent = element.getAttribute("data-edit-hint") || "edit";
+				element.querySelector(".et-hint").style.display = '';
+			}
+		}
+	};
+})(ko);
+
 (function(EP) {
 	"use strict";
 	// Instantiate our View Model

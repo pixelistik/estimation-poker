@@ -1,5 +1,10 @@
 var static = require("node-static");
-var clientFiles = new static.Server("./client");
+var clientFiles = new static.Server(
+	"./client",
+	{
+		gzip: true
+	}
+);
 
 var app = require("http").createServer(handler);
 

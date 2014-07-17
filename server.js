@@ -1,3 +1,4 @@
+var fs = require('fs');
 var static = require("node-static");
 var clientFiles = new static.Server(
 	"./client",
@@ -13,7 +14,27 @@ var io = require("socket.io").listen(app);
 var port = Number(process.env.PORT || 5000);
 app.listen(port);
 
+
+var mustache = require('mustache');
+
+var indexData = {};
+
+if (process.env.PIWIK_URL && process.env.PIWIK_SITE_ID) {
+	indexData.piwik = {
+		url: process.env.PIWIK_URL,
+		siteId: process.env.PIWIK_SITE_ID
+	};
+}
+
+var indexTemplate = fs.readFileSync("./client/index.html", "utf8");
+var indexHtml = mustache.render(indexTemplate, indexData);
+
 function handler (request, response) {
+	if(request.url === "/") {
+		response.writeHead(200, {"Content-Type": "text/html"});
+		response.end(indexHtml);
+	}
+
 	request.addListener("end", function () {
 		clientFiles.serve(request, response);
 	}).resume();

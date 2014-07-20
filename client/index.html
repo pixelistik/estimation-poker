@@ -7,6 +7,16 @@
 	<!--<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
 	<link rel="stylesheet" href="css/lib/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
+	{{#piwik}}
+	<script>
+		// Set up client error tracking
+		var _paq = _paq || [];
+		window.onerror = function(message, file, line) {
+			var sFormattedMessage = '[' + file + ' (' + line + ')] ' + message;
+			_paq.push(['trackEvent', 'Errors', 'Browser', sFormattedMessage, null, true]);
+		}
+	</script>
+	{{/piwik}}
 </head>
 <body>
 	<div class="container">

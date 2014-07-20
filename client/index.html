@@ -7,6 +7,16 @@
 	<!--<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
 	<link rel="stylesheet" href="css/lib/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
+	{{#piwik}}
+	<script>
+		// Set up client error tracking
+		var _paq = _paq || [];
+		window.onerror = function(message, file, line) {
+			var sFormattedMessage = '[' + file + ' (' + line + ')] ' + message;
+			_paq.push(['trackEvent', 'Errors', 'Browser', sFormattedMessage, null, true]);
+		}
+	</script>
+	{{/piwik}}
 </head>
 <body>
 	<div class="container">
@@ -85,5 +95,23 @@
 	<!-- PROD -->
 	<script src="js/client.prod.min.js"></script>
 	<!-- -->
+
+	{{#piwik}}
+	<!-- Piwik -->
+	<script type="text/javascript">
+	  var _paq = _paq || [];
+	  _paq.push(['trackPageView']);
+	  _paq.push(['enableLinkTracking']);
+	  (function() {
+		var u=(("https:" == document.location.protocol) ? "https" : "http") + "://{{piwik.url}}/";
+		_paq.push(['setTrackerUrl', u+'piwik.php']);
+		_paq.push(['setSiteId', {{piwik.siteId}}]);
+		var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+		g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+	  })();
+	</script>
+	<noscript><p><img src="http://{{piwik.url}}/piwik.php?idsite={{piwik.siteId}}" style="border:0;" alt="" /></p></noscript>
+	<!-- End Piwik Code -->
+	{{/piwik}}
 </body>
 </html>

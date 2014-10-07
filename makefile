@@ -1,3 +1,5 @@
+.PHONY: release
+
 all: client/js/client.prod.min.js.gzip client/css/lib/bootstrap.min.css.gz client/css/style.css.gz
 
 client/js/client.prod.js: node_modules/socket.io/node_modules/socket.io-client/socket.io.js client/js/lib/knockout-min.js client/js/tools.js client/js/models.js client/js/bindings.js client/js/app.js
@@ -14,6 +16,16 @@ client/css/lib/bootstrap.min.css.gz: client/css/lib/bootstrap.min.css
 
 client/css/style.css.gz: client/css/style.css
 	@gzip --keep --force client/css/style.css
+
+release: all
+	GIT_IS_CLEAN := $(shell git diff-index --quiet HEAD; echo $$?)
+	ifneq ($(GIT_IS_CLEAN),0)
+		$(error "Error: git working directory is not clean.")
+	endif
+	git checkout master
+	git tag "$(VERSION)" --annotate --message="Release $(VERSION)"
+	git checkout develop
+	git merge master
 
 clean:
 	@rm client/js/client.prod.js

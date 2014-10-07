@@ -19,7 +19,10 @@ client/css/style.css.gz: client/css/style.css
 
 release: all
 	git checkout master
+	git merge develop
+
 	git tag "$(VERSION)" --annotate --message="Release $(VERSION)"
+
 	git checkout develop
 	git merge master
 

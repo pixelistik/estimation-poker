@@ -6594,12 +6594,6 @@ t.fragments={};return e};this.createJavaScriptEvaluatorBlock=function(a){return"
 
 (function(EP) {
 	"use strict";
-	// Instantiate our View Model
-	/*var user = new EP.User("Local");
-	user.estimation(30);
-	// Pass the View Model to KO
-	ko.applyBindings(user);
-	*/
 	if(location.hash === "") {
 		location.hash = EP.Tools.uuid();
 	}

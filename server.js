@@ -26,6 +26,10 @@ if (process.env.PIWIK_URL && process.env.PIWIK_SITE_ID) {
 	};
 }
 
+if (process.env.PRODUCTION_MODE) {
+	indexData.productionMode = true;
+}
+
 var indexTemplate = fs.readFileSync("./client/index.html", "utf8");
 var indexHtml = mustache.render(indexTemplate, indexData);
 

@@ -18,10 +18,6 @@ client/css/style.css.gz: client/css/style.css
 	@gzip --keep --force client/css/style.css
 
 release: all
-	GIT_IS_CLEAN := $(shell git diff-index --quiet HEAD; echo $$?)
-	ifneq ($(GIT_IS_CLEAN),0)
-		$(error "Error: git working directory is not clean.")
-	endif
 	git checkout master
 	git tag "$(VERSION)" --annotate --message="Release $(VERSION)"
 	git checkout develop

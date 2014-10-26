@@ -77,6 +77,16 @@
 				<span class="glyphicon glyphicon-repeat"></span>
 				New Round
 			</button>
+
+			<div class="tutorial tutorialNote" data-bind="visible: users().length == 0">
+				<h3>
+				You are alone.
+				</h3>
+				<p>
+				Share this URL with your team members:
+				</p>
+				<pre data-bind="text: window.location">http://localhost:5000/#f89bfe06-4b0f-465c-9192-93ccb96489c0</pre>
+			</div>
 		</div>
 
 

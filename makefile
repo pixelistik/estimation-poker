@@ -1,4 +1,4 @@
-.PHONY: release lint
+.PHONY: all release lint committedworkingdir
 
 all: client/js/client.prod.min.js.gzip client/css/lib/bootstrap.min.css.gz client/css/style.css.gz
 
@@ -17,10 +17,11 @@ client/css/lib/bootstrap.min.css.gz: client/css/lib/bootstrap.min.css
 client/css/style.css.gz: client/css/style.css
 	@gzip --keep --force client/css/style.css
 
-release: lint all
+release: lint committedworkingdir all
+	# Update version number, commit rebuilt assets
 	git checkout develop
 	sed -i 's/"version": ".*"/"version": "$(VERSION)"/' package.json
-	git commit package.json -m "Bump version number for release $(VERSION)"
+	git commit --all -m "Build and updated version number for release $(VERSION)"
 
 	git checkout master
 	git merge develop
@@ -29,6 +30,10 @@ release: lint all
 
 	git checkout develop
 	git merge master
+
+committedworkingdir:
+	# Check if there are uncommitted changes
+	@git diff-index --quiet HEAD
 
 clean:
 	@rm client/js/client.prod.js

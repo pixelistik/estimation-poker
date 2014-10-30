@@ -1,0 +1,15 @@
+{
+	"strict": true,
+	"camelcase": true,
+	"curly": true,
+	"eqeqeq": true,
+	"undef": true,
+	"unused": true,
+	"browser": true,
+	"globals": {
+		"EP": true,
+		"ko": true,
+		"io": true
+
+	}
+}

@@ -18,6 +18,10 @@ client/css/style.css.gz: client/css/style.css
 	@gzip --keep --force client/css/style.css
 
 release: lint all
+	git checkout develop
+	sed -i 's/"version": ".*"/"version": "$(VERSION)"/' package.json
+	git commit package.json -m "Bump version number for release $(VERSION)"
+
 	git checkout master
 	git merge develop
 

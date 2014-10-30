@@ -1,6 +1,6 @@
 {
   "name": "estimation-poker",
-  "version": "0.3.1",
+  "version": "0.5.2",
   "description": "A browser-based agile planning poker tool.",
   "main": "server.js",
   "dependencies": {

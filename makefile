@@ -32,6 +32,6 @@ clean:
 	@rm client/js/client.prod.min.js.gz
 
 lint:
-	@node_modules/jshint/bin/jshint --exclude "client/js/*.prod.*" client/js/*.js
+	@node_modules/jshint/bin/jshint .
 	@node_modules/csslint/cli.js client/css/style.css
 

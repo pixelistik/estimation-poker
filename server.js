@@ -1,6 +1,8 @@
+/* jshint node: true */
+"use strict";
 var fs = require('fs');
-var static = require("node-static");
-var clientFiles = new static.Server(
+var nodeStatic = require("node-static");
+var clientFiles = new nodeStatic.Server(
 	"./client",
 	{
 		gzip: true

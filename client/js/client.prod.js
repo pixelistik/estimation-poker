@@ -6272,38 +6272,44 @@ t.fragments={};return e};this.createJavaScriptEvaluatorBlock=function(a){return"
 
 	EP.Tools.uuid = function () {
 		return('xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-			var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+			var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
 			return v.toString(16);
 		}));
 	};
 
 	// Cookie functions: http://www.quirksmode.org/js/cookies.html
-	EP.Tools.createCookie = function (name,value,days) {
+	EP.Tools.createCookie = function (name, value, days) {
+		var expires = "";
 		if (days) {
 			var date = new Date();
-			date.setTime(date.getTime()+(days*24*60*60*1000));
-			var expires = "; expires="+date.toGMTString();
+			date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+			expires = "; expires=" + date.toGMTString();
 		}
-		else var expires = "";
-		document.cookie = name+"="+value+expires+"; path=/";
-	}
+
+		document.cookie = name + "=" + value + expires + "; path=/";
+	};
 
 	EP.Tools.readCookie = function (name) {
 		var nameEQ = name + "=";
 		var ca = document.cookie.split(';');
-		for(var i=0;i < ca.length;i++) {
+		for(var i=0; i < ca.length; i++) {
 			var c = ca[i];
-			while (c.charAt(0)==' ') c = c.substring(1,c.length);
-			if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+			while (c.charAt(0) === ' ') {
+				c = c.substring(1, c.length);
+			}
+			if (c.indexOf(nameEQ) === 0) {
+				return c.substring(nameEQ.length, c.length);
+			}
 		}
 		return null;
-	}
+	};
 
 	EP.Tools.eraseCookie = function (name) {
-		createCookie(name,"",-1);
-	}
+		EP.Tools.createCookie(name, "", -1);
+	};
 
 })(window.EP = window.EP || {});
+
 (function (EP) {
 	"use strict";
 
@@ -6316,7 +6322,7 @@ t.fragments={};return e};this.createJavaScriptEvaluatorBlock=function(a){return"
 
 		self.broadcast = function () {
 			socket.emit("update", ko.toJSON(self));
-		}
+		};
 
 		self.loadFromCookie = function () {
 			if(
@@ -6340,7 +6346,7 @@ t.fragments={};return e};this.createJavaScriptEvaluatorBlock=function(a){return"
 		var getAllEstimations = function () {
 			var estimations = [];
 
-			self.users().forEach(function (val, i) {
+			self.users().forEach(function (val) {
 				if(val.estimation() !== false) {
 					estimations.push(val.estimation());
 				}
@@ -6360,7 +6366,7 @@ t.fragments={};return e};this.createJavaScriptEvaluatorBlock=function(a){return"
 			} else {
 				return self.users()[i];
 			}
-		}
+		};
 
 		var getExistingUserIndexByUuid = function (uuid) {
 			for(var i=0; i < self.users().length; i++) {
@@ -6369,7 +6375,7 @@ t.fragments={};return e};this.createJavaScriptEvaluatorBlock=function(a){return"
 				}
 			}
 			return false;
-		}
+		};
 
 		var socket = io.connect("/");
 
@@ -6484,15 +6490,16 @@ t.fragments={};return e};this.createJavaScriptEvaluatorBlock=function(a){return"
 				// A story object was received:
 				self.storyTitle(received.storyTitle);
 			}
-		}
+		};
 
 		var removeUser = function (uuid) {
 			var userIndex = getExistingUserIndexByUuid(uuid);
 
 			self.users.splice(userIndex, 1);
 		};
-	}
+	};
 })(window.EP = window.EP || {});
+
 (function (ko) {
 	"use strict";
 
@@ -6510,16 +6517,18 @@ t.fragments={};return e};this.createJavaScriptEvaluatorBlock=function(a){return"
 
 			var buttons = element.querySelectorAll("button");
 
-			for (var i = 0; i < buttons.length; i++) {
-				buttons[i].addEventListener("click", function () {
-					var observable = valueAccessor();
-					// Unset value if the button was already active
-					if(this.classList.contains("active")) {
-						observable(false);
-					} else {
-						observable(+this.textContent);
-					}
-				});
+			var clickHandler = function () {
+				var observable = valueAccessor();
+				// Unset value if the button was already active
+				if(this.classList.contains("active")) {
+					observable(false);
+				} else {
+					observable(+this.textContent);
+				}
+			};
+
+			for (i = 0; i < buttons.length; i++) {
+				buttons[i].addEventListener("click", clickHandler);
 			}
 		},
 		update: function (element, valueAccessor) {

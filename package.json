@@ -1,21 +1,26 @@
 {
-  "name": "estimation-poker",
-  "version": "0.5.3",
-  "description": "A browser-based agile planning poker tool.",
-  "main": "server.js",
-  "dependencies": {
-    "node-static": "~0.7.3",
-    "socket.io": "~1.0.0",
-    "mustache": "~0.8.2"
-  },
-  "devDependencies": {
-    "jshint": "2.x.x",
-    "csslint": "~0.10.x"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "author": "@pixelistik",
-  "license": "AGPL v3"
+    "name": "estimation-poker",
+    "version": "0.5.3",
+    "description": "A browser-based agile estimation poker tool.",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/pixelistik/estimation-poker.git"
+    },
+    "main": "server.js",
+    "dependencies": {
+        "node-static": "~0.7.3",
+        "socket.io": "~1.0.0",
+        "mustache": "~0.8.2"
+    },
+    "devDependencies": {
+        "jshint": "2.x.x",
+        "csslint": "~0.10.x"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node server.js"
+    },
+    "author": "@pixelistik",
+    "license": "AGPL v3"
 }
+

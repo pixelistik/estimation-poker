@@ -15,16 +15,18 @@
 
 			var buttons = element.querySelectorAll("button");
 
-			for (var i = 0; i < buttons.length; i++) {
-				buttons[i].addEventListener("click", function () {
-					var observable = valueAccessor();
-					// Unset value if the button was already active
-					if(this.classList.contains("active")) {
-						observable(false);
-					} else {
-						observable(+this.textContent);
-					}
-				});
+			var clickHandler = function () {
+				var observable = valueAccessor();
+				// Unset value if the button was already active
+				if(this.classList.contains("active")) {
+					observable(false);
+				} else {
+					observable(+this.textContent);
+				}
+			};
+
+			for (i = 0; i < buttons.length; i++) {
+				buttons[i].addEventListener("click", clickHandler);
 			}
 		},
 		update: function (element, valueAccessor) {

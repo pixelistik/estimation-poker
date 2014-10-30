@@ -1,4 +1,4 @@
-.PHONY: release
+.PHONY: release lint
 
 all: client/js/client.prod.min.js.gzip client/css/lib/bootstrap.min.css.gz client/css/style.css.gz
 
@@ -30,3 +30,6 @@ clean:
 	@rm client/js/client.prod.js
 	@rm client/js/client.prod.min.js
 	@rm client/js/client.prod.min.js.gz
+
+lint:
+	@node_modules/jshint/bin/jshint --exclude "client/js/*.prod.*" client/js/*.js

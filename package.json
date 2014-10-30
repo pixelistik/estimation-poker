@@ -8,7 +8,9 @@
     "socket.io": "~1.0.0",
     "mustache": "~0.8.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jshint": "2.x.x"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"

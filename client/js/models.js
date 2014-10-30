@@ -10,7 +10,7 @@
 
 		self.broadcast = function () {
 			socket.emit("update", ko.toJSON(self));
-		}
+		};
 
 		self.loadFromCookie = function () {
 			if(
@@ -54,7 +54,7 @@
 			} else {
 				return self.users()[i];
 			}
-		}
+		};
 
 		var getExistingUserIndexByUuid = function (uuid) {
 			for(var i=0; i < self.users().length; i++) {
@@ -63,7 +63,7 @@
 				}
 			}
 			return false;
-		}
+		};
 
 		var socket = io.connect("/");
 
@@ -178,12 +178,13 @@
 				// A story object was received:
 				self.storyTitle(received.storyTitle);
 			}
-		}
+		};
 
 		var removeUser = function (uuid) {
 			var userIndex = getExistingUserIndexByUuid(uuid);
 
 			self.users.splice(userIndex, 1);
 		};
-	}
+	};
 })(window.EP = window.EP || {});
+

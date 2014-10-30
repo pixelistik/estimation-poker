@@ -17,7 +17,7 @@ client/css/lib/bootstrap.min.css.gz: client/css/lib/bootstrap.min.css
 client/css/style.css.gz: client/css/style.css
 	@gzip --keep --force client/css/style.css
 
-release: all
+release: lint all
 	git checkout master
 	git merge develop
 
@@ -33,3 +33,5 @@ clean:
 
 lint:
 	@node_modules/jshint/bin/jshint --exclude "client/js/*.prod.*" client/js/*.js
+	@node_modules/csslint/cli.js client/css/style.css
+

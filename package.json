@@ -9,7 +9,8 @@
     "mustache": "~0.8.2"
   },
   "devDependencies": {
-    "jshint": "2.x.x"
+    "jshint": "2.x.x",
+    "csslint": "~0.10.x"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

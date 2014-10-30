@@ -34,7 +34,7 @@
 		var getAllEstimations = function () {
 			var estimations = [];
 
-			self.users().forEach(function (val, i) {
+			self.users().forEach(function (val) {
 				if(val.estimation() !== false) {
 					estimations.push(val.estimation());
 				}

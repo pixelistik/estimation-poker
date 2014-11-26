@@ -47,22 +47,9 @@
 		};
 
 		var getExistingUserByUuid = function (uuid) {
-			var i = getExistingUserIndexByUuid(uuid);
-
-			if (i === false) {
-				return false;
-			} else {
-				return self.users()[i];
-			}
-		};
-
-		var getExistingUserIndexByUuid = function (uuid) {
-			for(var i=0; i < self.users().length; i++) {
-				if (self.users()[i].uuid === uuid) {
-					return i;
-				}
-			}
-			return false;
+			return self.users().filter(function (user) {
+				return user.uuid === uuid;
+			})[0];
 		};
 
 		var socket = io.connect("/");
@@ -181,9 +168,11 @@
 		};
 
 		var removeUser = function (uuid) {
-			var userIndex = getExistingUserIndexByUuid(uuid);
+			var users = self.users().filter(function (user) {
+				return user.uuid !== uuid;
+			});
 
-			self.users.splice(userIndex, 1);
+			self.users(users);
 		};
 	};
 })(window.EP = window.EP || {});

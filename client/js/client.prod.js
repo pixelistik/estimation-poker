@@ -6344,37 +6344,21 @@ t.fragments={};return e};this.createJavaScriptEvaluatorBlock=function(a){return"
 		var self = this;
 
 		var getAllEstimations = function () {
-			var estimations = [];
-
-			self.users().forEach(function (val) {
-				if(val.estimation() !== false) {
-					estimations.push(val.estimation());
-				}
+			var estimations = self.users().map(function (user) {
+				return user.estimation();
 			});
 
-			if(self.localUser().estimation() !== false) {
-				estimations.push(self.localUser().estimation());
-			}
-			return estimations;
+			estimations.push(self.localUser().estimation());
+
+			return estimations.filter(function (estimation) {
+				return estimation !== false;
+			});
 		};
 
 		var getExistingUserByUuid = function (uuid) {
-			var i = getExistingUserIndexByUuid(uuid);
-
-			if (i === false) {
-				return false;
-			} else {
-				return self.users()[i];
-			}
-		};
-
-		var getExistingUserIndexByUuid = function (uuid) {
-			for(var i=0; i < self.users().length; i++) {
-				if (self.users()[i].uuid === uuid) {
-					return i;
-				}
-			}
-			return false;
+			return self.users().filter(function (user) {
+				return user.uuid === uuid;
+			})[0];
 		};
 
 		var socket = io.connect("/");
@@ -6454,15 +6438,10 @@ t.fragments={};return e};this.createJavaScriptEvaluatorBlock=function(a){return"
 		});
 
 		self.estimationsComplete = ko.computed(function () {
-			for(var i=0; i < self.users().length; i++) {
-				if (self.users()[i].estimation() === false) {
-					return false;
-				}
-			}
-			if(self.localUser().estimation() === false) {
-				return false;
-			}
-			return true;
+			var estimationsCount = getAllEstimations().length;
+			var usersCount = 1 + self.users().length; // +1 = localUser
+
+			return estimationsCount === usersCount;
 		});
 
 		var broadcast = function () {
@@ -6493,9 +6472,11 @@ t.fragments={};return e};this.createJavaScriptEvaluatorBlock=function(a){return"
 		};
 
 		var removeUser = function (uuid) {
-			var userIndex = getExistingUserIndexByUuid(uuid);
+			var users = self.users().filter(function (user) {
+				return user.uuid !== uuid;
+			});
 
-			self.users.splice(userIndex, 1);
+			self.users(users);
 		};
 	};
 })(window.EP = window.EP || {});

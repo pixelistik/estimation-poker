@@ -32,18 +32,15 @@
 		var self = this;
 
 		var getAllEstimations = function () {
-			var estimations = [];
-
-			self.users().forEach(function (val) {
-				if(val.estimation() !== false) {
-					estimations.push(val.estimation());
-				}
+			var estimations = self.users().map(function (user) {
+				return user.estimation();
 			});
 
-			if(self.localUser().estimation() !== false) {
-				estimations.push(self.localUser().estimation());
-			}
-			return estimations;
+			estimations.push(self.localUser().estimation());
+
+			return estimations.filter(function (estimation) {
+				return estimation !== false;
+			});
 		};
 
 		var getExistingUserByUuid = function (uuid) {

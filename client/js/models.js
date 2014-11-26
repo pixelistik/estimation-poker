@@ -126,15 +126,10 @@
 		});
 
 		self.estimationsComplete = ko.computed(function () {
-			for(var i=0; i < self.users().length; i++) {
-				if (self.users()[i].estimation() === false) {
-					return false;
-				}
-			}
-			if(self.localUser().estimation() === false) {
-				return false;
-			}
-			return true;
+			var estimationsCount = getAllEstimations().length;
+			var usersCount = 1 + self.users().length; // +1 = localUser
+
+			return estimationsCount === usersCount;
 		});
 
 		var broadcast = function () {

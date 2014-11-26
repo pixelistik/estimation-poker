@@ -5,7 +5,8 @@ var nodeStatic = require("node-static");
 var clientFiles = new nodeStatic.Server(
 	"./client",
 	{
-		gzip: true
+		gzip: true,
+		cache: 3600 * 24 * 365
 	}
 );
 
@@ -16,10 +17,13 @@ var io = require("socket.io").listen(app);
 var port = Number(process.env.PORT || 5000);
 app.listen(port);
 
+var version = require("./package.json").version;
 
 var mustache = require('mustache');
 
-var indexData = {};
+var indexData = {
+	version: version
+};
 
 if (process.env.PIWIK_URL && process.env.PIWIK_SITE_ID) {
 	indexData.piwik = {

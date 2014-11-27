@@ -17,12 +17,12 @@ var io = require("socket.io").listen(app);
 var port = Number(process.env.PORT || 5000);
 app.listen(port);
 
-var version = require("./package.json").version;
+var packageInfo = require("./package.json");
 
 var mustache = require('mustache');
 
 var indexData = {
-	version: version
+	packageInfo: packageInfo
 };
 
 if (process.env.PIWIK_URL && process.env.PIWIK_SITE_ID) {

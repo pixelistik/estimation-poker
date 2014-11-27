@@ -3,10 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="{{packageInfo.description}}">
 	<title>Estimation Poker</title>
 	<!--<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
-	<link rel="stylesheet" href="css/lib/bootstrap.min.css?{{version}}">
-	<link rel="stylesheet" href="css/style.css?{{version}}">
+	<link rel="stylesheet" href="css/lib/bootstrap.min.css?{{packageInfo.version}}">
+	<link rel="stylesheet" href="css/style.css?{{packageInfo.version}}">
 	{{#piwik}}
 	<script>
 		// Set up client error tracking
@@ -103,7 +104,7 @@
 	{{/productionMode}}
 
 	{{#productionMode}}
-	<script src="js/client.prod.min.js?{{version}}"></script>
+	<script src="js/client.prod.min.js?{{packageInfo.version}}"></script>
 	{{/productionMode}}
 
 	{{#piwik}}

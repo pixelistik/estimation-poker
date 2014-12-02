@@ -2,10 +2,11 @@
 "use strict";
 var fs = require('fs');
 var nodeStatic = require("node-static");
+
 var clientFiles = new nodeStatic.Server(
 	"./client",
 	{
-		gzip: true,
+		gzip: process.env.PRODUCTION_MODE ? true : false,
 		cache: 3600 * 24 * 365
 	}
 );

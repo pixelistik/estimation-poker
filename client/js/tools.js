@@ -9,6 +9,20 @@
 		}));
 	};
 
+	EP.Tools.base64Id = function (length) {
+		var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		var id = "";
+
+		var rnd;
+
+		for (var i = 0; i < length; i++) {
+			rnd = Math.random() * chars.length | 0;
+			id += chars[rnd];
+		}
+
+		return id;
+	};
+
 	// Cookie functions: http://www.quirksmode.org/js/cookies.html
 	EP.Tools.createCookie = function (name, value, days) {
 		var expires = "";

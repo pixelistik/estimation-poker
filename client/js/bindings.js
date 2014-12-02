@@ -5,7 +5,7 @@
 		init: function (element, valueAccessor) {
 			var values = [0, 1, 2, 3, 5, 8, 13, 20, 40, 100];
 
-			element.classList.add("estimationSelect");
+			element.classList.add("estimation-select");
 
 			for(var i = 0; i < values.length; i++) {
 				var markup = '<button type="button" class="btn">' + values[i] + '</button>';
@@ -47,7 +47,7 @@
 	ko.bindingHandlers.editableText = {
 		init: function (element, valueAccessor) {
 
-			element.classList.add("editableText");
+			element.classList.add("editable-text");
 
 			var markup = '<span class="et-display"><span class="et-label"></span><span class="et-hint"></span></span><span class="et-form"><input/><button type="submit" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-ok"></span></button></span>';
 			element.insertAdjacentHTML('beforeend', markup);

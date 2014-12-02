@@ -49,25 +49,25 @@
 	background-color: #ff9;
 }
 
-.estimationSelect .active {
+.estimation-select .active {
 	color: #fff;
 	background-color: #ff9840;
 }
 
-.localUser .username {
+.local-user .username {
 	margin-right: 1em;
 	display: inline-block;
 }
 
-.localUser .username,
-.localUser .btn {
+.local-user .username,
+.local-user .btn {
 	margin-bottom: 0.4em;
 }
 
-.storyTitle .et-form {
+.story-title .et-form {
 	display: block;
 }
 
-.storyTitle .et-form input {
+.story-title .et-form input {
 	width: 80%;
 }

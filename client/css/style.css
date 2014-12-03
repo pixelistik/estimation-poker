@@ -32,16 +32,16 @@
 /*
  * Individual border colors for the different card values
  */
-.card--0   { border-color: #ff3333; }
-.card--1   { border-color: #3333ff; }
-.card--2   { border-color: #9999ff; }
-.card--3   { border-color: #33ff33; }
-.card--5   { border-color: #ff66ff; }
-.card--8   { border-color: #66ff00; }
-.card--13  { border-color: #00cccc; }
-.card--20  { border-color: #999900; }
-.card--40  { border-color: #3333ff; }
-.card--100 { border-color: #ffff00; }
+.card--0   { border-color: hsl(195, 20%, 40%); }
+.card--1   { border-color: hsl( 21, 40%, 60%); }
+.card--2   { border-color: hsl(195, 60%, 40%); }
+.card--3   { border-color: hsl( 21, 80%, 60%); }
+.card--5   { border-color: hsl(195, 99%, 40%); }
+.card--8   { border-color: hsl( 21, 20%, 40%); }
+.card--13  { border-color: hsl(195, 40%, 60%); }
+.card--20  { border-color: hsl( 21, 60%, 40%); }
+.card--40  { border-color: hsl(195, 80%, 60%); }
+.card--100 { border-color: hsl( 21, 99%, 40%); }
 
 .card__number {
     line-height: 2.6em;

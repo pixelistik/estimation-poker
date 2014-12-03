@@ -73,20 +73,20 @@
 		<div class="estimations col-lg-8" data-bind="css: {'estimations--incomplete': !$root.estimationsComplete()}">
 			<h2>The Estimations</h2>
 			<table class="table">
-				<tbody class="local-user">
+				<tbody class="local-user" data-bind="with: localUser">
 					<tr>
 						<td>
-							<span class="username" data-bind="editableText: localUser().name" data-edit-hint="<your name>"></span>
-							<span class="btn-group" data-bind="estimationSelect: localUser().estimation"></span>
+							<span class="username" data-bind="editableText: name" data-edit-hint="<your name>"></span>
+							<span class="btn-group" data-bind="estimationSelect: estimation"></span>
 						</td>
 						<td>
 							<div class="card" data-bind="
-									css: {
-										'card--unplayed': localUser().estimation() == false,
-										'card--max': localUser().estimation() === $root.highestEstimation(),
-										'card--min': localUser().estimation() === $root.lowestEstimation()
+								css: {
+									'card--unplayed': estimation() == false,
+									'card--max': estimation() === $root.highestEstimation(),
+									'card--min': estimation() === $root.lowestEstimation()
 							}">
-								<div class="card__number" data-bind="text: localUser().estimation"></div>
+								<div class="card__number" data-bind="text: estimation"></div>
 							</div>
 						</td>
 					</tr>

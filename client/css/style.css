@@ -20,18 +20,6 @@
 	#Estimations
 \*--------------------------------------*/
 
-.max {
-	background-color: #69f;
-}
-
-.min {
-	background-color: #99f;
-}
-
-.max.min {
-	background-color: transparent;
-}
-
 /*
  * Individual border colors for the different card values
  */
@@ -78,6 +66,32 @@
 .estimations--incomplete .summary__card {
 	visibility: hidden;
 }
+
+/*
+ * Highlight the highest and lowest card (but not if they are equal)
+ */
+
+.card--min .card__number:after,
+.card--max .card__number:after
+{
+    display: block;
+    margin-top: -2.8em;
+    margin-left: 2em;
+    color: #f00;
+    font-weight: normal;
+}
+.card--min .card__number:after {
+    content: "←min";
+}
+
+.card--max .card__number:after {
+    content: "←max";
+}
+
+.card--min.card--max .card__number:after{
+	display: none;
+}
+
 
 /*
  * Drop shadow for the cards

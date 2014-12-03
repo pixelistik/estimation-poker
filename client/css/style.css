@@ -40,7 +40,7 @@
     border: 0.2em solid #00f;
     border-radius: 0.2em;
     background: #fefefe;
-    margin: 0 0.2em 1em 0;
+    margin-right: 2em;
 }
 
 .card--unplayed {

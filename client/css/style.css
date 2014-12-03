@@ -1,3 +1,7 @@
+/*--------------------------------------*\
+	#Logo
+\*--------------------------------------*/
+
 .logo {
 	width: 1em;
 	margin-right: 0.2em;
@@ -11,13 +15,10 @@
 .logo__card-2 { fill:#0f0; }
 .logo__card-3 { fill:#00f; }
 
-.estimation {
-	width: 2.5em;
-	display: inline-block;
-	border-radius: 2px;
-	padding: 2px 4px;
-	text-align: center;
-}
+
+/*--------------------------------------*\
+	#Estimations
+\*--------------------------------------*/
 
 .max {
 	background-color: #69f;
@@ -32,21 +33,85 @@
 }
 
 /*
- * While the team's estimation is incomplete, the estimation
- * values are completely hidden by default
+ * Individual border colors for the different card values
  */
-.incomplete .estimation {
-	color: transparent;
+.card--0   { border-color: #ff3333; }
+.card--1   { border-color: #3333ff; }
+.card--2   { border-color: #9999ff; }
+.card--3   { border-color: #33ff33; }
+.card--5   { border-color: #ff66ff; }
+.card--8   { border-color: #66ff00; }
+.card--13  { border-color: #00cccc; }
+.card--20  { border-color: #999900; }
+.card--40  { border-color: #3333ff; }
+.card--100 { border-color: #ffff00; }
+
+.card {
+    width: 2em;
+    height: 3em;
+    border: 0.2em solid #00f;
+    border-radius: 0.2em;
+    background: #fefefe;
+    margin: 0 0.2em 1em 0;
+}
+
+.card--unplayed {
+	visibility: hidden;
+}
+
+.card__number {
+    line-height: 2.6em;
+    text-align: center;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #333;
+    font-weight: bold;
+}
+
+.estimations--incomplete .card {
+    border-color: #DDD;
+    background: #DDD;
+}
+.estimations--incomplete .card__number {
+    display: none;
+}
+
+.estimations--incomplete .summary__card {
+	visibility: hidden;
 }
 
 /*
- * While the team's estimation is incomplete, received estimation
- * values are shown in an unreadably teaser style
+ * Drop shadow for the cards
+ * http://nicolasgallagher.com/css-drop-shadows-without-images/
  */
-.incomplete .estimated {
-	color: #666;
-	background-color: #666;
+
+.card {
+  position: relative;
 }
+
+.card:before,
+.card:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  bottom: 0.1em;
+  left: 0.05em;
+  width: 90%;
+  height: 20%;
+  max-width: 300px;
+  box-shadow :0 0.35em 0.3em rgba(0, 0, 0, 0.5);
+  transform: rotate(-3deg);
+}
+
+.card:after{
+  right: 0.05em;
+  left: auto;
+  transform: rotate(3deg);
+}
+
+
+/*--------------------------------------*\
+	#EditableText
+\*--------------------------------------*/
 
 .et-display {
 	cursor: pointer;
@@ -61,6 +126,11 @@
 .et-hint:hover {
 	background-color: #ff9;
 }
+
+
+/*--------------------------------------*\
+	#EstimationSelect
+\*--------------------------------------*/
 
 .estimation-select .active {
 	color: #fff;
@@ -84,3 +154,4 @@
 .story-title .et-form input {
 	width: 80%;
 }
+

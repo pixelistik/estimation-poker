@@ -20,6 +20,15 @@
 	#Estimations
 \*--------------------------------------*/
 
+.card {
+    width: 2em;
+    height: 3em;
+    border: 0.2em solid #00f;
+    border-radius: 0.2em;
+    background: #fefefe;
+    margin-right: 2em;
+}
+
 /*
  * Individual border colors for the different card values
  */
@@ -34,25 +43,23 @@
 .card--40  { border-color: #3333ff; }
 .card--100 { border-color: #ffff00; }
 
-.card {
-    width: 2em;
-    height: 3em;
-    border: 0.2em solid #00f;
-    border-radius: 0.2em;
-    background: #fefefe;
-    margin-right: 2em;
-}
-
-.card--unplayed {
-	visibility: hidden;
-}
-
 .card__number {
     line-height: 2.6em;
     text-align: center;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #333;
     font-weight: bold;
+}
+
+/*
+ * Different states that a card can be in:
+ *   - unplayed: the user has not estimated a value yet
+ *   - incomplete: the user has estimated, but other team members haven't
+ *   - complete: all users have estimated
+ */
+
+.card--unplayed {
+	visibility: hidden;
 }
 
 .estimations--incomplete .card {

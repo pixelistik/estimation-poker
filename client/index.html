@@ -134,8 +134,14 @@
 
 	</div>
 
+	<!--
+	Reusable "card" component that is used for both local and remote
+	users. Including a little dirty hack with the attr binding to achieve
+	code-generated classes for the card values. -->
 	<template id="card">
+
 		<div class="card" data-bind="
+			attr: {'class': 'card  card--'+user.estimation()},
 			css: {
 				'card--unplayed': user.estimation() == false,
 				'card--max': user.estimation() === $root.highestEstimation(),

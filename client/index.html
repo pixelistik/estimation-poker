@@ -80,14 +80,12 @@
 							<span class="btn-group" data-bind="estimationSelect: estimation"></span>
 						</td>
 						<td>
-							<div class="card" data-bind="
-								css: {
-									'card--unplayed': estimation() == false,
-									'card--max': estimation() === $root.highestEstimation(),
-									'card--min': estimation() === $root.lowestEstimation()
-							}">
-								<div class="card__number" data-bind="text: estimation"></div>
-							</div>
+							<div data-bind="component: {
+								name: 'card',
+								params: {
+									user: $data
+								}
+							}"></div>
 						</td>
 					</tr>
 				</tbody>
@@ -95,15 +93,12 @@
 					<tr>
 						<td class="name" data-bind="text: name"></td>
 						<td>
-							<div class="card" data-bind="
-								css: {
-									'card--unplayed': estimation() == false,
-									'card--max': estimation() === $root.highestEstimation(),
-									'card--min': estimation() === $root.lowestEstimation()
+							<div data-bind="component: {
+								name: 'card',
+								params: {
+									user: $data
 								}
-							">
-								<div class="card__number" data-bind="text: estimation"></div>
-							</div>
+							}"></div>
 						</td>
 					</tr>
 				</tbody>
@@ -136,6 +131,18 @@
 
 
 	</div>
+
+	<template id="card">
+		<div class="card" data-bind="
+			css: {
+				'card--unplayed': user.estimation() == false,
+				'card--max': user.estimation() === $root.highestEstimation(),
+				'card--min': user.estimation() === $root.lowestEstimation()
+			}
+		">
+			<div class="card__number" data-bind="text: user.estimation"></div>
+		</div>
+	</template>
 
 	{{^productionMode}}
 	<script src="/socket.io/socket.io.js"></script>

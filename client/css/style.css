@@ -23,7 +23,7 @@
 .card {
     width: 2em;
     height: 3em;
-    border: 0.2em solid #00f;
+    border: 0.2em solid #aaa;
     border-radius: 0.2em;
     background: #fefefe;
     margin-right: 2em;

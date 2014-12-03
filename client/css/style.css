@@ -1,3 +1,16 @@
+.logo {
+	width: 1em;
+	margin-right: 0.2em;
+	height: auto;
+	float: left;
+}
+
+.logo__card {}
+
+.logo__card-1 { fill:#f00; }
+.logo__card-2 { fill:#0f0; }
+.logo__card-3 { fill:#00f; }
+
 .estimation {
 	width: 2.5em;
 	display: inline-block;

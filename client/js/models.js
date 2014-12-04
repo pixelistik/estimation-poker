@@ -60,6 +60,20 @@
 			broadcast();
 		});
 
+		socket.on("reconnect", function () {
+			// The client has a different session ID after reconnect,
+			// so we need to re-join the group.
+			socket.emit(
+				"join",
+				{
+					groupName: groupName,
+					userUuid: self.localUser().uuid
+				}
+			);
+			self.localUser().broadcast();
+			broadcast();
+		});
+
 		socket.on("user disconnected", function (data) {
 			removeUser(data);
 		});

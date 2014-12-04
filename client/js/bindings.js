@@ -28,6 +28,47 @@
 			for (i = 0; i < buttons.length; i++) {
 				buttons[i].addEventListener("click", clickHandler);
 			}
+
+			/*
+			 * Activate the next (+1) or previous (-1) value
+			 *
+			 * When no value is selected, select the first (+1) or last (-1) one.
+			 */
+			var shiftValue = function (indexDelta) {
+				var observable = valueAccessor();
+
+				var currentValueIndex, nextValueIndex;
+
+				currentValueIndex = values.indexOf(observable());
+
+				if (currentValueIndex !== -1) {
+					nextValueIndex = currentValueIndex + indexDelta;
+				} else {
+					if (indexDelta === +1) {
+						nextValueIndex = 0;
+					}
+
+					if (indexDelta === -1) {
+						nextValueIndex = values.length -1;
+					}
+				}
+
+				var nextValue = values[nextValueIndex]
+
+				if (typeof nextValue !== "undefined") {
+					observable(nextValue);
+				}
+			};
+
+			document.addEventListener("keypress", function (e) {
+				if (e.key === "+") {
+					shiftValue(+1);
+				}
+
+				if (e.key === "-") {
+					shiftValue(-1);
+				}
+			});
 		},
 		update: function (element, valueAccessor) {
 			var observable = valueAccessor();

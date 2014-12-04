@@ -4,8 +4,16 @@
 	EP.User = function (socket, uuid) {
 		var self = this;
 
+		var DEFAULT_DISPLAY_NAME = "new user";
+
 		self.uuid = uuid || EP.Tools.uuid();
+
 		self.name = ko.observable("");
+
+		self.displayName = ko.pureComputed(function () {
+			return self.name() || DEFAULT_DISPLAY_NAME;
+		});
+
 		self.estimation = ko.observable(false);
 
 		self.broadcast = function () {

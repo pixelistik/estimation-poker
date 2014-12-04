@@ -93,7 +93,10 @@
 				</tbody>
 				<tbody class="remote-users" data-bind="foreach: users">
 					<tr>
-						<td class="name" data-bind="text: name"></td>
+						<td class="name" data-bind="
+							text: displayName,
+							css: {'name--default': displayName() !== name()}
+						"></td>
 						<td>
 							<!-- ko component: {
 								name: 'card',

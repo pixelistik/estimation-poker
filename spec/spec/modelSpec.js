@@ -46,6 +46,16 @@ describe("Model", function () {
 			expect(user.uuid).toEqual("a-mock-uuid");
 		});
 
+		it("should show a generic display name when no name is set", function () {
+			expect(user.displayName()).toEqual("new user");
+
+			user.name("testuser");
+			expect(user.displayName()).toEqual("testuser");
+
+			user.name("");
+			expect(user.displayName()).toEqual("new user");
+		});
+
 		it("should be able to be loaded from cookie", function () {
 			spyOn(EP.Tools, "readCookie").and.callFake(function (param) {
 				var returnValues = {

@@ -20,6 +20,15 @@
 	#Estimations
 \*--------------------------------------*/
 
+/*
+ * Remote users that haven't set their name yet
+ */
+.name--default {
+	font-style: italic;
+	color: #555;
+}
+
+
 .card {
     width: 2em;
     height: 3em;

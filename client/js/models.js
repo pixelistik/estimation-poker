@@ -132,7 +132,7 @@
 		self.users = ko.observableArray([]);
 
 		self.storyTitle = ko.observable("");
-		self.storyTitle.subscribe(function () {
+		var storySubscription = self.storyTitle.subscribe(function () {
 			broadcast();
 		});
 
@@ -189,7 +189,9 @@
 				user.estimation(received.estimation);
 			} else {
 				// A story object was received:
+				storySubscription.isDisposed = true;
 				self.storyTitle(received.storyTitle);
+				storySubscription.isDisposed = false;
 			}
 		};
 

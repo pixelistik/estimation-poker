@@ -320,6 +320,20 @@ describe("Model", function () {
 				// Users should not be touched
 				expect(pokerView.users()).toEqual(usersCache);
 			});
+
+			it("should broadcast the story title when changed locally", function () {
+				pokerView.storyTitle("locally updated title");
+				expect(socketMock.emit).toHaveBeenCalledWith( 'update', '{"storyTitle":"locally updated title"}');
+			});
+
+			it("should NOT re-broadcast the story title when changed remotely", function () {
+				socketMock.callHandler("update", '{"storyTitle": "remotely updated title"}');
+				expect(socketMock.emit).not.toHaveBeenCalledWith('update', '{"storyTitle":"remotely updated title"}');
+
+				// Re-test local change, in case we broke the subscription
+				pokerView.storyTitle("locally updated title");
+				expect(socketMock.emit).toHaveBeenCalledWith( 'update', '{"storyTitle":"locally updated title"}');
+			});
 		});
 
 		describe("Reset", function () {

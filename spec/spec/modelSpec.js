@@ -16,8 +16,16 @@ describe("Model", function () {
 		socketMock.on = jasmine.createSpy("on")
 			.and.callFake(function (eventName, handler) {
 				// Store references to all callback functions:
-				this.handlers[eventName] = handler;
+				this.handlers[eventName] = this.handlers[eventName] || [];
+				this.handlers[eventName].push(handler);
 			});
+
+		// Helper to call all stored references to handlers for an event
+		socketMock.callHandler = function (eventName, arg) {
+			this.handlers[eventName].forEach(function (handler) {
+				handler(arg);
+			});
+		};
 
 		socketMock.emit = jasmine.createSpy("emit");
 
@@ -252,7 +260,7 @@ describe("Model", function () {
 					expect(pokerView.users().length).toEqual(1);
 
 					// Manually call the event handler
-					socketMock.handlers["user disconnected"]("a-user-to-remove");
+					socketMock.callHandler("user disconnected", "a-user-to-remove");
 
 					expect(pokerView.users().length).toEqual(0);
 				});
@@ -272,7 +280,7 @@ describe("Model", function () {
 					uuid: "a-test-user",
 					estimation: 99
 				};
-				socketMock.handlers["update"](JSON.stringify(data));
+				socketMock.callHandler("update", JSON.stringify(data));
 
 				expect(pokerView.users()[0].estimation()).toEqual(99);
 
@@ -290,7 +298,7 @@ describe("Model", function () {
 				var data = {
 					storyTitle: "a test story title"
 				};
-				socketMock.handlers["update"](JSON.stringify(data));
+				socketMock.callHandler("update", JSON.stringify(data));
 
 				expect(pokerView.storyTitle()).toEqual("a test story title");
 
@@ -316,7 +324,7 @@ describe("Model", function () {
 				user1.estimation(3);
 				pokerView.localUser(user1);
 
-				socketMock.handlers["new round"]();
+				socketMock.callHandler("new round");
 
 				expect(pokerView.localUser().estimation()).toEqual(false);
 			});

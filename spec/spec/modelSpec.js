@@ -246,6 +246,21 @@ describe("Model", function () {
 				expect(localUser.broadcast).toHaveBeenCalled();
 				expect(localUser.saveToCookie).toHaveBeenCalled();
 			});
+
+			it("should know its current connection state", function () {
+				var localUser = pokerView.localUser();
+
+				expect(localUser.isConnected()).toBeFalsy();
+
+				socketMock.callHandler("connect");
+				expect(localUser.isConnected()).toBeTruthy();
+
+				socketMock.callHandler("disconnect");
+				expect(localUser.isConnected()).toBeFalsy();
+
+				socketMock.callHandler("reconnect");
+				expect(localUser.isConnected()).toBeTruthy();
+			});
 		});
 
 		describe("Remote users", function () {

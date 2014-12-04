@@ -34,6 +34,8 @@
 			EP.Tools.createCookie("ep.user.name", self.name());
 			EP.Tools.createCookie("ep.user.uuid", self.uuid);
 		};
+
+		self.isConnected = ko.observable(false);
 	};
 
 	EP.PokerView = function (groupName) {
@@ -58,6 +60,16 @@
 		};
 
 		var socket = io.connect("/");
+
+		socket.on("connect", function () {
+			self.localUser().isConnected(true);
+		});
+		socket.on("disconnect", function () {
+			self.localUser().isConnected(false);
+		});
+		socket.on("reconnect", function () {
+			self.localUser().isConnected(true);
+		});
 
 		socket.on("update", function (data) {
 			update(data);

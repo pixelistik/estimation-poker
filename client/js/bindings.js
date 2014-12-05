@@ -61,6 +61,11 @@
 			};
 
 			document.addEventListener("keypress", function (e) {
+				// These bindings shall only work outside of inputs
+				if (e.target.tagName && e.target.tagName.toLowerCase() === "input") {
+					return;
+				}
+
 				if (e.key === "+") {
 					shiftValue(+1);
 				}

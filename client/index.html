@@ -120,8 +120,12 @@
 					<tr>
 						<td>Team estimation (max)</td>
 						<td>
-							<div class="card  summary__card">
-								<div class="card__number" data-bind="text: $root.highestEstimation()"></div>
+							<div class="card  summary__card" data-bind="
+								attr: {'class': 'card  summary__card  card--'+$root.highestEstimation()}
+							">
+								<div class="card__number" data-bind="
+									text: $root.highestEstimation()"
+								></div>
 							</div>
 						</td>
 					</tr>

@@ -53,7 +53,7 @@
 					}
 				}
 
-				var nextValue = values[nextValueIndex]
+				var nextValue = values[nextValueIndex];
 
 				if (typeof nextValue !== "undefined") {
 					observable(nextValue);

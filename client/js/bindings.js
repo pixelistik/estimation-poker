@@ -8,7 +8,7 @@
 			element.classList.add("estimation-select");
 
 			for(var i = 0; i < values.length; i++) {
-				var markup = '<button type="button" class="btn">' + values[i] + '</button>';
+				var markup = '<button type="button" class="btn  estimation-select__btn  estimation-select__btn-' + values[i] + '">' + values[i] + '</button>';
 				element.insertAdjacentHTML('beforeend', markup);
 			}
 

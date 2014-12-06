@@ -85,6 +85,22 @@ describe("Binding", function () {
 			ko.applyBindings(model, fixture[0]);
 		});
 
+		describe("mouse click binding", function () {
+			it("should set the value of the clicked button", function () {
+				$(".estimation-select__btn-1", fixture).click();
+				expect(model.prop()).toEqual(1);
+
+				$(".estimation-select__btn-5", fixture).click();
+				expect(model.prop()).toEqual(5);
+			});
+
+			it("should unset the value when the active button is clicked again", function () {
+				$(".estimation-select__btn-1", fixture).click();
+				$(".estimation-select__btn-1", fixture).click();
+				expect(model.prop()).toEqual(false);
+			});
+		});
+
 		describe("+/- key binding", function () {
 			it("should go from undefined to the lowest value with +", function () {
 				e = crossBrowser_initKeyboardEvent("keypress", {"key": "+"})

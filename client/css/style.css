@@ -154,7 +154,7 @@
 
 .et-label:hover,
 .et-hint:hover {
-	background-color: #ff9;
+	background-color: #f5f5f5;
 }
 
 .et-form .btn {
@@ -168,7 +168,7 @@
 
 .estimation-select .active {
 	color: #fff;
-	background-color: #ff9840;
+	background-color: #0086B2;
 }
 
 .local-user .username {
@@ -197,3 +197,13 @@
 .alerts {
 	margin-top: 1em;
 }
+
+
+/*--------------------------------------*\
+	#Tutorial
+\*--------------------------------------*/
+
+.tutorial a {
+	color: #333;
+}
+

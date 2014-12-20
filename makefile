@@ -6,7 +6,7 @@ client/js/client.prod.js: node_modules/socket.io/node_modules/socket.io-client/s
 	@cat node_modules/socket.io/node_modules/socket.io-client/socket.io.js client/js/lib/knockout-min.js client/js/tools.js client/js/models.js client/js/bindings.js client/js/app.js > client/js/client.prod.js
 
 client/js/client.prod.min.js: client/js/client.prod.js
-	@curl --silent --data "output_info=compiled_code" --data-urlencode "js_code@client/js/client.prod.js" "http://closure-compiler.appspot.com/compile" -o client/js/client.prod.min.js
+	@curl --silent --data "output_info=compiled_code" --data "language=ECMASCRIPT5" --data-urlencode "js_code@client/js/client.prod.js" "http://closure-compiler.appspot.com/compile" -o client/js/client.prod.min.js
 
 client/js/client.prod.min.js.gzip: client/js/client.prod.min.js
 	@gzip --keep --force client/js/client.prod.min.js

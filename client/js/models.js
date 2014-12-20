@@ -1,4 +1,4 @@
-(function (EP) {
+(function (EP, ko) {
 	"use strict";
 
 	EP.User = function (socket, uuid) {
@@ -203,5 +203,5 @@
 			self.users(users);
 		};
 	};
-})(window.EP = window.EP || {});
+})(window.EP = window.EP || {}, window.ko);
 

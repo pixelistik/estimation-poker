@@ -66,11 +66,11 @@
 					return;
 				}
 
-				if (e.key === "+") {
+				if (e.key === "+" || e.keyCode === 43) {
 					shiftValue(+1);
 				}
 
-				if (e.key === "-") {
+				if (e.key === "-" || e.keyCode === 45) {
 					shiftValue(-1);
 				}
 			});

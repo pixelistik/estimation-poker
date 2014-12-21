@@ -1,6 +1,6 @@
 .PHONY: all release lint committedworkingdir
 
-all: client/js/client.prod.min.js.gzip client/css/lib/bootstrap.min.css.gz client/css/style.css.gz
+all: client/js/client.prod.min.js.gz client/css/lib/bootstrap.min.css.gz client/css/style.css.gz
 
 client/js/client.prod.js: node_modules/socket.io/node_modules/socket.io-client/socket.io.js client/js/lib/knockout-min.js client/js/tools.js client/js/models.js client/js/bindings.js client/js/app.js
 	# Concatenate JS
@@ -10,7 +10,7 @@ client/js/client.prod.min.js: client/js/client.prod.js
 	# Minify JS
 	curl --silent --data "output_info=compiled_code" --data "language=ECMASCRIPT5" --data-urlencode "js_code@client/js/client.prod.js" "http://closure-compiler.appspot.com/compile" -o client/js/client.prod.min.js
 
-client/js/client.prod.min.js.gzip: client/js/client.prod.min.js
+client/js/client.prod.min.js.gz: client/js/client.prod.min.js
 	# Gzip JS
 	gzip --keep --force client/js/client.prod.min.js
 
@@ -44,6 +44,8 @@ clean:
 	rm client/js/client.prod.js
 	rm client/js/client.prod.min.js
 	rm client/js/client.prod.min.js.gz
+	rm client/css/lib/bootstrap.min.css.gz
+	rm client/css/style.css.gz
 
 lint:
 	node_modules/jshint/bin/jshint .

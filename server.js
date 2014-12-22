@@ -38,7 +38,7 @@ app.get("/", function (request, response) {
 	response.send(indexHtml);
 });
 
-app.use(express.static("./client"));
+app.use(express.static("./client", { maxAge: 1000 * 3600 * 24 * 365 }));
 
 io.sockets.on("connection", function (socket) {
 	var group;

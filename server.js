@@ -1,18 +1,20 @@
 /* jshint node: true */
 "use strict";
+
 var fs = require('fs');
 var express = require("express");
 var compression = require('compression');
+var mustache = require('mustache');
+var socketio = require("socket.io")
+
+var port = Number(process.env.PORT || 5000);
 
 var app = express();
-var port = Number(process.env.PORT || 5000);
 var server = app.listen(port);
 
-var io = require("socket.io").listen(server);
+var io = socketio.listen(server);
 
 var packageInfo = require("./package.json");
-
-var mustache = require('mustache');
 
 var indexData = {
 	packageInfo: packageInfo

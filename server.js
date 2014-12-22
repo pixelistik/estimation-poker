@@ -1,22 +1,13 @@
 /* jshint node: true */
 "use strict";
 var fs = require('fs');
-var nodeStatic = require("node-static");
 
-var clientFiles = new nodeStatic.Server(
-	"./client",
-	{
-		gzip: process.env.PRODUCTION_MODE ? true : false,
-		cache: 3600 * 24 * 365
-	}
-);
-
-var app = require("http").createServer(handler);
-
-var io = require("socket.io").listen(app);
-
+var express = require("express");
+var app = express();
 var port = Number(process.env.PORT || 5000);
-app.listen(port);
+var server = app.listen(port);
+
+var io = require("socket.io").listen(server);
 
 var packageInfo = require("./package.json");
 
@@ -40,16 +31,11 @@ if (process.env.PRODUCTION_MODE) {
 var indexTemplate = fs.readFileSync("./client/index.html", "utf8");
 var indexHtml = mustache.render(indexTemplate, indexData);
 
-function handler (request, response) {
-	if(request.url === "/") {
-		response.writeHead(200, {"Content-Type": "text/html"});
-		response.end(indexHtml);
-	}
+app.get("/", function (request, response) {
+	response.send(indexHtml);
+});
 
-	request.addListener("end", function () {
-		clientFiles.serve(request, response);
-	}).resume();
-}
+app.use(express.static("./client"));
 
 io.sockets.on("connection", function (socket) {
 	var group;

@@ -11,7 +11,8 @@
     "node-static": "~0.7.3",
     "socket.io": "~1.2.x",
     "mustache": "~0.8.2",
-    "express": "~4.10.6"
+    "express": "~4.10.6",
+    "compression": "~1.2.2"
   },
   "devDependencies": {
     "jshint": "2.x.x",

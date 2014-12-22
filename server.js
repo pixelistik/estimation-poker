@@ -1,8 +1,9 @@
 /* jshint node: true */
 "use strict";
 var fs = require('fs');
-
 var express = require("express");
+var compression = require('compression');
+
 var app = express();
 var port = Number(process.env.PORT || 5000);
 var server = app.listen(port);
@@ -30,6 +31,8 @@ if (process.env.PRODUCTION_MODE) {
 
 var indexTemplate = fs.readFileSync("./client/index.html", "utf8");
 var indexHtml = mustache.render(indexTemplate, indexData);
+
+app.use(compression());
 
 app.get("/", function (request, response) {
 	response.send(indexHtml);

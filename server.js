@@ -1,11 +1,10 @@
 /* jshint node: true */
 "use strict";
 
-var fs = require('fs');
 var express = require("express");
 var compression = require('compression');
-var mustache = require('mustache');
-var socketio = require("socket.io")
+var mustacheExpress = require('mustache-express');
+var socketio = require("socket.io");
 
 var port = Number(process.env.PORT || 5000);
 
@@ -13,6 +12,10 @@ var app = express();
 var server = app.listen(port);
 
 var io = socketio.listen(server);
+
+app.engine("html", mustacheExpress());
+app.set("view engine", "mustache");
+app.set("views", __dirname + "/client");
 
 var packageInfo = require("./package.json");
 
@@ -31,13 +34,10 @@ if (process.env.PRODUCTION_MODE) {
 	indexData.productionMode = true;
 }
 
-var indexTemplate = fs.readFileSync("./client/index.html", "utf8");
-var indexHtml = mustache.render(indexTemplate, indexData);
-
 app.use(compression());
 
 app.get("/", function (request, response) {
-	response.send(indexHtml);
+	response.render("index.html", indexData);
 });
 
 app.use(express.static("./client", { maxAge: 1000 * 3600 * 24 * 365 }));

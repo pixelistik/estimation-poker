@@ -129,6 +129,7 @@
 
 			element.querySelector("input").addEventListener("keypress", function (e) {if(e.keyCode === 13) {save();}});
 			element.querySelector("input").addEventListener("keypress", function (e) {if(e.keyCode === 27) {abort();}});
+			element.querySelector("input").addEventListener("blur", save);
 		},
 		update: function (element, valueAccessor) {
 			var observable = valueAccessor();

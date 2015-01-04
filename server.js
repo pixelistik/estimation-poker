@@ -14,6 +14,8 @@ var server = app.listen(port);
 var io = socketio.listen(server);
 
 app.engine("html", mustacheExpress());
+app.engine("manifest", mustacheExpress());
+
 app.set("view engine", "mustache");
 app.set("views", __dirname + "/client");
 
@@ -22,6 +24,8 @@ var packageInfo = require("./package.json");
 var indexData = {
 	packageInfo: packageInfo
 };
+
+var manifestData = indexData;
 
 if (process.env.PIWIK_URL && process.env.PIWIK_SITE_ID) {
 	indexData.piwik = {
@@ -38,6 +42,11 @@ app.use(compression());
 
 app.get("/", function (request, response) {
 	response.render("index.html", indexData);
+});
+
+app.get("/cache.manifest", function (request, response) {
+	response.setHeader('Content-Type', 'text/cache-manifest');
+	response.render("cache.manifest", manifestData);
 });
 
 app.use(express.static("./client", { maxAge: 1000 * 3600 * 24 * 365 }));

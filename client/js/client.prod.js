@@ -6880,7 +6880,7 @@ b,e);e.appendTo(v.createElement("div"));w.fragments={};return e};this.createJava
 
 })(window.EP = window.EP || {});
 
-(function (EP) {
+(function (EP, ko) {
 	"use strict";
 
 	EP.User = function (socket, uuid) {
@@ -7085,7 +7085,7 @@ b,e);e.appendTo(v.createElement("div"));w.fragments={};return e};this.createJava
 			self.users(users);
 		};
 	};
-})(window.EP = window.EP || {});
+})(window.EP = window.EP || {}, window.ko);
 
 (function (ko) {
 	"use strict";
@@ -7155,11 +7155,11 @@ b,e);e.appendTo(v.createElement("div"));w.fragments={};return e};this.createJava
 					return;
 				}
 
-				if (e.key === "+") {
+				if (e.key === "+" || e.keyCode === 43) {
 					shiftValue(+1);
 				}
 
-				if (e.key === "-") {
+				if (e.key === "-" || e.keyCode === 45) {
 					shiftValue(-1);
 				}
 			});
@@ -7218,6 +7218,7 @@ b,e);e.appendTo(v.createElement("div"));w.fragments={};return e};this.createJava
 
 			element.querySelector("input").addEventListener("keypress", function (e) {if(e.keyCode === 13) {save();}});
 			element.querySelector("input").addEventListener("keypress", function (e) {if(e.keyCode === 27) {abort();}});
+			element.querySelector("input").addEventListener("blur", save);
 		},
 		update: function (element, valueAccessor) {
 			var observable = valueAccessor();
@@ -7232,9 +7233,9 @@ b,e);e.appendTo(v.createElement("div"));w.fragments={};return e};this.createJava
 			}
 		}
 	};
-})(ko);
+})(window.ko);
 
-(function(EP) {
+(function(EP, ko) {
 	"use strict";
 	if(location.hash === "") {
 		location.hash = EP.Tools.base64Id(8);
@@ -7245,4 +7246,4 @@ b,e);e.appendTo(v.createElement("div"));w.fragments={};return e};this.createJava
 	});
 	ko.applyBindings(poker);
 
-})(window.EP = window.EP || {});
+})(window.EP = window.EP || {}, window.ko);

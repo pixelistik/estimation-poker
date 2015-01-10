@@ -334,6 +334,20 @@ describe("Model", function () {
 				pokerView.storyTitle("locally updated title");
 				expect(socketMock.emit).toHaveBeenCalledWith( 'update', '{"storyTitle":"locally updated title"}');
 			});
+
+			it("should not handle any socket events before initialisation", function () {
+				socketMock.on = jasmine.createSpy("on")
+					.and.callFake(function (eventName, handler) {
+						// Call connect handler immediately.
+						// This triggered an undefined error, when the
+						// initialisation had not finished yet.
+						if (eventName === "connect") {
+							handler();
+						}
+					});
+
+				pokerView = new EP.PokerView();
+			});
 		});
 
 		describe("Reset", function () {

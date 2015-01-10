@@ -61,47 +61,6 @@
 
 		var socket = io.connect("/");
 
-		socket.on("connect", function () {
-			self.localUser().isConnected(true);
-		});
-		socket.on("disconnect", function () {
-			self.localUser().isConnected(false);
-		});
-		socket.on("reconnect", function () {
-			self.localUser().isConnected(true);
-		});
-
-		socket.on("update", function (data) {
-			update(data);
-		});
-
-		socket.on("who is there", function () {
-			self.localUser().broadcast();
-			broadcast();
-		});
-
-		socket.on("reconnect", function () {
-			// The client has a different session ID after reconnect,
-			// so we need to re-join the group.
-			socket.emit(
-				"join",
-				{
-					groupName: groupName,
-					userUuid: self.localUser().uuid
-				}
-			);
-			self.localUser().broadcast();
-			broadcast();
-		});
-
-		socket.on("user disconnected", function (data) {
-			removeUser(data);
-		});
-
-		socket.on("new round", function () {
-			self.localUser().estimation(false);
-		});
-
 		self.initNewRound = function () {
 			self.localUser().estimation(false);
 			socket.emit("new round");
@@ -202,6 +161,47 @@
 
 			self.users(users);
 		};
+
+		socket.on("connect", function () {
+			self.localUser().isConnected(true);
+		});
+		socket.on("disconnect", function () {
+			self.localUser().isConnected(false);
+		});
+		socket.on("reconnect", function () {
+			self.localUser().isConnected(true);
+		});
+
+		socket.on("update", function (data) {
+			update(data);
+		});
+
+		socket.on("who is there", function () {
+			self.localUser().broadcast();
+			broadcast();
+		});
+
+		socket.on("reconnect", function () {
+			// The client has a different session ID after reconnect,
+			// so we need to re-join the group.
+			socket.emit(
+				"join",
+				{
+					groupName: groupName,
+					userUuid: self.localUser().uuid
+				}
+			);
+			self.localUser().broadcast();
+			broadcast();
+		});
+
+		socket.on("user disconnected", function (data) {
+			removeUser(data);
+		});
+
+		socket.on("new round", function () {
+			self.localUser().estimation(false);
+		});
 	};
 })(window.EP = window.EP || {}, window.ko);
 

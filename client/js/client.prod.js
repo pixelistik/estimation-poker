@@ -6943,47 +6943,6 @@ b,e);e.appendTo(v.createElement("div"));w.fragments={};return e};this.createJava
 
 		var socket = io.connect("/");
 
-		socket.on("connect", function () {
-			self.localUser().isConnected(true);
-		});
-		socket.on("disconnect", function () {
-			self.localUser().isConnected(false);
-		});
-		socket.on("reconnect", function () {
-			self.localUser().isConnected(true);
-		});
-
-		socket.on("update", function (data) {
-			update(data);
-		});
-
-		socket.on("who is there", function () {
-			self.localUser().broadcast();
-			broadcast();
-		});
-
-		socket.on("reconnect", function () {
-			// The client has a different session ID after reconnect,
-			// so we need to re-join the group.
-			socket.emit(
-				"join",
-				{
-					groupName: groupName,
-					userUuid: self.localUser().uuid
-				}
-			);
-			self.localUser().broadcast();
-			broadcast();
-		});
-
-		socket.on("user disconnected", function (data) {
-			removeUser(data);
-		});
-
-		socket.on("new round", function () {
-			self.localUser().estimation(false);
-		});
-
 		self.initNewRound = function () {
 			self.localUser().estimation(false);
 			socket.emit("new round");
@@ -7048,6 +7007,26 @@ b,e);e.appendTo(v.createElement("div"));w.fragments={};return e};this.createJava
 			return estimationsCount === usersCount;
 		});
 
+		self.roundIsInProgress = ko.computed(function () {
+			var estimationsCount = getAllEstimations().length;
+
+			return estimationsCount > 0 && !self.estimationsComplete();
+		});
+
+		self.statusTitle = ko.computed(function () {
+			var statusPrefix = "";
+
+			if (self.roundIsInProgress()) {
+				statusPrefix = "… ";
+			} else {
+				if (self.estimationsComplete()) {
+					statusPrefix = "✓ ";
+				}
+			}
+
+			return statusPrefix + "Estimation Poker";
+		});
+
 		var broadcast = function () {
 			var me = {
 				storyTitle: self.storyTitle()
@@ -7084,6 +7063,47 @@ b,e);e.appendTo(v.createElement("div"));w.fragments={};return e};this.createJava
 
 			self.users(users);
 		};
+
+		socket.on("connect", function () {
+			self.localUser().isConnected(true);
+		});
+		socket.on("disconnect", function () {
+			self.localUser().isConnected(false);
+		});
+		socket.on("reconnect", function () {
+			self.localUser().isConnected(true);
+		});
+
+		socket.on("update", function (data) {
+			update(data);
+		});
+
+		socket.on("who is there", function () {
+			self.localUser().broadcast();
+			broadcast();
+		});
+
+		socket.on("reconnect", function () {
+			// The client has a different session ID after reconnect,
+			// so we need to re-join the group.
+			socket.emit(
+				"join",
+				{
+					groupName: groupName,
+					userUuid: self.localUser().uuid
+				}
+			);
+			self.localUser().broadcast();
+			broadcast();
+		});
+
+		socket.on("user disconnected", function (data) {
+			removeUser(data);
+		});
+
+		socket.on("new round", function () {
+			self.localUser().estimation(false);
+		});
 	};
 })(window.EP = window.EP || {}, window.ko);
 
@@ -7231,6 +7251,13 @@ b,e);e.appendTo(v.createElement("div"));w.fragments={};return e};this.createJava
 				element.querySelector(".et-hint").textContent = element.getAttribute("data-edit-hint") || "edit";
 				element.querySelector(".et-hint").style.display = '';
 			}
+		}
+	};
+
+	ko.bindingHandlers.pageTitle = {
+		update: function (element, valueAccessor) {
+			var observable = valueAccessor();
+			document.title = observable();
 		}
 	};
 })(window.ko);

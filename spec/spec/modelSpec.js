@@ -233,6 +233,42 @@ describe("Model", function () {
 
 				expect(pokerView.estimationsComplete()).toBeTruthy();
 			});
+
+			it("should tell if the round is in progress", function () {
+				expect(pokerView.roundIsInProgress()).toBeFalsy();
+
+				var user1 = new EP.User();
+				var user2 = new EP.User();
+
+				pokerView.users.push(user1);
+				pokerView.localUser(user2);
+
+				user1.estimation(1);
+
+				expect(pokerView.roundIsInProgress()).toBeTruthy();
+
+				user2.estimation(1);
+
+				expect(pokerView.roundIsInProgress()).toBeFalsy();
+			});
+
+			it("should show the round status depending on progress", function () {
+				expect(pokerView.statusTitle()).toEqual("Estimation Poker");
+
+				var user1 = new EP.User();
+				var user2 = new EP.User();
+
+				pokerView.users.push(user1);
+				pokerView.localUser(user2);
+
+				user1.estimation(1);
+
+				expect(pokerView.statusTitle()).toEqual("… Estimation Poker");
+
+				user2.estimation(1);
+
+				expect(pokerView.statusTitle()).toEqual("✓ Estimation Poker");
+			});
 		});
 
 		describe("Local user", function () {

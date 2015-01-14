@@ -125,6 +125,26 @@
 			return estimationsCount === usersCount;
 		});
 
+		self.roundIsInProgress = ko.computed(function () {
+			var estimationsCount = getAllEstimations().length;
+
+			return estimationsCount > 0 && !self.estimationsComplete();
+		});
+
+		self.statusTitle = ko.computed(function () {
+			var statusPrefix = "";
+
+			if (self.roundIsInProgress()) {
+				statusPrefix = "… ";
+			} else {
+				if (self.estimationsComplete()) {
+					statusPrefix = "✓ ";
+				}
+			}
+
+			return statusPrefix + "Estimation Poker";
+		});
+
 		var broadcast = function () {
 			var me = {
 				storyTitle: self.storyTitle()

@@ -263,7 +263,7 @@ describe("Model", function () {
 
 				user1.estimation(1);
 
-				expect(pokerView.statusTitle()).toEqual("… Estimation Poker");
+				expect(pokerView.statusTitle()).toEqual("Estimation Poker");
 
 				user2.estimation(1);
 

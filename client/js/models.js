@@ -134,12 +134,8 @@
 		self.statusTitle = ko.computed(function () {
 			var statusPrefix = "";
 
-			if (self.roundIsInProgress()) {
-				statusPrefix = "… ";
-			} else {
-				if (self.estimationsComplete()) {
-					statusPrefix = "✓ ";
-				}
+			if (self.estimationsComplete()) {
+				statusPrefix = "✓ ";
 			}
 
 			return statusPrefix + "Estimation Poker";

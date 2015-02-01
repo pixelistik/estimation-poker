@@ -1,4 +1,4 @@
-(function(EP, ko) {
+(function(EP, ko, QRCode) {
 	"use strict";
 	if(location.hash === "") {
 		location.hash = EP.Tools.base64Id(8);
@@ -9,4 +9,6 @@
 	});
 	ko.applyBindings(poker);
 
-})(window.EP = window.EP || {}, window.ko);
+	new QRCode(document.getElementById("sharing-qr-code"), location + "");
+
+})(window.EP = window.EP || {}, window.ko, window.QRCode);

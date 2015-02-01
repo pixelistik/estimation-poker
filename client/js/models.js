@@ -148,6 +148,8 @@
 			);
 		});
 
+		self.displaySharingQrCode = ko.observable(false);
+
 		var broadcast = function () {
 			var me = {
 				storyTitle: self.storyTitle()

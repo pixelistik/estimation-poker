@@ -143,10 +143,15 @@
 				Share this URL with your team members:
 				</p>
 				<pre><a data-bind="attr: {href: window.location}, text: window.location"></a></pre>
+				<a class="btn btn-default" href="javascript:void(0)" data-bind="click: displaySharingQrCode">
+					<span class="glyphicon glyphicon-qrcode"></span>
+					Share as QR code
+				</a>
 				<a class="btn btn-default" data-bind="attr: {href: mailtoHref}">
 					<span class="glyphicon glyphicon-envelope"></span>
 					Share via e-mail
 				</a>
+				<div class="tutorial__qrcode" id="sharing-qr-code" data-bind="visible: displaySharingQrCode"></div>
 			</div>
 		</div>
 
@@ -173,6 +178,7 @@
 
 	{{^productionMode}}
 	<script src="/socket.io/socket.io.js"></script>
+	<script src="js/lib/qrcode.min.js"></script>
 	<script src="js/lib/knockout-debug.js"></script>
 
 	<script src="js/tools.js"></script>

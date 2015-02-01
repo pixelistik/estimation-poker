@@ -408,6 +408,16 @@ describe("Model", function () {
 				expect(pokerView.localUser().estimation()).toEqual(false);
 			});
 		});
+
+		describe("Sharing options", function () {
+			describe("Mailto link", function () {
+				it("should use the safe mailto link tool", function () {
+					spyOn(EP.Tools, "safeMailtoHref").and.returnValue("safe-mailto");
+
+					expect(pokerView.mailtoHref()).toBe("safe-mailto");
+				});
+			});
+		});
 	});
 });
 

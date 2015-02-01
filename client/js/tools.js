@@ -54,5 +54,14 @@
 		EP.Tools.createCookie(name, "", -1);
 	};
 
+	EP.Tools.safeMailtoHref = function (subject, body) {
+		return "mailto:?" +
+			"subject=" +
+			encodeURIComponent(subject) +
+			"&" +
+			"body=" +
+			encodeURIComponent(body);
+	};
+
 })(window.EP = window.EP || {});
 

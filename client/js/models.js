@@ -141,6 +141,13 @@
 			return statusPrefix + "Estimation Poker";
 		});
 
+		self.mailtoHref = ko.pureComputed(function () {
+			return EP.Tools.safeMailtoHref(
+				"Estimation Poker URL",
+				window.location
+			);
+		});
+
 		var broadcast = function () {
 			var me = {
 				storyTitle: self.storyTitle()

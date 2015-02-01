@@ -21,4 +21,18 @@ describe("Tool", function () {
 			expect(/[9]/.test(result)).toBeTruthy();
 		});
 	});
+
+	describe("Safe mailto href", function () {
+		it("should contain the given subject and body", function () {
+			var result = EP.Tools.safeMailtoHref("theSubject", "theBody");
+
+			expect(result).toBe("mailto:?subject=theSubject&body=theBody");
+		});
+
+		it("should not allow injection of additional parameters", function () {
+			var result = EP.Tools.safeMailtoHref("&bcc=evil@example.com", "&bcc=evil@example.com");
+
+			expect(result).not.toContain("&bcc=");
+		});
+	});
 });

@@ -162,7 +162,7 @@
 	Reusable "card" component that is used for both local and remote
 	users. Including a little dirty hack with the attr binding to achieve
 	code-generated classes for the card values. -->
-	<template id="card">
+	<script type="text/template" id="card">
 
 		<div class="card" data-bind="
 			attr: {'class': 'card  card--'+user.estimation()},
@@ -174,7 +174,7 @@
 		">
 			<div class="card__number" data-bind="text: user.estimation"></div>
 		</div>
-	</template>
+	</script>
 
 	{{^productionMode}}
 	<script src="/socket.io/socket.io.js"></script>

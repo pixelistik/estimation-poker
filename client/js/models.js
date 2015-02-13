@@ -150,6 +150,10 @@
 
 		self.displaySharingQrCode = ko.observable(false);
 
+		self.toggleDisplaySharingQrCode = function () {
+			self.displaySharingQrCode(!self.displaySharingQrCode());
+		};
+
 		var broadcast = function () {
 			var me = {
 				storyTitle: self.storyTitle()

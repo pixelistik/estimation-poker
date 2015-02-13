@@ -42,6 +42,11 @@ app.get("/", function (request, response) {
 
 app.use(express.static("./client", { maxAge: 1000 * 3600 * 24 * 365 }));
 
+if (!process.env.PRODUCTION_MODE) {
+	// Automatic reloading for convenient dev environment
+	require("reload")(server, app);
+}
+
 io.sockets.on("connection", function (socket) {
 	var group;
 	socket.on("join", function (data) {

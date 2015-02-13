@@ -15,7 +15,8 @@
   },
   "devDependencies": {
     "jshint": "2.x.x",
-    "csslint": "~0.10.x"
+    "csslint": "~0.10.x",
+    "reload": "~0.1.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

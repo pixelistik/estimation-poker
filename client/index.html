@@ -19,7 +19,7 @@
 	</script>
 	{{/piwik}}
 </head>
-<body data-bind="pageTitle: statusTitle">
+<body data-bind="pageTitle: statusTitle" class="uninitialised">
 	<div class="container">
 
 		<div class="alerts  col-lg-12">
@@ -74,7 +74,7 @@
 		<div class="story col-lg-4">
 			<h2>The Story</h2>
 			<blockquote class="story-title">
-				<p data-bind="editableText: storyTitle" data-edit-hint="<edit story title>"></p>
+				<p data-bind="editableText: storyTitle" data-edit-hint="<edit story title>">&lt;edit story title&gt;</p>
 			</blockquote>
 		</div>
 
@@ -84,7 +84,7 @@
 				<tbody class="local-user" data-bind="with: localUser">
 					<tr>
 						<td>
-							<span class="username" data-bind="editableText: name" data-edit-hint="<your name>"></span>
+							<span class="username" data-bind="editableText: name" data-edit-hint="<your name>">&lt;your name&gt;</span>
 							<span class="btn-group" data-bind="estimationSelect: estimation"></span>
 						</td>
 						<td>
@@ -99,7 +99,7 @@
 					</tr>
 				</tbody>
 				<tbody class="remote-users" data-bind="foreach: users">
-					<tr>
+					<tr class="hide-uninitialised">
 						<td class="name" data-bind="
 							text: displayName,
 							css: {'name--default': displayName() !== name()}
@@ -119,7 +119,7 @@
 					<tr>
 						<td>Team estimation (max)</td>
 						<td>
-							<div class="card  summary__card" data-bind="
+							<div class="card  summary__card hide-uninitialised" data-bind="
 								attr: {'class': 'card  summary__card  card--'+$root.highestEstimation()}
 							">
 								<div class="card__number" data-bind="
@@ -142,7 +142,7 @@
 				<p>
 				Share this URL with your team members:
 				</p>
-				<pre><a data-bind="attr: {href: window.location}, text: window.location"></a></pre>
+				<pre><a data-bind="attr: {href: window.location}, text: window.location">...</a></pre>
 				<a class="btn btn-default" href="javascript:void(0)" data-bind="click: toggleDisplaySharingQrCode">
 					<span class="glyphicon glyphicon-qrcode"></span>
 					Share as QR code

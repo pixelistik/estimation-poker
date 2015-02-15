@@ -96,7 +96,7 @@
 			element.classList.add("editable-text");
 
 			var markup = '<span class="et-display"><span class="et-label"></span><span class="et-hint"></span></span><span class="et-form"><input/><button type="submit" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-ok"></span></button></span>';
-			element.insertAdjacentHTML('beforeend', markup);
+			element.innerHTML = markup;
 
 			element.querySelector(".et-form").style.display = 'none';
 

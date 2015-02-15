@@ -7041,6 +7041,10 @@ b,e);e.appendTo(v.createElement("div"));w.fragments={};return e};this.createJava
 
 		self.displaySharingQrCode = ko.observable(false);
 
+		self.toggleDisplaySharingQrCode = function () {
+			self.displaySharingQrCode(!self.displaySharingQrCode());
+		};
+
 		var broadcast = function () {
 			var me = {
 				storyTitle: self.storyTitle()
@@ -7219,7 +7223,7 @@ b,e);e.appendTo(v.createElement("div"));w.fragments={};return e};this.createJava
 			element.classList.add("editable-text");
 
 			var markup = '<span class="et-display"><span class="et-label"></span><span class="et-hint"></span></span><span class="et-form"><input/><button type="submit" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-ok"></span></button></span>';
-			element.insertAdjacentHTML('beforeend', markup);
+			element.innerHTML = markup;
 
 			element.querySelector(".et-form").style.display = 'none';
 
@@ -7288,5 +7292,7 @@ b,e);e.appendTo(v.createElement("div"));w.fragments={};return e};this.createJava
 	ko.applyBindings(poker);
 
 	new QRCode(document.getElementById("sharing-qr-code"), location + "");
+
+	document.querySelector("body").classList.remove("uninitialised");
 
 })(window.EP = window.EP || {}, window.ko, window.QRCode);

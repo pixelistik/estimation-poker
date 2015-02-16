@@ -85,6 +85,43 @@ describe("Binding", function () {
 			ko.applyBindings(model, fixture[0]);
 		});
 
+		describe("DOM elements", function () {
+			it("should initialise with the Scrum values by default", function () {
+				var buttons = fixture.find(".estimation-select__btn");
+
+				expect(buttons.length).toEqual(10);
+
+				expect(buttons[0].textContent).toEqual("0");
+				expect(buttons[1].textContent).toEqual("1");
+				expect(buttons[2].textContent).toEqual("2");
+				expect(buttons[3].textContent).toEqual("3");
+				expect(buttons[4].textContent).toEqual("5");
+				expect(buttons[5].textContent).toEqual("8");
+				expect(buttons[6].textContent).toEqual("13");
+				expect(buttons[7].textContent).toEqual("20");
+				expect(buttons[8].textContent).toEqual("40");
+				expect(buttons[9].textContent).toEqual("100");
+			});
+
+			it("should not assign the active class when no value is set", function () {
+				model.prop(false);
+
+				expect(fixture.find(".active").length).toEqual(0);
+			});
+
+			it("should assign the 'active' class to the button matching the current value", function () {
+				var activeButton
+
+				model.prop(0);
+				activeButton = fixture.find(".active")[0];
+				expect(activeButton.textContent).toEqual("0");
+
+				model.prop(8);
+				activeButton = fixture.find(".active")[0];
+				expect(activeButton.textContent).toEqual("8");
+			});
+		});
+
 		describe("mouse click binding", function () {
 			it("should set the value of the clicked button", function () {
 				$(".estimation-select__btn-1", fixture).click();

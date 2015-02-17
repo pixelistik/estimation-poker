@@ -122,6 +122,31 @@ describe("Binding", function () {
 			});
 		});
 
+		describe("custom estimation values", function () {
+			it("should use the values passed on init", function () {
+				fixture = $('<div data-bind="estimationSelect: {value: prop, valueSet: valueSet}"></div>');
+
+				observable = ko.observable(100);
+				observableSet = ko.observableArray(["M", "L"]);
+				model = {
+					prop: observable,
+					valueSet: observableSet
+				};
+
+				ko.applyBindings(model, fixture[0]);
+
+				var buttons = fixture.find(".estimation-select__btn");
+
+				expect(buttons.length).toEqual(2);
+
+				expect(buttons[0].textContent).toEqual("M");
+				expect(buttons[1].textContent).toEqual("L");
+			});
+
+			it("should change the DOM elements when the values are changed", function () {});
+
+		});
+
 		describe("mouse click binding", function () {
 			it("should set the value of the clicked button", function () {
 				$(".estimation-select__btn-1", fixture).click();

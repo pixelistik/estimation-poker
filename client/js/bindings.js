@@ -3,7 +3,19 @@
 
 	ko.bindingHandlers.estimationSelect = {
 		init: function (element, valueAccessor) {
-			var values = [0, 1, 2, 3, 5, 8, 13, 20, 40, 100];
+			var defaultValues = [0, 1, 2, 3, 5, 8, 13, 20, 40, 100];
+			var params = ko.utils.unwrapObservable(valueAccessor());
+
+			var value;
+			var values;
+
+			if (typeof params === 'object') {
+				value = valueAccessor().value;
+				values = valueAccessor().valueSet();
+			} else {
+				value = valueAccessor();
+				values = defaultValues;
+			}
 
 			element.classList.add("estimation-select");
 
@@ -16,12 +28,11 @@
 			var buttons = element.querySelectorAll("button");
 
 			var clickHandler = function () {
-				var observable = valueAccessor();
 				// Unset value if the button was already active
 				if(this.classList.contains("active")) {
-					observable(false);
+					value(false);
 				} else {
-					observable(+this.textContent);
+					value(+this.textContent);
 				}
 			};
 
@@ -35,11 +46,9 @@
 			 * When no value is selected, select the first (+1) or last (-1) one.
 			 */
 			var shiftValue = function (indexDelta) {
-				var observable = valueAccessor();
-
 				var currentValueIndex, nextValueIndex;
 
-				currentValueIndex = values.indexOf(observable());
+				currentValueIndex = values.indexOf(value());
 
 				if (currentValueIndex !== -1) {
 					nextValueIndex = currentValueIndex + indexDelta;
@@ -56,7 +65,7 @@
 				var nextValue = values[nextValueIndex];
 
 				if (typeof nextValue !== "undefined") {
-					observable(nextValue);
+					value(nextValue);
 				}
 			};
 
@@ -76,12 +85,22 @@
 			});
 		},
 		update: function (element, valueAccessor) {
-			var observable = valueAccessor();
+			var params = ko.utils.unwrapObservable(valueAccessor());
+			var value;
+			var values;
+
+			if (typeof params === 'object') {
+				value = valueAccessor().value;
+				values = valueAccessor().valueSet();
+			} else {
+				value = valueAccessor();
+			}
+
 
 			var buttons = element.querySelectorAll("button");
 
 			for (var i = 0; i < buttons.length; i++) {
-				if(+buttons[i].textContent === observable()) {
+				if(+buttons[i].textContent === value()) {
 					buttons[i].classList.add("active");
 				} else {
 					buttons[i].classList.remove("active");

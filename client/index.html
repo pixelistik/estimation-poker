@@ -85,7 +85,7 @@
 					<tr>
 						<td>
 							<span class="username" data-bind="editableText: name" data-edit-hint="<your name>">&lt;your name&gt;</span>
-							<span class="btn-group" data-bind="estimationSelect: estimation"></span>
+							<span class="btn-group" data-bind="estimationSelect: {value: estimation, valueSet: $root.pokerValues}"></span>
 						</td>
 						<td>
 							<!-- ko component: {

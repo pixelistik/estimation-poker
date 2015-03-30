@@ -61,6 +61,8 @@
 
 		var socket = io.connect("/");
 
+		self.pokerValues = ko.observableArray([0, 1, 2, 3, 5, 8, 13, 20, 40, 100]);
+
 		self.initNewRound = function () {
 			self.localUser().estimation(false);
 			socket.emit("new round");

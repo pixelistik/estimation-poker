@@ -3,24 +3,13 @@
 
 	ko.bindingHandlers.estimationSelect = {
 		init: function (element, valueAccessor) {
-			var defaultValues = [0, 1, 2, 3, 5, 8, 13, 20, 40, 100];
-			var params = ko.utils.unwrapObservable(valueAccessor());
-
-			var value;
-			var values;
-
-			if (typeof params === 'object') {
-				value = valueAccessor().value;
-				values = valueAccessor().valueSet();
-			} else {
-				value = valueAccessor();
-				values = defaultValues;
-			}
+			var value = valueAccessor().value;
+			var values = valueAccessor().valueSet();
 
 			element.classList.add("estimation-select");
 
 			for(var i = 0; i < values.length; i++) {
-				var markup = '<button type="button" class="btn  estimation-select__btn  estimation-select__btn-' + values[i] + '">' + values[i] + '</button>';
+				var markup = '<button type="button" class="btn  estimation-select__btn  estimation-select__btn-' + i + '" data-index="' + i + '">' + values[i] + '</button>';
 				element.insertAdjacentHTML('beforeend', markup);
 			}
 
@@ -32,7 +21,7 @@
 				if(this.classList.contains("active")) {
 					value(false);
 				} else {
-					value(+this.textContent);
+					value(+this.getAttribute("data-index"));
 				}
 			};
 

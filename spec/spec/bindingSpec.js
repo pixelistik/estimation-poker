@@ -77,10 +77,17 @@ describe("Binding", function () {
 		var fixture, model, observable;
 
 		beforeEach(function () {
-			fixture = $('<div data-bind="estimationSelect: prop"></div>');
+			fixture = $('<div data-bind="estimationSelect: {value: prop, valueSet: valueSet}"></div>');
 
-			observable = ko.observable(false);
-			model = {prop: observable};
+			observable = ko.observable(100);
+			observableSet = ko.observableArray(
+				["0", "1", "2", "3", "5", "8", "13", "20", "40", "100"]
+			);
+
+			model = {
+				prop: observable,
+				valueSet: observableSet
+			};
 
 			ko.applyBindings(model, fixture[0]);
 		});

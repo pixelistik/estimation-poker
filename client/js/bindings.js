@@ -34,27 +34,26 @@
 			 *
 			 * When no value is selected, select the first (+1) or last (-1) one.
 			 */
-			var shiftValue = function (indexDelta) {
-				var currentValueIndex, nextValueIndex;
+			var shiftValue = function (delta) {
+				var newValue;
 
-				currentValueIndex = values.indexOf(value());
+				if (value() === false) {
+					if (delta === +1) {
+						newValue = 0;
+					}
 
-				if (currentValueIndex !== -1) {
-					nextValueIndex = currentValueIndex + indexDelta;
+					if (delta === -1) {
+						newValue = values.length - 1;
+					}
 				} else {
-					if (indexDelta === +1) {
-						nextValueIndex = 0;
-					}
-
-					if (indexDelta === -1) {
-						nextValueIndex = values.length -1;
-					}
+					newValue = value() + delta;
 				}
 
-				var nextValue = values[nextValueIndex];
-
-				if (typeof nextValue !== "undefined") {
-					value(nextValue);
+				if (
+					newValue >= 0 &&
+					newValue <= values.length - 1
+				) {
+					value(newValue);
 				}
 			};
 
@@ -89,7 +88,7 @@
 			var buttons = element.querySelectorAll("button");
 
 			for (var i = 0; i < buttons.length; i++) {
-				if(+buttons[i].textContent === value()) {
+				if(+buttons[i].getAttribute("data-index") === value()) {
 					buttons[i].classList.add("active");
 				} else {
 					buttons[i].classList.remove("active");

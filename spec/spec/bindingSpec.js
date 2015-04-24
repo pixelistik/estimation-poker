@@ -79,7 +79,7 @@ describe("Binding", function () {
 		beforeEach(function () {
 			fixture = $('<div data-bind="estimationSelect: {value: prop, valueSet: valueSet}"></div>');
 
-			observable = ko.observable();
+			observable = ko.observable(false);
 			observableSet = ko.observableArray(
 				[0, 1, 2, 3, 5, 8, 13, 20, 40, 100]
 			);
@@ -123,9 +123,9 @@ describe("Binding", function () {
 				activeButton = fixture.find(".active")[0];
 				expect(activeButton.textContent).toEqual("0");
 
-				model.prop(8);
+				model.prop(9);
 				activeButton = fixture.find(".active")[0];
-				expect(activeButton.textContent).toEqual("8");
+				expect(activeButton.textContent).toEqual("100");
 			});
 		});
 
@@ -133,7 +133,7 @@ describe("Binding", function () {
 			it("should use the values passed on init", function () {
 				fixture = $('<div data-bind="estimationSelect: {value: prop, valueSet: valueSet}"></div>');
 
-				observable = ko.observable(100);
+				observable = ko.observable(1);
 				observableSet = ko.observableArray(["M", "L"]);
 				model = {
 					prop: observable,
@@ -182,7 +182,7 @@ describe("Binding", function () {
 				e = crossBrowser_initKeyboardEvent("keypress", {"key": "-"})
 				document.dispatchEvent(e);
 
-				expect(model.prop()).toEqual(100);
+				expect(model.prop()).toEqual(9);
 			});
 
 			it("should increase one step with +", function () {
@@ -191,7 +191,7 @@ describe("Binding", function () {
 				e = crossBrowser_initKeyboardEvent("keypress", {"key": "+"})
 				document.dispatchEvent(e);
 
-				expect(model.prop()).toEqual(5);
+				expect(model.prop()).toEqual(4);
 			});
 
 			it("should decrease one step with -", function () {
@@ -200,16 +200,16 @@ describe("Binding", function () {
 				e = crossBrowser_initKeyboardEvent("keypress", {"key": "-"})
 				document.dispatchEvent(e);
 
-				expect(model.prop()).toEqual(3);
+				expect(model.prop()).toEqual(4);
 			});
 
 			it("should not go above the max with +", function () {
-				model.prop(100);
+				model.prop(9);
 
 				e = crossBrowser_initKeyboardEvent("keypress", {"key": "+"})
 				document.dispatchEvent(e);
 
-				expect(model.prop()).toEqual(100);
+				expect(model.prop()).toEqual(9);
 			});
 
 			it("should not go below the min with -", function () {

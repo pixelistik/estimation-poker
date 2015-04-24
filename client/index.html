@@ -123,7 +123,7 @@
 								attr: {'class': 'card  summary__card  card--'+$root.highestEstimation()}
 							">
 								<div class="card__number" data-bind="
-									text: $root.highestEstimation()"
+									text: $root.pokerValues()[$root.highestEstimation()]"
 								></div>
 							</div>
 						</td>
@@ -172,7 +172,7 @@
 				'card--min': user.estimation() === $root.lowestEstimation()
 			}
 		">
-			<div class="card__number" data-bind="text: user.estimation"></div>
+			<div class="card__number" data-bind="text: $root.pokerValues()[user.estimation()]"></div>
 		</div>
 	</script>
 

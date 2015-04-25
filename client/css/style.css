@@ -50,16 +50,16 @@
  * (the hex value is a lazy uniform fallback, modern browsers will pick up
  * the hsl values).
  */
-.card--0   { border-color: #0086b2; border-color: hsl(195, 20%, 40%); }
-.card--1   { border-color: #0086b2; border-color: hsl( 21, 40%, 60%); }
-.card--2   { border-color: #0086b2; border-color: hsl(195, 60%, 40%); }
-.card--3   { border-color: #0086b2; border-color: hsl( 21, 80%, 60%); }
-.card--5   { border-color: #0086b2; border-color: hsl(195, 99%, 40%); }
-.card--8   { border-color: #0086b2; border-color: hsl( 21, 20%, 40%); }
-.card--13  { border-color: #0086b2; border-color: hsl(195, 40%, 60%); }
-.card--20  { border-color: #0086b2; border-color: hsl( 21, 60%, 40%); }
-.card--40  { border-color: #0086b2; border-color: hsl(195, 80%, 60%); }
-.card--100 { border-color: #0086b2; border-color: hsl( 21, 99%, 40%); }
+.card--0, .card--10 { border-color: #0086b2; border-color: hsl(195, 20%, 40%); }
+.card--1, .card--11 { border-color: #0086b2; border-color: hsl( 21, 40%, 60%); }
+.card--2, .card--12 { border-color: #0086b2; border-color: hsl(195, 60%, 40%); }
+.card--3, .card--13 { border-color: #0086b2; border-color: hsl( 21, 80%, 60%); }
+.card--4, .card--14 { border-color: #0086b2; border-color: hsl(195, 99%, 40%); }
+.card--5, .card--15 { border-color: #0086b2; border-color: hsl( 21, 20%, 40%); }
+.card--6, .card--16 { border-color: #0086b2; border-color: hsl(195, 40%, 60%); }
+.card--7, .card--17 { border-color: #0086b2; border-color: hsl( 21, 60%, 40%); }
+.card--8, .card--18 { border-color: #0086b2; border-color: hsl(195, 80%, 60%); }
+.card--9, .card--19 { border-color: #0086b2; border-color: hsl( 21, 99%, 40%); }
 
 .card__number {
     line-height: 2.6em;

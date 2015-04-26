@@ -73,17 +73,8 @@
 			});
 		},
 		update: function (element, valueAccessor) {
-			var params = ko.utils.unwrapObservable(valueAccessor());
-			var value;
-			var values;
-
-			if (typeof params === 'object') {
-				value = valueAccessor().value;
-				values = valueAccessor().valueSet();
-			} else {
-				value = valueAccessor();
-			}
-
+			var value = valueAccessor().value;
+			var values = valueAccessor().valueSet();
 
 			var buttons = element.querySelectorAll("button");
 

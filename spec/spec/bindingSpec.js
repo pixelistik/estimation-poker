@@ -197,6 +197,15 @@ describe("Binding", function () {
 				expect(model.prop()).toEqual(9);
 			});
 
+			it("should go to the highest value with - correctly after a changed value set", function () {
+				model.valueSet(["some", "other", "set"])
+
+				e = crossBrowser_initKeyboardEvent("keypress", {"key": "-"})
+				document.dispatchEvent(e);
+
+				expect(model.prop()).toEqual(2);
+			});
+
 			it("should increase one step with +", function () {
 				model.prop(3);
 

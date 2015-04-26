@@ -4,11 +4,11 @@
 	ko.bindingHandlers.estimationSelect = {
 		init: function (element, valueAccessor) {
 			var value = valueAccessor().value;
-			var values = valueAccessor().valueSet();
+			var values = valueAccessor().valueSet;
 
 			element.classList.add("estimation-select");
 
-			for(var i = 0; i < values.length; i++) {
+			for(var i = 0; i < values().length; i++) {
 				var markup = '<button type="button" class="btn  estimation-select__btn  estimation-select__btn-' + i + '" data-index="' + i + '">' + values[i] + '</button>';
 				element.insertAdjacentHTML('beforeend', markup);
 			}
@@ -38,7 +38,7 @@
 					}
 
 					if (delta === -1) {
-						newValue = values.length - 1;
+						newValue = values().length - 1;
 					}
 				} else {
 					newValue = value() + delta;
@@ -46,7 +46,7 @@
 
 				if (
 					newValue >= 0 &&
-					newValue <= values.length - 1
+					newValue <= values().length - 1
 				) {
 					value(newValue);
 				}

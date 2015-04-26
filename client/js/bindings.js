@@ -13,21 +13,16 @@
 				element.insertAdjacentHTML('beforeend', markup);
 			}
 
-
-			var buttons = element.querySelectorAll("button");
-
-			var clickHandler = function () {
+			var clickHandler = function (event) {
 				// Unset value if the button was already active
-				if(this.classList.contains("active")) {
+				if(event.target.classList.contains("active")) {
 					value(false);
 				} else {
-					value(+this.getAttribute("data-index"));
+					value(+event.target.getAttribute("data-index"));
 				}
 			};
 
-			for (i = 0; i < buttons.length; i++) {
-				buttons[i].addEventListener("click", clickHandler);
-			}
+			element.addEventListener("click", clickHandler);
 
 			/*
 			 * Activate the next (+1) or previous (-1) value

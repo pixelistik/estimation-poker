@@ -63,5 +63,23 @@
 			encodeURIComponent(body);
 	};
 
+	EP.Tools.bootstrapDropdowns = function () {
+		var dropdownTriggers = document.querySelectorAll(".dropdown-toggle");
+		var dropdownMenu = document.querySelectorAll(".dropdown-menu");
+
+		var toggleParentOpen = function(el){
+			el.addEventListener("click", function (event) {
+				this.parentNode.classList.toggle("open");
+			});
+		};
+
+		Array.prototype.forEach.call(dropdownMenu, toggleParentOpen);
+		Array.prototype.forEach.call(dropdownTriggers, toggleParentOpen);
+	};
+
+	EP.Tools.init = function () {
+		EP.Tools.bootstrapDropdowns();
+	};
+
 })(window.EP = window.EP || {});
 

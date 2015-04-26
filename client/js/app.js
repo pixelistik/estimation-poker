@@ -11,6 +11,8 @@
 
 	new QRCode(document.getElementById("sharing-qr-code"), location + "");
 
+	EP.Tools.init();
+
 	document.querySelector("body").classList.remove("uninitialised");
 
 })(window.EP = window.EP || {}, window.ko, window.QRCode);

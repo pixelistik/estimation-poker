@@ -150,7 +150,19 @@ describe("Binding", function () {
 				expect(buttons[1].textContent).toEqual("L");
 			});
 
-			it("should change the DOM elements when the values are changed", function () {});
+			it("should change the DOM elements when the values are changed", function () {
+				var buttons = fixture.find(".estimation-select__btn");
+
+				expect(buttons.length).toEqual(10);
+
+				model.valueSet(["one", "two"]);
+
+				buttons = fixture.find(".estimation-select__btn");
+
+				expect(buttons.length).toEqual(2);
+				expect(buttons[0].textContent).toEqual("one");
+				expect(buttons[1].textContent).toEqual("two");
+			});
 
 		});
 

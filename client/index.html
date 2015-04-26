@@ -71,6 +71,7 @@
 				Estimation Poker
 			</h1>
 		</div>
+
 		<div class="story col-lg-4">
 			<h2>The Story</h2>
 			<blockquote class="story-title">
@@ -134,6 +135,18 @@
 				<span class="glyphicon glyphicon-repeat"></span>
 				New Round
 			</button>
+
+			<div class="settings  btn-group">
+				<button type="button" class="settings__btn  btn  btn-sm  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+					<span class="glyphicon  glyphicon-cog"></span> <span class="caret"></span>
+				</button>
+				<ul class="settings__menu  dropdown-menu" role="menu" data-bind="foreach: pokerValueSets">
+					<li>
+						<a href="javascript: void(0)" data-bind="click: $parent.setPokerValues, text: title">
+						</a>
+					</li>
+				</ul>
+			</div>
 
 			<div class="tutorial tutorialNote" data-bind="visible: users().length == 0">
 				<h3>

@@ -386,6 +386,40 @@ describe("Model", function () {
 			});
 		});
 
+		describe("Change poker value set", function () {
+			var data = {
+				values: ["change", "me", "now"]
+			};
+
+			it("should set the value set when changed by a remote user", function () {
+				socketMock.callHandler("set poker values", JSON.stringify(data));
+
+				expect(pokerView.pokerValues()).toEqual(data.values);
+			});
+
+			it("should init a new round when changed by a remote user", function () {
+				spyOn(pokerView, "initNewRound");
+
+				socketMock.callHandler("set poker values", JSON.stringify(data));
+
+				expect(pokerView.initNewRound).toHaveBeenCalled();
+			});
+
+			it("should set the value set when changed locally", function () {
+				pokerView.setPokerValues(data);
+
+				expect(pokerView.pokerValues()).toEqual(data.values);
+			});
+
+			it("should init a new round when changed locally", function () {
+				spyOn(pokerView, "initNewRound");
+
+				pokerView.setPokerValues(data.values);
+
+				expect(pokerView.initNewRound).toHaveBeenCalled();
+			});
+		});
+
 		describe("Reset", function () {
 			it("triggered locally: should send the event and reset local user's estimation", function () {
 				var user1 = new EP.User();

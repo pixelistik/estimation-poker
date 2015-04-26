@@ -63,9 +63,27 @@
 
 		self.pokerValues = ko.observableArray([0, 1, 2, 3, 5, 8, 13, 20, 40, 100]);
 
+		self.pokerValueSets = [
+			{
+				title: "Scrum",
+				values: [0, 1, 2, 3, 5, 8, 13, 20, 40, 100]
+			},
+			{
+				title: "T-Shirt sizes",
+				values: ["S", "M", "L", "XL"]
+			}
+		];
+
 		self.initNewRound = function () {
 			self.localUser().estimation(false);
 			socket.emit("new round");
+		};
+
+		self.setPokerValues = function (valueSet) {
+			socket.emit("set poker values", JSON.stringify(valueSet));
+
+			self.initNewRound();
+			self.pokerValues(valueSet.values);
 		};
 
 		self.localUser = ko.observable(new EP.User(socket));
@@ -205,6 +223,11 @@
 
 		socket.on("update", function (data) {
 			update(data);
+		});
+
+		socket.on("set poker values", function (data) {
+			self.initNewRound();
+			self.pokerValues(JSON.parse(data).values);
 		});
 
 		socket.on("who is there", function () {

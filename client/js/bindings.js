@@ -79,7 +79,7 @@
 
 			var buttons = element.querySelectorAll("button");
 
-			for (var i = 0; i < buttons.length; i++) {
+			for (i = 0; i < buttons.length; i++) {
 				if(+buttons[i].getAttribute("data-index") === value()) {
 					buttons[i].classList.add("active");
 				} else {

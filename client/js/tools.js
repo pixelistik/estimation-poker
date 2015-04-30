@@ -68,7 +68,7 @@
 		var dropdownMenu = document.querySelectorAll(".dropdown-menu");
 
 		var toggleParentOpen = function(el){
-			el.addEventListener("click", function (event) {
+			el.addEventListener("click", function () {
 				this.parentNode.classList.toggle("open");
 			});
 		};

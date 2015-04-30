@@ -1,6 +1,6 @@
 {
   "name": "estimation-poker",
-  "version": "0.9.3",
+  "version": "1.0.0",
   "description": "A browser-based agile estimation poker tool.",
   "repository": {
     "type": "git",

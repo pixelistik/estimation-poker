@@ -359,7 +359,7 @@ describe("Model", function () {
 
 			it("should broadcast the story title when changed locally", function () {
 				pokerView.storyTitle("locally updated title");
-				expect(socketMock.emit).toHaveBeenCalledWith( 'update', '{"storyTitle":"locally updated title"}');
+				expect(socketMock.emit).toHaveBeenCalledWith( 'update', '{"storyTitle":"locally updated title","pokerValues":[0,1,2,3,5,8,13,20,40,100]}');
 			});
 
 			it("should NOT re-broadcast the story title when changed remotely", function () {
@@ -383,40 +383,6 @@ describe("Model", function () {
 					});
 
 				pokerView = new EP.PokerView();
-			});
-		});
-
-		describe("Change poker value set", function () {
-			var data = {
-				values: ["change", "me", "now"]
-			};
-
-			it("should set the value set when changed by a remote user", function () {
-				socketMock.callHandler("set poker values", JSON.stringify(data));
-
-				expect(pokerView.pokerValues()).toEqual(data.values);
-			});
-
-			it("should init a new round when changed by a remote user", function () {
-				spyOn(pokerView, "initNewRound");
-
-				socketMock.callHandler("set poker values", JSON.stringify(data));
-
-				expect(pokerView.initNewRound).toHaveBeenCalled();
-			});
-
-			it("should set the value set when changed locally", function () {
-				pokerView.setPokerValues(data);
-
-				expect(pokerView.pokerValues()).toEqual(data.values);
-			});
-
-			it("should init a new round when changed locally", function () {
-				spyOn(pokerView, "initNewRound");
-
-				pokerView.setPokerValues(data.values);
-
-				expect(pokerView.initNewRound).toHaveBeenCalled();
 			});
 		});
 

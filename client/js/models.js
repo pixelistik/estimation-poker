@@ -62,6 +62,9 @@
 		var socket = io.connect("/");
 
 		self.pokerValues = ko.observableArray([0, 1, 2, 3, 5, 8, 13, 20, 40, 100]);
+		var pokerValuesSubscription = self.pokerValues.subscribe(function () {
+			broadcast();
+		});
 
 		self.pokerValueSets = [
 			{
@@ -176,7 +179,8 @@
 
 		var broadcast = function () {
 			var me = {
-				storyTitle: self.storyTitle()
+				storyTitle: self.storyTitle(),
+				pokerValues: self.pokerValues()
 			};
 			socket.emit("update", JSON.stringify(me));
 		};
@@ -198,8 +202,13 @@
 			} else {
 				// A story object was received:
 				storySubscription.isDisposed = true;
+				pokerValuesSubscription.isDisposed = true;
+
 				self.storyTitle(received.storyTitle);
+				self.pokerValues(received.pokerValues);
+
 				storySubscription.isDisposed = false;
+				pokerValuesSubscription.isDisposed = false;
 			}
 		};
 
@@ -223,11 +232,6 @@
 
 		socket.on("update", function (data) {
 			update(data);
-		});
-
-		socket.on("set poker values", function (data) {
-			self.initNewRound();
-			self.pokerValues(JSON.parse(data).values);
 		});
 
 		socket.on("who is there", function () {

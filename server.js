@@ -62,10 +62,6 @@ io.sockets.on("connection", function (socket) {
 		socket.broadcast.to(group).emit("update", data);
 	});
 
-	socket.on("set poker values", function (data) {
-		socket.broadcast.to(group).emit("set poker values", data);
-	});
-
 	socket.on("disconnect", function () {
 		socket.broadcast.to(group).emit("user disconnected", socket.userUuid);
 	});

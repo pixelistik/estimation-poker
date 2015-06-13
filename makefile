@@ -2,9 +2,9 @@
 
 all: client/js/client.prod.min.js
 
-client/js/client.prod.js: node_modules/socket.io/node_modules/socket.io-client/socket.io.js client/js/lib/knockout-min.js client/js/tools.js client/js/models.js client/js/bindings.js client/js/app.js
+client/js/client.prod.js: node_modules/socket.io/node_modules/socket.io-client/socket.io.js client/js/lib/knockout-debug.js client/js/tools.js client/js/models.js client/js/bindings.js client/js/app.js
 	# Concatenate JS
-	cat node_modules/socket.io/node_modules/socket.io-client/socket.io.js client/js/lib/qrcode.min.js client/js/lib/knockout-min.js client/js/tools.js client/js/models.js client/js/bindings.js client/js/app.js > client/js/client.prod.js
+	cat node_modules/socket.io/node_modules/socket.io-client/socket.io.js client/js/lib/qrcode.min.js client/js/lib/knockout-debug.js client/js/tools.js client/js/models.js client/js/bindings.js client/js/app.js > client/js/client.prod.js
 
 client/js/client.prod.min.js: client/js/client.prod.js
 	# Minify JS

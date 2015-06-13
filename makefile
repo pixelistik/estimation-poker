@@ -10,7 +10,7 @@ client/js/client.prod.min.js: client/js/client.prod.js
 	# Minify JS
 	curl --silent --data "output_info=compiled_code" --data "language=ECMASCRIPT5" --data-urlencode "js_code@client/js/client.prod.js" "http://closure-compiler.appspot.com/compile" -o client/js/client.prod.min.js
 
-release: lint committedworkingdir all
+release: lint committedworkingdir clean all
 	# Update version number, commit rebuilt assets
 	git checkout develop
 	sed -i 's/"version": ".*"/"version": "$(VERSION)"/' package.json

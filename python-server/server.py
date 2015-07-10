@@ -60,5 +60,9 @@ def update(data):
 def disconnect():
     emit("user disconnected", session["userUuid"], room=session["group"])
 
+@socketio.on("new round")
+def new_round():
+    emit("new round", room=session["group"])
+
 if __name__ == "__main__":
     socketio.run(app)

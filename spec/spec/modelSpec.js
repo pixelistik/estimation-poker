@@ -339,6 +339,25 @@ describe("Model", function () {
 				expect(pokerView.storyTitle()).toEqual(storyTitleCache);
 			});
 
+			it("should ignore updates about the local user", function () {
+				var user = new EP.User();
+				user.uuid ="the-local-user";
+
+				pokerView.localUser(user);
+
+				var data = {
+					uuid: "the-local-user",
+					estimation: 99
+				};
+				socketMock.callHandler("update", JSON.stringify(data));
+
+				// Local User should be untouched
+				expect(pokerView.localUser()).toEqual(user);
+
+				// Local User should not be added to the remote Users
+				expect(pokerView.users().length).toEqual(0);
+			});
+
 			it("should update the story when story data is received", function () {
 				var user1 = new EP.User();
 

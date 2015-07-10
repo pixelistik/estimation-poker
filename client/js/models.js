@@ -190,6 +190,11 @@
 
 			if(received.uuid !== undefined) {
 				// A user object was received:
+
+				if(received.uuid === self.localUser().uuid) {
+					return;
+				}
+
 				var user = getExistingUserByUuid(received.uuid);
 
 				if (!user) {

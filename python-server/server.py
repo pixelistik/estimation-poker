@@ -11,11 +11,17 @@ socketio = SocketIO(app)
 
 indexData = {}
 
+if os.environ.has_key("PIWIK_URL") and os.environ.has_key("PIWIK_SITE_ID"):
+    indexData["piwik"] = {
+        "url": os.environ["PIWIK_URL"],
+        "siteId": os.environ["PIWIK_SITE_ID"]
+    }
+
 if os.environ.has_key("PRODUCTION_MODE") and os.environ["PRODUCTION_MODE"] == "1":
     indexData["productionMode"] = True
 else:
     indexData["productionMode"] = False
-
+app.logger.debug(indexData)
 @app.route("/")
 def index():
     with open ("../client/index.html", "r") as indexfile:

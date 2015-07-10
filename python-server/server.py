@@ -10,7 +10,6 @@ with open ("../package.json", "r") as packageFile:
 template_dir = os.path.abspath("../client")
 app = Flask(__name__, template_folder=template_dir)
 app.config["SECRET_KEY"] = "b8weH7evX6ELU0Dy540zgrIt"
-app.debug = True
 socketio = SocketIO(app)
 
 indexData = {
@@ -40,24 +39,18 @@ def send_socketio_js():
 
 @app.route("/<path:path>")
 def send_assets(path):
-    app.logger.debug("assetss")
     return send_from_directory("../client/", path)
 
 @socketio.on("join")
 def join(data):
-    app.logger.debug(data)
-
     session["group"] = data["groupName"]
     session["userUuid"] = data["userUuid"]
-
-    app.logger.debug(session)
 
     join_room(session["group"])
     emit("who is there", room=session["group"])
 
 @socketio.on("update")
 def update(data):
-    app.logger.debug(data)
     emit("update", data, room=session["group"])
 
 @socketio.on("disconnect")

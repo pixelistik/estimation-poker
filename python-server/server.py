@@ -2,6 +2,10 @@ from flask import Flask, render_template, send_from_directory, send_file, sessio
 from flask.ext.socketio import SocketIO, emit, join_room
 import os
 import pystache
+import json
+
+with open ("../package.json", "r") as packageFile:
+    packageInfo = json.load(packageFile)
 
 template_dir = os.path.abspath("../client")
 app = Flask(__name__, template_folder=template_dir)
@@ -9,7 +13,9 @@ app.config["SECRET_KEY"] = "b8weH7evX6ELU0Dy540zgrIt"
 app.debug = True
 socketio = SocketIO(app)
 
-indexData = {}
+indexData = {
+    "packageInfo": packageInfo
+}
 
 if os.environ.has_key("PIWIK_URL") and os.environ.has_key("PIWIK_SITE_ID"):
     indexData["piwik"] = {
@@ -21,7 +27,7 @@ if os.environ.has_key("PRODUCTION_MODE") and os.environ["PRODUCTION_MODE"] == "1
     indexData["productionMode"] = True
 else:
     indexData["productionMode"] = False
-app.logger.debug(indexData)
+
 @app.route("/")
 def index():
     with open ("../client/index.html", "r") as indexfile:

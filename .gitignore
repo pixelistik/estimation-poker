@@ -1,3 +1,4 @@
 *~
 node_modules
 *.marks
+python-server/env

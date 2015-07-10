@@ -1,4 +1,5 @@
 from flask import Flask, render_template, send_from_directory, send_file, session
+from flask.ext.compress import Compress
 from flask.ext.socketio import SocketIO, emit, join_room
 import os
 import pystache
@@ -26,6 +27,8 @@ if os.environ.has_key("PRODUCTION_MODE") and os.environ["PRODUCTION_MODE"] == "1
     indexData["productionMode"] = True
 else:
     indexData["productionMode"] = False
+
+Compress(app)
 
 @app.route("/")
 def index():

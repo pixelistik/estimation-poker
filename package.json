@@ -16,7 +16,9 @@
   "devDependencies": {
     "jshint": "2.x.x",
     "csslint": "~0.10.x",
-    "reload": "~0.1.0"
+    "reload": "~0.1.0",
+    "mocha": "~2.2.5",
+    "nightmare": "~1.8.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

@@ -198,6 +198,10 @@
 	width: 80%;
 }
 
+.is-watcher-label {
+	font-weight: normal;
+}
+
 
 /*--------------------------------------*\
 	#Alerts

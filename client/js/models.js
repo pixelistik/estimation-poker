@@ -49,15 +49,17 @@
 		var self = this;
 
 		var getAllEstimations = function () {
-			var estimations = self.users().map(function (user) {
-				return user.estimation();
-			});
-
-			estimations.push(self.localUser().estimation());
-
-			return estimations.filter(function (estimation) {
-				return estimation !== false;
-			});
+			return self.users()
+				.concat(self.localUser())
+				.filter(function (user) {
+					return true;
+				})
+				.map(function (user) {
+					return user.estimation();
+				})
+				.filter(function (estimation) {
+					return estimation !== false;
+				});
 		};
 
 		var getExistingUserByUuid = function (uuid) {

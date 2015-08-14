@@ -89,6 +89,14 @@ describe("Model", function () {
 
 			expect(EP.Tools.createCookie.calls.allArgs()).toEqual([["ep.user.name", "test user"], ["ep.user.uuid", "test user"]]);
 		});
+
+		it("should be able to be a watcher", function () {
+			user.estimation(2);
+			user.isWatcher(true);
+
+			expect(user.estimation()).toBeFalsy();
+			expect(user.isWatcher()).toBeTruthy();
+		});
 	});
 
 	describe("PokerView", function () {

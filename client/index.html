@@ -87,10 +87,14 @@
 						<td>
 							<span class="username" data-bind="editableText: name" data-edit-hint="<your name>">&lt;your name&gt;</span>
 							<span class="btn-group" data-bind="estimationSelect: {value: estimation, valueSet: $root.pokerValues}, visible: !isWatcher()"></span>
-							<label class="is-watcher-label">
-								<input type="checkbox" data-bind="checked: isWatcher" />
-								Watch only
-							</label>
+							<button
+								type="button"
+								class="btn btn-xs active"
+								data-bind="click: $root.toggleWatcher, css: {'active': isWatcher()}"
+								title="Pause estimating, watch only"
+							>
+								<span class="glyphicon glyphicon-pause"></span>
+							</button>
 						</td>
 						<td>
 							<!-- ko component: {

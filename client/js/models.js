@@ -193,6 +193,10 @@
 			self.displaySharingQrCode(!self.displaySharingQrCode());
 		};
 
+		self.toggleWatcher = function () {
+			self.localUser().isWatcher(!self.localUser().isWatcher());
+		}
+
 		var broadcast = function () {
 			var me = {
 				storyTitle: self.storyTitle(),

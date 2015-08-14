@@ -195,7 +195,7 @@
 
 		self.toggleWatcher = function () {
 			self.localUser().isWatcher(!self.localUser().isWatcher());
-		}
+		};
 
 		var broadcast = function () {
 			var me = {
@@ -224,7 +224,7 @@
 
 				user.name(received.name);
 				user.estimation(received.estimation);
-				user.isWatcher(received.isWatcher)
+				user.isWatcher(received.isWatcher);
 			} else {
 				// A story object was received:
 				storySubscription.isDisposed = true;

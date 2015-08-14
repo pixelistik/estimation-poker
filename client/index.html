@@ -110,9 +110,15 @@
 				<tbody class="remote-users" data-bind="foreach: users">
 					<tr class="hide-uninitialised">
 						<td class="name" data-bind="
-							text: displayName,
 							css: {'name--default': displayName() !== name()}
-						"></td>
+						">
+							<span data-bind="text: displayName"></span>
+							<span
+								class="glyphicon glyphicon-pause"
+								data-bind="visible: isWatcher()"
+								title="User is paused"
+							></span>
+						</td>
 						<td>
 							<!-- ko component: {
 								name: 'card',

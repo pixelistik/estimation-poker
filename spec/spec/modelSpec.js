@@ -192,38 +192,38 @@ describe("Model", function () {
 				expect(pokerView.highestEstimation()).toEqual(8);
 				expect(pokerView.lowestEstimation()).toEqual(3);
 			});
-		});
 
-		it("should ignore a watcher with two users", function () {
-			var user1 = new EP.User();
-			var user2 = new EP.User();
+			it("should ignore a watcher with two users", function () {
+				var user1 = new EP.User();
+				var user2 = new EP.User();
 
-			user1.estimation(1);
-			user2.estimation(3);
+				user1.estimation(1);
+				user2.estimation(3);
 
-			pokerView.users.push(user1);
-			pokerView.users.push(user2);
+				pokerView.users.push(user1);
+				pokerView.users.push(user2);
 
-			user2.isWatcher(true);
+				user2.isWatcher(true);
 
-			expect(pokerView.highestEstimation()).toEqual(1);
-			expect(pokerView.lowestEstimation()).toEqual(1);
-		});
+				expect(pokerView.highestEstimation()).toEqual(1);
+				expect(pokerView.lowestEstimation()).toEqual(1);
+			});
 
-		it("should ignore the local user as a watcher", function () {
-			var user1 = new EP.User();
-			var user2 = new EP.User();
+			it("should ignore the local user as a watcher", function () {
+				var user1 = new EP.User();
+				var user2 = new EP.User();
 
-			user1.estimation(1);
-			user2.estimation(3);
+				user1.estimation(1);
+				user2.estimation(3);
 
-			pokerView.users.push(user1);
-			pokerView.localUser(user2);
+				pokerView.users.push(user1);
+				pokerView.localUser(user2);
 
-			user2.isWatcher(true);
+				user2.isWatcher(true);
 
-			expect(pokerView.highestEstimation()).toEqual(1);
-			expect(pokerView.lowestEstimation()).toEqual(1);
+				expect(pokerView.highestEstimation()).toEqual(1);
+				expect(pokerView.lowestEstimation()).toEqual(1);
+			});
 		});
 
 		describe("Completed estimations", function () {

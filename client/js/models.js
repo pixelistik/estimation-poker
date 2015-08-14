@@ -36,6 +36,13 @@
 		};
 
 		self.isConnected = ko.observable(false);
+		self.isWatcher = ko.observable(false);
+
+		self.isWatcher.subscribe(function (value) {
+			if (value === true) {
+			self.estimation(false);
+			}
+		});
 	};
 
 	EP.PokerView = function (groupName) {

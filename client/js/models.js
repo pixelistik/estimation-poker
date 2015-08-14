@@ -110,6 +110,10 @@
 			self.localUser().broadcast();
 		});
 
+		self.localUser().isWatcher.subscribe(function () {
+			self.localUser().broadcast();
+		});
+
 		socket.emit(
 			"join",
 			{
@@ -216,6 +220,7 @@
 
 				user.name(received.name);
 				user.estimation(received.estimation);
+				user.isWatcher(received.isWatcher)
 			} else {
 				// A story object was received:
 				storySubscription.isDisposed = true;

@@ -194,6 +194,38 @@ describe("Model", function () {
 			});
 		});
 
+		it("should ignore a watcher with two users", function () {
+			var user1 = new EP.User();
+			var user2 = new EP.User();
+
+			user1.estimation(1);
+			user2.estimation(3);
+
+			pokerView.users.push(user1);
+			pokerView.users.push(user2);
+
+			user2.isWatcher(true);
+
+			expect(pokerView.highestEstimation()).toEqual(1);
+			expect(pokerView.lowestEstimation()).toEqual(1);
+		});
+
+		it("should ignore the local user as a watcher", function () {
+			var user1 = new EP.User();
+			var user2 = new EP.User();
+
+			user1.estimation(1);
+			user2.estimation(3);
+
+			pokerView.users.push(user1);
+			pokerView.localUser(user2);
+
+			user2.isWatcher(true);
+
+			expect(pokerView.highestEstimation()).toEqual(1);
+			expect(pokerView.lowestEstimation()).toEqual(1);
+		});
+
 		describe("Completed estimations", function () {
 			it("should correctly tell if no estimations are there", function () {
 				var user1 = new EP.User();
@@ -240,6 +272,45 @@ describe("Model", function () {
 				pokerView.localUser(user2);
 
 				expect(pokerView.estimationsComplete()).toBeTruthy();
+			});
+
+			it("should determine estimations as complete if remote user is watcher", function () {
+				var user1 = new EP.User();
+				var user2 = new EP.User();
+
+				user1.isWatcher(true);
+				user2.estimation(1);
+
+				pokerView.users.push(user1);
+				pokerView.localUser(user2);
+
+				expect(pokerView.estimationsComplete()).toBeTruthy();
+			});
+
+			it("should determine estimations as complete if local user is watcher", function () {
+				var user1 = new EP.User();
+				var user2 = new EP.User();
+
+				user1.estimation(1);
+				user2.isWatcher(true);
+
+				pokerView.users.push(user1);
+				pokerView.localUser(user2);
+
+				expect(pokerView.estimationsComplete()).toBeTruthy();
+			});
+
+			it("should determine estimations as incomplete if there are only watchers", function () {
+				var user1 = new EP.User();
+				var user2 = new EP.User();
+
+				user1.isWatcher(true);
+				user2.isWatcher(true);
+
+				pokerView.users.push(user1);
+				pokerView.localUser(user2);
+
+				expect(pokerView.estimationsComplete()).toBeFalsy();
 			});
 
 			it("should tell if the round is in progress", function () {

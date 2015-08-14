@@ -52,7 +52,7 @@
 			return self.users()
 				.concat(self.localUser())
 				.filter(function (user) {
-					return true;
+					return user.isWatcher() !== true;
 				})
 				.map(function (user) {
 					return user.estimation();
@@ -151,10 +151,13 @@
 		});
 
 		self.estimationsComplete = ko.computed(function () {
-			var estimationsCount = getAllEstimations().length;
-			var usersCount = 1 + self.users().length; // +1 = localUser
-
-			return estimationsCount === usersCount;
+			return self.users()
+				.concat(self.localUser())
+				.filter(function (user) {
+					return user.isWatcher() !== true &&
+						user.estimation() === false;
+				}).length === 0 &&
+				getAllEstimations().length > 0;
 		});
 
 		self.roundIsInProgress = ko.computed(function () {

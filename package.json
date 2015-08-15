@@ -8,7 +8,7 @@
   },
   "main": "server.js",
   "dependencies": {
-    "socket.io": "~0.9.x",
+    "socket.io": "~1.2.x",
     "express": "~4.10.6",
     "compression": "~1.2.2",
     "mustache-express": "~1.2.1"

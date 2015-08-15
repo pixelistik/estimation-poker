@@ -40,13 +40,6 @@ app.get("/", function (request, response) {
 	response.render("index.html", indexData);
 });
 
-app.get("/js/lib/socket.io.js", function (request, response) {
-	response.sendFile(
-		__dirname + "/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js",
-		{ maxAge: 1000 * 3600 * 24 * 365 }
-	);
-});
-
 app.use(express.static("./client", { maxAge: 1000 * 3600 * 24 * 365 }));
 
 if (!process.env.PRODUCTION_MODE) {

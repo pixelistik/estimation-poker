@@ -1,5 +1,5 @@
 web:
-  image: node:0.10-onbuild
+  image: node:4.0.0-onbuild
   volumes:
     - .:/usr/src/app
   ports:

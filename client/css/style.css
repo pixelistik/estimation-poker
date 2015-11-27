@@ -213,10 +213,25 @@
 	border-radius: 0 0 4px 4px;
 }
 
+/*--------------------------------------*\
+	#Actions
+\*--------------------------------------*/
+
+.actions {
+	margin: 10px 0;
+}
 
 /*--------------------------------------*\
 	#Tutorial
 \*--------------------------------------*/
+
+.tutorial {
+	display: none;
+}
+
+.alone .tutorial {
+	display: block;
+}
 
 .tutorial a {
 	color: #333;
@@ -226,3 +241,16 @@
 	margin: 1em 0;
 }
 
+/*--------------------------------------*\
+	#Sharing
+\*--------------------------------------*/
+
+.sharing,
+.sharing .btn {
+	color: #888;
+}
+
+.alone .sharing,
+.alone .sharing .btn {
+	color: inherit;
+}

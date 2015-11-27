@@ -44,7 +44,7 @@ app.use(express.static("./client", { maxAge: 1000 * 3600 * 24 * 365 }));
 
 if (!process.env.PRODUCTION_MODE) {
 	// Automatic reloading for convenient dev environment
-	require("reload")(server, app);
+	require("reload")(server, app, 1000);
 }
 
 io.sockets.on("connection", function (socket) {
@@ -70,4 +70,3 @@ io.sockets.on("connection", function (socket) {
 		socket.broadcast.to(group).emit("new round");
 	});
 });
-

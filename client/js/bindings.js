@@ -8,12 +8,6 @@
 
 			element.classList.add("estimation-select");
 
-			var markup;
-			for(var i = 0; i < values().length; i++) {
-				markup = '<button type="button" class="btn  estimation-select__btn  estimation-select__btn-' + i + '" data-index="' + i + '">' + values[i] + '</button>';
-				element.insertAdjacentHTML('beforeend', markup);
-			}
-
 			var clickHandler = function (event) {
 				// Unset value if the button was already active
 				if(event.target.classList.contains("active")) {
@@ -152,4 +146,3 @@
 		}
 	};
 })(window.ko);
-

@@ -5,16 +5,22 @@ all: client/js/client.prod.min.js
 client/js/client.prod.js: node_modules/socket.io/node_modules/socket.io-client/socket.io.js \
 		client/js/lib/knockout-debug.js \
 		client/js/tools.js \
-		client/js/models.js \
-		client/js/bindings.js \
+		client/js/models/User.js \
+		client/js/models/PokerView.js \
+		client/js/bindings/estimationSelect.js \
+		client/js/bindings/editableText.js \
+		client/js/bindings/pageTitle.js \
 		client/js/app.js
 	# Concatenate JS
 	cat node_modules/socket.io/node_modules/socket.io-client/socket.io.js \
 		client/js/lib/qrcode.min.js \
 		client/js/lib/knockout-debug.js \
 		client/js/tools.js \
-		client/js/models.js \
-		client/js/bindings.js \
+		client/js/models/User.js \
+		client/js/models/PokerView.js \
+		client/js/bindings/estimationSelect.js \
+		client/js/bindings/editableText.js \
+		client/js/bindings/pageTitle.js \
 		client/js/app.js \
 		> client/js/client.prod.js
 

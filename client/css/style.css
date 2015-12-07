@@ -6,6 +6,9 @@
 	display: none;
 }
 
+.uninitialised .hide-uninitialised.card {
+	visibility: hidden;
+}
 
 /*--------------------------------------*\
 	#Logo

@@ -75,7 +75,9 @@
 		<div class="story col-lg-4">
 			<h2>The Story</h2>
 			<blockquote class="story-title">
-				<p data-bind="editableText: storyTitle" data-edit-hint="<edit story title>">&lt;edit story title&gt;</p>
+				<p data-bind="editableText: storyTitle" data-edit-hint="<edit story title>">
+					<span class="et-hint  uninitialised-placeholder">&lt;edit story title&gt;</span>
+				</p>
 			</blockquote>
 		</div>
 
@@ -85,7 +87,9 @@
 				<tbody class="local-user" data-bind="with: localUser">
 					<tr>
 						<td>
-							<span class="username" data-bind="editableText: name" data-edit-hint="<your name>">&lt;your name&gt;</span>
+							<span class="username" data-bind="editableText: name" data-edit-hint="<your name>">
+								<span class="et-hint  uninitialised-placeholder">&lt;your name&gt;</span>
+							</span>
 							<span class="btn-group" data-bind="estimationSelect: {value: estimation, valueSet: $root.pokerValues}, visible: !isWatcher()">
 								<button type="button" class="btn  estimation-select__btn  estimation-select__btn-0  uninitialised-placeholder">0</button>
 								<button type="button" class="btn  estimation-select__btn  estimation-select__btn-1  uninitialised-placeholder">1</button>

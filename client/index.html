@@ -86,7 +86,18 @@
 					<tr>
 						<td>
 							<span class="username" data-bind="editableText: name" data-edit-hint="<your name>">&lt;your name&gt;</span>
-							<span class="btn-group" data-bind="estimationSelect: {value: estimation, valueSet: $root.pokerValues}, visible: !isWatcher()"></span>
+							<span class="btn-group" data-bind="estimationSelect: {value: estimation, valueSet: $root.pokerValues}, visible: !isWatcher()">
+								<button type="button" class="btn  estimation-select__btn  estimation-select__btn-0  uninitialised-placeholder">0</button>
+								<button type="button" class="btn  estimation-select__btn  estimation-select__btn-1  uninitialised-placeholder">1</button>
+								<button type="button" class="btn  estimation-select__btn  estimation-select__btn-2  uninitialised-placeholder">2</button>
+								<button type="button" class="btn  estimation-select__btn  estimation-select__btn-3  uninitialised-placeholder">3</button>
+								<button type="button" class="btn  estimation-select__btn  estimation-select__btn-4  uninitialised-placeholder">5</button>
+								<button type="button" class="btn  estimation-select__btn  estimation-select__btn-5  uninitialised-placeholder">8</button>
+								<button type="button" class="btn  estimation-select__btn  estimation-select__btn-6  uninitialised-placeholder">13</button>
+								<button type="button" class="btn  estimation-select__btn  estimation-select__btn-7  uninitialised-placeholder">20</button>
+								<button type="button" class="btn  estimation-select__btn  estimation-select__btn-8  uninitialised-placeholder">40</button>
+								<button type="button" class="btn  estimation-select__btn  estimation-select__btn-9  uninitialised-placeholder">100</button>
+							</span>
 							<button
 								type="button"
 								class="btn btn-xs active"

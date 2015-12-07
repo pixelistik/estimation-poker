@@ -12317,6 +12317,9 @@ ko.exportSymbol('nativeTemplateEngine', ko.nativeTemplateEngine);
 			}
 		});
 	};
+})(window.EP = window.EP || {}, window.ko);
+(function (EP, ko) {
+	"use strict";
 
 	EP.PokerView = function (groupName) {
 		var self = this;
@@ -12561,7 +12564,6 @@ ko.exportSymbol('nativeTemplateEngine', ko.nativeTemplateEngine);
 		});
 	};
 })(window.EP = window.EP || {}, window.ko);
-
 (function (ko) {
 	"use strict";
 
@@ -12571,12 +12573,6 @@ ko.exportSymbol('nativeTemplateEngine', ko.nativeTemplateEngine);
 			var values = valueAccessor().valueSet;
 
 			element.classList.add("estimation-select");
-
-			var markup;
-			for(var i = 0; i < values().length; i++) {
-				markup = '<button type="button" class="btn  estimation-select__btn  estimation-select__btn-' + i + '" data-index="' + i + '">' + values[i] + '</button>';
-				element.insertAdjacentHTML('beforeend', markup);
-			}
 
 			var clickHandler = function (event) {
 				// Unset value if the button was already active
@@ -12636,11 +12632,13 @@ ko.exportSymbol('nativeTemplateEngine', ko.nativeTemplateEngine);
 			var value = valueAccessor().value;
 			var values = valueAccessor().valueSet();
 
-			element.innerHTML = "";
+			var markup = "";
 			for(var i = 0; i < values.length; i++) {
-				var markup = '<button type="button" class="btn  estimation-select__btn  estimation-select__btn-' + i + '" data-index="' + i + '">' + values[i] + '</button>';
-				element.insertAdjacentHTML('beforeend', markup);
+				markup += '<button type="button" class="btn  estimation-select__btn  estimation-select__btn-' + i + '" data-index="' + i + '">' + values[i] + '</button>';
 			}
+
+			element.innerHTML = "";
+			element.insertAdjacentHTML('beforeend', markup);
 
 			var buttons = element.querySelectorAll("button");
 
@@ -12653,6 +12651,9 @@ ko.exportSymbol('nativeTemplateEngine', ko.nativeTemplateEngine);
 			}
 		}
 	};
+})(window.ko);
+(function (ko) {
+	"use strict";
 
 	ko.bindingHandlers.editableText = {
 		init: function (element, valueAccessor) {
@@ -12708,6 +12709,9 @@ ko.exportSymbol('nativeTemplateEngine', ko.nativeTemplateEngine);
 			}
 		}
 	};
+})(window.ko);
+(function (ko) {
+	"use strict";
 
 	ko.bindingHandlers.pageTitle = {
 		update: function (element, valueAccessor) {
@@ -12716,7 +12720,6 @@ ko.exportSymbol('nativeTemplateEngine', ko.nativeTemplateEngine);
 		}
 	};
 })(window.ko);
-
 (function(EP, ko, QRCode) {
 	"use strict";
 	if(location.hash === "") {

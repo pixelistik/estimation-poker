@@ -263,6 +263,15 @@
 	</script>
 	<noscript><p><img src="http://{{piwik.url}}/piwik.php?idsite={{piwik.siteId}}" style="border:0;" alt="" /></p></noscript>
 	<!-- End Piwik Code -->
+	<!-- Boomerang performance tracking -->
+	<script src="js/lib/boomerang/boomerang.js"></script>
+	<script src="js/lib/boomerang/plugins/rt.js"></script>
+	<script type="text/javascript">
+		BOOMR.init();
+		BOOMR.subscribe("before_beacon", function (beacon_data) {
+			_paq.push(['trackEvent', 'Performance', 'Boomerang', 't_done', beacon_data.t_done]);
+		})
+	</script>
 	{{/piwik}}
 </body>
 </html>

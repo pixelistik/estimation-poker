@@ -9,7 +9,7 @@
 	"globals": {
 		"EP": true,
 		"ko": true,
-		"io": true
-
+		"io": true,
+		"module": true
 	}
 }

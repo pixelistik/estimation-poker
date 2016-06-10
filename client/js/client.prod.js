@@ -12186,18 +12186,19 @@ ko.exportSymbol('nativeTemplateEngine', ko.nativeTemplateEngine);
 }));
 }());
 })();
-(function(EP) {
+(function(window) {
 	"use strict";
-	EP.Tools = {};
 
-	EP.Tools.uuid = function () {
+	var Tools = {};
+
+	Tools.uuid = function () {
 		return('xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
 			var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
 			return v.toString(16);
 		}));
 	};
 
-	EP.Tools.base64Id = function (length) {
+	Tools.base64Id = function (length) {
 		var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 		var id = "";
 
@@ -12212,7 +12213,7 @@ ko.exportSymbol('nativeTemplateEngine', ko.nativeTemplateEngine);
 	};
 
 	// Cookie functions: http://www.quirksmode.org/js/cookies.html
-	EP.Tools.createCookie = function (name, value, days) {
+	Tools.createCookie = function (name, value, days) {
 		var expires = "";
 		if (days) {
 			var date = new Date();
@@ -12223,7 +12224,7 @@ ko.exportSymbol('nativeTemplateEngine', ko.nativeTemplateEngine);
 		document.cookie = name + "=" + value + expires + "; path=/";
 	};
 
-	EP.Tools.readCookie = function (name) {
+	Tools.readCookie = function (name) {
 		var nameEQ = name + "=";
 		var ca = document.cookie.split(';');
 		for(var i=0; i < ca.length; i++) {
@@ -12238,11 +12239,11 @@ ko.exportSymbol('nativeTemplateEngine', ko.nativeTemplateEngine);
 		return null;
 	};
 
-	EP.Tools.eraseCookie = function (name) {
-		EP.Tools.createCookie(name, "", -1);
+	Tools.eraseCookie = function (name) {
+		Tools.createCookie(name, "", -1);
 	};
 
-	EP.Tools.safeMailtoHref = function (subject, body) {
+	Tools.safeMailtoHref = function (subject, body) {
 		return "mailto:?" +
 			"subject=" +
 			encodeURIComponent(subject) +
@@ -12251,7 +12252,7 @@ ko.exportSymbol('nativeTemplateEngine', ko.nativeTemplateEngine);
 			encodeURIComponent(body);
 	};
 
-	EP.Tools.bootstrapDropdowns = function () {
+	Tools.bootstrapDropdowns = function () {
 		var dropdownTriggers = document.querySelectorAll(".dropdown-toggle");
 		var dropdownMenu = document.querySelectorAll(".dropdown-menu");
 
@@ -12265,12 +12266,19 @@ ko.exportSymbol('nativeTemplateEngine', ko.nativeTemplateEngine);
 		Array.prototype.forEach.call(dropdownTriggers, toggleParentOpen);
 	};
 
-	EP.Tools.init = function () {
-		EP.Tools.bootstrapDropdowns();
+	Tools.init = function () {
+		Tools.bootstrapDropdowns();
 	};
 
-})(window.EP = window.EP || {});
+	// Export as module or global
+	if (typeof module !== "undefined" && module.exports) {
+		module.exports = Tools;
+	} else {
+		window.EP = window.EP || {};
+		window.EP.Tools = Tools;
+	}
 
+})(this);
 (function (EP, ko) {
 	"use strict";
 

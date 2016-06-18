@@ -1,7 +1,7 @@
-(function (EP, ko) {
-	"use strict";
+"use strict";
 
-	EP.PokerView = function (groupName) {
+var PokerViewFactory = function (ko, Tools, User, io, window) {
+	var PokerView = function (groupName) {
 		var self = this;
 
 		var getAllEstimations = function () {
@@ -54,7 +54,7 @@
 			self.pokerValues(valueSet.values);
 		};
 
-		self.localUser = ko.observable(new EP.User(socket));
+		self.localUser = ko.observable(new User(socket));
 		self.localUser().loadFromCookie();
 
 		self.localUser().name.subscribe(function () {
@@ -137,7 +137,7 @@
 		});
 
 		self.mailtoHref = ko.pureComputed(function () {
-			return EP.Tools.safeMailtoHref(
+			return Tools.safeMailtoHref(
 				"Estimation Poker URL",
 				window.location
 			);
@@ -174,7 +174,7 @@
 				var user = getExistingUserByUuid(received.uuid);
 
 				if (!user) {
-					 user = new EP.User(socket, received.uuid);
+					 user = new User(socket, received.uuid);
 					 self.users.push(user);
 				}
 
@@ -243,4 +243,8 @@
 			self.localUser().estimation(false);
 		});
 	};
-})(window.EP = window.EP || {}, window.ko);
+
+	return PokerView;
+};
+
+module.exports = PokerViewFactory;

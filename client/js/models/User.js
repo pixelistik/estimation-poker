@@ -1,12 +1,13 @@
-(function (EP, ko) {
-	"use strict";
+"use strict";
 
-	EP.User = function (socket, uuid) {
+var UserFactory = function (ko, Tools) {
+
+	var User = function (socket, uuid) {
 		var self = this;
 
 		var DEFAULT_DISPLAY_NAME = "new user";
 
-		self.uuid = uuid || EP.Tools.uuid();
+		self.uuid = uuid || Tools.uuid();
 
 		self.name = ko.observable("");
 
@@ -22,17 +23,17 @@
 
 		self.loadFromCookie = function () {
 			if(
-				EP.Tools.readCookie("ep.user.name") &&
-				EP.Tools.readCookie("ep.user.uuid")
+				Tools.readCookie("ep.user.name") &&
+				Tools.readCookie("ep.user.uuid")
 			) {
-				self.name(EP.Tools.readCookie("ep.user.name"));
-				self.uuid = EP.Tools.readCookie("ep.user.uuid");
+				self.name(Tools.readCookie("ep.user.name"));
+				self.uuid = Tools.readCookie("ep.user.uuid");
 			}
 		};
 
 		self.saveToCookie = function () {
-			EP.Tools.createCookie("ep.user.name", self.name());
-			EP.Tools.createCookie("ep.user.uuid", self.uuid);
+			Tools.createCookie("ep.user.name", self.name());
+			Tools.createCookie("ep.user.uuid", self.uuid);
 		};
 
 		self.isConnected = ko.observable(false);
@@ -44,4 +45,8 @@
 			}
 		});
 	};
-})(window.EP = window.EP || {}, window.ko);
+
+	return User;
+};
+
+module.exports = UserFactory;

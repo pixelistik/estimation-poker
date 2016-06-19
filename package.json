@@ -21,7 +21,6 @@
     "csslint": "~0.10.x",
     "reload": "~0.1.0",
     "mocha": "~2.2.5",
-    "nightmare": "~1.8.2",
     "jasmine": "~2.4.1",
     "watchify": "~3.7.0",
     "jquery": "~3.0.0"

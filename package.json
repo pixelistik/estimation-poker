@@ -31,7 +31,8 @@
     "specrunner": "node_modules/.bin/browserify spec/spec/*.js -o spec/testBundle.js && firefox spec/SpecRunner.html",
     "start": "node server.js",
     "build": "browserify client/js/app.js -o client/js/bundle.js",
-    "watch": "watchify --debug client/js/app.js -o client/js/bundle.js"
+    "watch": "watchify --debug client/js/app.js -o client/js/bundle.js",
+    "postinstall": "npm run build"
   },
   "author": "@pixelistik",
   "license": "AGPL v3"

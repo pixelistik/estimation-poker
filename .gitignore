@@ -2,3 +2,5 @@
 node_modules
 *.marks
 python-server/env
+client/js/bundle.js
+spec/testBundle.js

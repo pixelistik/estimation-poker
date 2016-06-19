@@ -24,10 +24,12 @@
     "mocha": "~2.2.5",
     "jasmine": "~2.4.1",
     "watchify": "~3.7.0",
-    "jquery": "~3.0.0"
+    "jquery": "~3.0.0",
+    "istanbul": "~0.4.3"
   },
   "scripts": {
     "test": "jasmine",
+    "coverage": "istanbul cover -x '**/spec/**' jasmine",
     "specrunner": "node_modules/.bin/browserify spec/spec/*.js -o spec/testBundle.js && firefox spec/SpecRunner.html",
     "start": "node server.js",
     "build": "browserify client/js/app.js | uglifyjs > client/js/bundle.js",

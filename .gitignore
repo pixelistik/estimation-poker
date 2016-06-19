@@ -4,3 +4,4 @@ node_modules
 python-server/env
 client/js/bundle.js
 spec/testBundle.js
+coverage

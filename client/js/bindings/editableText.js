@@ -55,6 +55,6 @@ var editableTextFactory = function (ko) {
 			}
 		}
 	};
-}
+};
 
 module.exports = editableTextFactory;

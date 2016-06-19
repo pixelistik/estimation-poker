@@ -1,5 +1,5 @@
 {
-	"strict": true,
+	"strict": "global",
 	"camelcase": true,
 	"curly": true,
 	"eqeqeq": true,
@@ -10,6 +10,7 @@
 		"EP": true,
 		"ko": true,
 		"io": true,
-		"module": true
+		"module": true,
+		"require": true
 	}
 }

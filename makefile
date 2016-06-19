@@ -2,7 +2,7 @@
 
 all:
 
-release: lint committedworkingdir clean all
+release: lint committedworkingdir
 	# Update version number, commit rebuilt assets
 	git checkout develop
 	sed -i 's/"version": ".*"/"version": "$(VERSION)"/' package.json

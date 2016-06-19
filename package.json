@@ -12,7 +12,9 @@
     "express": "~4.10.6",
     "compression": "~1.2.2",
     "mustache-express": "~1.2.1",
-    "knockout": "~3.4.0"
+    "knockout": "~3.4.0",
+    "browserify": "~13.0.1",
+    "socket.io-client": "~1.4.6"
   },
   "devDependencies": {
     "jshint": "2.x.x",
@@ -24,7 +26,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "browserify client/js/app.js -o client/js/bundle.js"
   },
   "author": "@pixelistik",
   "license": "AGPL v3"

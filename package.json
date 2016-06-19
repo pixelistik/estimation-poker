@@ -25,7 +25,7 @@
     "jasmine": "~2.4.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jasmine",
     "start": "node server.js",
     "build": "browserify client/js/app.js -o client/js/bundle.js"
   },

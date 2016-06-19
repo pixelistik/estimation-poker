@@ -14,7 +14,8 @@
     "mustache-express": "~1.2.1",
     "knockout": "~3.4.0",
     "browserify": "~13.0.1",
-    "socket.io-client": "~1.4.6"
+    "socket.io-client": "~1.4.6",
+    "uglify-js": "~2.6.2"
   },
   "devDependencies": {
     "jshint": "2.x.x",
@@ -29,7 +30,7 @@
     "test": "jasmine",
     "specrunner": "node_modules/.bin/browserify spec/spec/*.js -o spec/testBundle.js && firefox spec/SpecRunner.html",
     "start": "node server.js",
-    "build": "browserify client/js/app.js -o client/js/bundle.js",
+    "build": "browserify client/js/app.js | uglifyjs > client/js/bundle.js",
     "watch": "watchify --debug client/js/app.js -o client/js/bundle.js",
     "postinstall": "npm run build"
   },

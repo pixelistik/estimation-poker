@@ -1,5 +1,6 @@
-(function (ko) {
-	"use strict";
+"use strict";
+
+var estimationSelectFactory = function (ko,document) {
 
 	ko.bindingHandlers.estimationSelect = {
 		init: function (element, valueAccessor) {
@@ -85,4 +86,6 @@
 			}
 		}
 	};
-})(window.ko);
+};
+
+module.exports = estimationSelectFactory;

@@ -1,6 +1,6 @@
-(function (ko) {
-	"use strict";
+"use strict";
 
+var editableTextFactory = function (ko) {
 	ko.bindingHandlers.editableText = {
 		init: function (element, valueAccessor) {
 
@@ -55,4 +55,6 @@
 			}
 		}
 	};
-})(window.ko);
+}
+
+module.exports = editableTextFactory;

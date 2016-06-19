@@ -23,10 +23,12 @@
     "mocha": "~2.2.5",
     "nightmare": "~1.8.2",
     "jasmine": "~2.4.1",
-    "watchify": "~3.7.0"
+    "watchify": "~3.7.0",
+    "jquery": "~3.0.0"
   },
   "scripts": {
     "test": "jasmine",
+    "specrunner": "node_modules/.bin/browserify spec/spec/*.js -o spec/testBundle.js && firefox spec/SpecRunner.html",
     "start": "node server.js",
     "build": "browserify client/js/app.js -o client/js/bundle.js",
     "watch": "watchify --debug client/js/app.js -o client/js/bundle.js"

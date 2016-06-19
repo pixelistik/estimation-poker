@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/pixelistik/estimation-poker.svg?branch=develop)](https://travis-ci.org/pixelistik/estimation-poker)
+
 ## What
 
 This is a simple implementation of

@@ -22,7 +22,7 @@ require("./bindings/pageTitle.js")(ko, document);
 ko.applyBindings(poker);
 
 // require("./lib/qrcode.js");
-// new QRCode(document.getElementById("sharing-qr-code"), location + "");
+new QRCode(document.getElementById("sharing-qr-code"), location + "");
 
 Tools.init();
 

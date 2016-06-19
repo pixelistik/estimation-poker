@@ -5,7 +5,6 @@
     "spec/modelSpec.js"
   ],
   "helpers": [
-    "helpers/**/*.js"
   ],
   "stopSpecOnExpectationFailure": false,
   "random": false

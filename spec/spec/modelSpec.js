@@ -11,7 +11,8 @@ var io = {
 };
 
 var windowStub = {
-	location: "http://stub.example.com"
+	location: "http://stub.example.com",
+	prompt: jasmine.createSpy("prompt")
 };
 
 var User = require("../../client/js/models/User.js")(ko, Tools);
@@ -530,5 +531,53 @@ describe("Model", function () {
 				});
 			});
 		});
+
+		describe("Custom value set", function () {
+			it("should use the entered values as Poker values", function () {
+				windowStub.prompt.and.returnValue("One;Two;Three");
+				pokerView.promptForCustomPokerValues();
+
+				expect(pokerView.pokerValues()).toEqual(["One", "Two", "Three"]);
+			});
+
+			it("should trim any whitespace", function () {
+				windowStub.prompt.and.returnValue("  One;Two ; Three  ");
+				pokerView.promptForCustomPokerValues();
+
+				expect(pokerView.pokerValues()).toEqual(["One", "Two", "Three"])
+			});
+
+			it("should ignore empty elements", function () {
+				windowStub.prompt.and.returnValue("One;Two;; ");
+				pokerView.promptForCustomPokerValues();
+
+				expect(pokerView.pokerValues()).toEqual(["One", "Two"])
+			});
+
+			it("should ignore a cancelled prompt", function () {
+				spyOn(pokerView, "initNewRound");
+				windowStub.prompt.and.returnValue(null);
+
+				pokerView.promptForCustomPokerValues();
+
+				expect(pokerView.initNewRound).not.toHaveBeenCalled();
+			})
+
+			it("should pre-fill the prompt with the current value set", function () {
+				pokerView.promptForCustomPokerValues();
+				expect(windowStub.prompt).toHaveBeenCalledWith(
+					"Enter your custom estimation range (semicolon separated)",
+					"0;1;2;3;5;8;13;20;40;100"
+				);
+
+				pokerView.pokerValues(["Test 1", "Test 2"])
+
+				pokerView.promptForCustomPokerValues();
+				expect(windowStub.prompt).toHaveBeenCalledWith(
+					"Enter your custom estimation range (semicolon separated)",
+					"Test 1;Test 2"
+				);
+			});
+		})
 	});
 });

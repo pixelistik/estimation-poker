@@ -15,7 +15,8 @@
     "knockout": "~3.4.0",
     "browserify": "~13.0.1",
     "socket.io-client": "~1.4.6",
-    "uglify-js": "~2.6.2"
+    "uglify-js": "~2.6.2",
+    "xss-filters": "~1.2.6"
   },
   "devDependencies": {
     "jshint": "2.x.x",

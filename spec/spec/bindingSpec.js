@@ -173,6 +173,13 @@ describe("Binding", function () {
 				expect(buttons[1].textContent).toEqual("two");
 			});
 
+			it("should be safe against XSS", function () {
+				model.valueSet(["<span>one</span>", "two"]);
+
+				var injectedSpan = fixture.find(".estimation-select__btn span");
+
+				expect(injectedSpan.length).toEqual(0);
+			})
 		});
 
 		describe("mouse click binding", function () {

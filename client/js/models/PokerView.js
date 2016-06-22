@@ -54,6 +54,30 @@ var PokerViewFactory = function (ko, Tools, User, io, window) {
 			self.pokerValues(valueSet.values);
 		};
 
+		self.promptForCustomPokerValues = function () {
+			var currentRangePrefill = self.pokerValues().join(";");
+			var customValues = window.prompt(
+				"Enter your custom estimation range (semicolon separated)",
+				currentRangePrefill
+			);
+
+			if (customValues === null) {
+				return;
+			}
+
+			var preparedValues = customValues.split(";")
+				.map(function (value) {
+					return value.trim();
+				})
+				.filter(function (value) {
+					return value !== "";
+				});
+
+			self.setPokerValues({
+				values: preparedValues
+			});
+		};
+
 		self.localUser = ko.observable(new User(socket));
 		self.localUser().loadFromCookie();
 

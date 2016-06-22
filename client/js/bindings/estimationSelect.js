@@ -1,5 +1,7 @@
 "use strict";
 
+var xssFilters = require('xss-filters');
+
 var estimationSelectFactory = function (ko,document) {
 
 	ko.bindingHandlers.estimationSelect = {
@@ -69,7 +71,7 @@ var estimationSelectFactory = function (ko,document) {
 
 			var markup = "";
 			for(var i = 0; i < values.length; i++) {
-				markup += '<button type="button" class="btn  estimation-select__btn  estimation-select__btn-' + i + '" data-index="' + i + '">' + values[i] + '</button>';
+				markup += '<button type="button" class="btn  estimation-select__btn  estimation-select__btn-' + i + '" data-index="' + i + '">' + xssFilters.inHTMLData(values[i]) + '</button>';
 			}
 
 			element.innerHTML = "";

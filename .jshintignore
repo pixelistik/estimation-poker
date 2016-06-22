@@ -3,3 +3,4 @@ spec/
 **/lib/*
 client/js/bundle.js
 spec/testBundle.js
+coverage/

@@ -2,11 +2,9 @@
 
 var PokerViewFactory = function (ko, Tools, User, io, window) {
 	var PokerView = function (groupName) {
-		var self = this;
-
 		var getAllEstimations = function () {
-			return self.users()
-				.concat(self.localUser())
+			return this.users()
+				.concat(this.localUser())
 				.filter(function (user) {
 					return user.isWatcher() !== true;
 				})
@@ -16,22 +14,22 @@ var PokerViewFactory = function (ko, Tools, User, io, window) {
 				.filter(function (estimation) {
 					return estimation !== false;
 				});
-		};
+		}.bind(this);
 
 		var getExistingUserByUuid = function (uuid) {
-			return self.users().filter(function (user) {
+			return this.users().filter(function (user) {
 				return user.uuid === uuid;
 			})[0];
-		};
+		}.bind(this);
 
 		var socket = io.connect("/");
 
-		self.pokerValues = ko.observableArray([0, 1, 2, 3, 5, 8, 13, 20, 40, 100]);
-		var pokerValuesSubscription = self.pokerValues.subscribe(function () {
+		this.pokerValues = ko.observableArray([0, 1, 2, 3, 5, 8, 13, 20, 40, 100]);
+		var pokerValuesSubscription = this.pokerValues.subscribe(function () {
 			broadcast();
 		});
 
-		self.pokerValueSets = [
+		this.pokerValueSets = [
 			{
 				title: "Scrum",
 				values: [0, 1, 2, 3, 5, 8, 13, 20, 40, 100]
@@ -42,20 +40,20 @@ var PokerViewFactory = function (ko, Tools, User, io, window) {
 			}
 		];
 
-		self.initNewRound = function () {
-			self.localUser().estimation(false);
+		this.initNewRound = function () {
+			this.localUser().estimation(false);
 			socket.emit("new round");
 		};
 
-		self.setPokerValues = function (valueSet) {
+		this.setPokerValues = function (valueSet) {
 			socket.emit("set poker values", JSON.stringify(valueSet));
 
-			self.initNewRound();
-			self.pokerValues(valueSet.values);
+			this.initNewRound();
+			this.pokerValues(valueSet.values);
 		};
 
-		self.promptForCustomPokerValues = function () {
-			var currentRangePrefill = self.pokerValues().join(";");
+		this.promptForCustomPokerValues = function () {
+			var currentRangePrefill = this.pokerValues().join(";");
 			var customValues = window.prompt(
 				"Enter your custom estimation range (semicolon separated)",
 				currentRangePrefill
@@ -73,46 +71,46 @@ var PokerViewFactory = function (ko, Tools, User, io, window) {
 					return value !== "";
 				});
 
-			self.setPokerValues({
+			this.setPokerValues({
 				values: preparedValues
 			});
 		};
 
-		self.localUser = ko.observable(new User(socket));
-		self.localUser().loadFromCookie();
+		this.localUser = ko.observable(new User(socket));
+		this.localUser().loadFromCookie();
 
-		self.localUser().name.subscribe(function () {
-			self.localUser().broadcast();
-			self.localUser().saveToCookie();
-		});
+		this.localUser().name.subscribe(function () {
+			this.localUser().broadcast();
+			this.localUser().saveToCookie();
+		}.bind(this));
 
-		self.localUser().estimation.subscribe(function () {
-			self.localUser().broadcast();
-		});
+		this.localUser().estimation.subscribe(function () {
+			this.localUser().broadcast();
+		}.bind(this));
 
-		self.localUser().isWatcher.subscribe(function () {
-			self.localUser().broadcast();
-		});
+		this.localUser().isWatcher.subscribe(function () {
+			this.localUser().broadcast();
+		}.bind(this));
 
 		socket.emit(
 			"join",
 			{
 				groupName: groupName,
-				userUuid: self.localUser().uuid
+				userUuid: this.localUser().uuid
 			}
 		);
 
-		self.localUser().broadcast();
+		this.localUser().broadcast();
 
-		self.users = ko.observableArray([]);
+		this.users = ko.observableArray([]);
 
-		self.storyTitle = ko.observable("");
-		var storySubscription = self.storyTitle.subscribe(function () {
+		this.storyTitle = ko.observable("");
+		var storySubscription = this.storyTitle.subscribe(function () {
 			broadcast();
 		});
 
 		// http://stackoverflow.com/a/6102340/376138
-		self.highestEstimation = ko.computed(function () {
+		this.highestEstimation = ko.computed(function () {
 			var estimations = getAllEstimations();
 
 			var result = Math.max.apply(null, estimations);
@@ -121,9 +119,9 @@ var PokerViewFactory = function (ko, Tools, User, io, window) {
 				return false;
 			}
 			return result;
-		});
+		}.bind(this));
 
-		self.lowestEstimation = ko.computed(function () {
+		this.lowestEstimation = ko.computed(function () {
 			var estimations = getAllEstimations();
 
 			var result = Math.min.apply(null, estimations);
@@ -134,56 +132,56 @@ var PokerViewFactory = function (ko, Tools, User, io, window) {
 			return result;
 		});
 
-		self.estimationsComplete = ko.computed(function () {
-			return self.users()
-				.concat(self.localUser())
+		this.estimationsComplete = ko.computed(function () {
+			return this.users()
+				.concat(this.localUser())
 				.filter(function (user) {
 					return user.isWatcher() !== true &&
 						user.estimation() === false;
 				}).length === 0 &&
 				getAllEstimations().length > 0;
-		});
+		}.bind(this));
 
-		self.roundIsInProgress = ko.computed(function () {
+		this.roundIsInProgress = ko.computed(function () {
 			var estimationsCount = getAllEstimations().length;
 
-			return estimationsCount > 0 && !self.estimationsComplete();
-		});
+			return estimationsCount > 0 && !this.estimationsComplete();
+		}.bind(this));
 
-		self.statusTitle = ko.computed(function () {
+		this.statusTitle = ko.computed(function () {
 			var statusPrefix = "";
 
-			if (self.estimationsComplete()) {
+			if (this.estimationsComplete()) {
 				statusPrefix = "✓ ";
 			}
 
 			return statusPrefix + "Estimation Poker";
-		});
+		}.bind(this));
 
-		self.mailtoHref = ko.pureComputed(function () {
+		this.mailtoHref = ko.pureComputed(function () {
 			return Tools.safeMailtoHref(
 				"Estimation Poker URL",
 				window.location
 			);
 		});
 
-		self.displaySharingQrCode = ko.observable(false);
+		this.displaySharingQrCode = ko.observable(false);
 
-		self.toggleDisplaySharingQrCode = function () {
-			self.displaySharingQrCode(!self.displaySharingQrCode());
+		this.toggleDisplaySharingQrCode = function () {
+			this.displaySharingQrCode(!this.displaySharingQrCode());
 		};
 
-		self.toggleWatcher = function () {
-			self.localUser().isWatcher(!self.localUser().isWatcher());
+		this.toggleWatcher = function () {
+			this.localUser().isWatcher(!this.localUser().isWatcher());
 		};
 
 		var broadcast = function () {
 			var me = {
-				storyTitle: self.storyTitle(),
-				pokerValues: self.pokerValues()
+				storyTitle: this.storyTitle(),
+				pokerValues: this.pokerValues()
 			};
 			socket.emit("update", JSON.stringify(me));
-		};
+		}.bind(this);
 
 		var update = function (data) {
 			var received = JSON.parse(data);
@@ -191,7 +189,7 @@ var PokerViewFactory = function (ko, Tools, User, io, window) {
 			if(received.uuid !== undefined) {
 				// A user object was received:
 
-				if(received.uuid === self.localUser().uuid) {
+				if(received.uuid === this.localUser().uuid) {
 					return;
 				}
 
@@ -199,7 +197,7 @@ var PokerViewFactory = function (ko, Tools, User, io, window) {
 
 				if (!user) {
 					 user = new User(socket, received.uuid);
-					 self.users.push(user);
+					 this.users.push(user);
 				}
 
 				user.name(received.name);
@@ -210,40 +208,40 @@ var PokerViewFactory = function (ko, Tools, User, io, window) {
 				storySubscription.isDisposed = true;
 				pokerValuesSubscription.isDisposed = true;
 
-				self.storyTitle(received.storyTitle);
-				self.pokerValues(received.pokerValues);
+				this.storyTitle(received.storyTitle);
+				this.pokerValues(received.pokerValues);
 
 				storySubscription.isDisposed = false;
 				pokerValuesSubscription.isDisposed = false;
 			}
-		};
+		}.bind(this);
 
 		var removeUser = function (uuid) {
-			var users = self.users().filter(function (user) {
+			var users = this.users().filter(function (user) {
 				return user.uuid !== uuid;
 			});
 
-			self.users(users);
-		};
+			this.users(users);
+		}.bind(this);
 
 		socket.on("connect", function () {
-			self.localUser().isConnected(true);
-		});
+			this.localUser().isConnected(true);
+		}.bind(this));
 		socket.on("disconnect", function () {
-			self.localUser().isConnected(false);
-		});
+			this.localUser().isConnected(false);
+		}.bind(this));
 		socket.on("reconnect", function () {
-			self.localUser().isConnected(true);
-		});
+			this.localUser().isConnected(true);
+		}.bind(this));
 
 		socket.on("update", function (data) {
 			update(data);
-		});
+		}.bind(this));
 
 		socket.on("who is there", function () {
-			self.localUser().broadcast();
+			this.localUser().broadcast();
 			broadcast();
-		});
+		}.bind(this));
 
 		socket.on("reconnect", function () {
 			// The client has a different session ID after reconnect,
@@ -252,20 +250,20 @@ var PokerViewFactory = function (ko, Tools, User, io, window) {
 				"join",
 				{
 					groupName: groupName,
-					userUuid: self.localUser().uuid
+					userUuid: this.localUser().uuid
 				}
 			);
-			self.localUser().broadcast();
+			this.localUser().broadcast();
 			broadcast();
-		});
+		}.bind(this));
 
 		socket.on("user disconnected", function (data) {
 			removeUser(data);
 		});
 
 		socket.on("new round", function () {
-			self.localUser().estimation(false);
-		});
+			this.localUser().estimation(false);
+		}.bind(this));
 	};
 
 	return PokerView;

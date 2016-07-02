@@ -1,6 +1,6 @@
 "use strict";
 
-var PokerViewFactory = function (ko, Tools, User, io, window) {
+var PokerViewFactory = function (ko, Tools, User, io, window, LocalUser) {
 	var PokerView = function (groupName) {
 		var getAllEstimations = function () {
 			return this.users()

@@ -26,10 +26,12 @@
     "jasmine": "~2.4.1",
     "watchify": "~3.7.0",
     "jquery": "~3.0.0",
-    "istanbul": "~0.4.3"
+    "istanbul": "~0.4.3",
+    "devtool": "~1.8.3"
   },
   "scripts": {
     "test": "jasmine",
+    "test:debug": "echo 'Use `debugger` in code to set a breakpoint.' && node_modules/.bin/devtool node_modules/.bin/jasmine",
     "coverage": "istanbul cover -x '**/spec/**' jasmine",
     "specrunner": "node_modules/.bin/browserify spec/spec/*.js -o spec/testBundle.js && firefox spec/SpecRunner.html",
     "start": "node server.js",

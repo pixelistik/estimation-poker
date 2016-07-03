@@ -76,21 +76,8 @@ var PokerViewFactory = function (ko, Tools, User, io, window, LocalUser) {
 			});
 		};
 
-		this.localUser = ko.observable(new User(socket));
+		this.localUser = ko.observable(new LocalUser(socket));
 		this.localUser().loadFromCookie();
-
-		this.localUser().name.subscribe(function () {
-			this.localUser().broadcast();
-			this.localUser().saveToCookie();
-		}.bind(this));
-
-		this.localUser().estimation.subscribe(function () {
-			this.localUser().broadcast();
-		}.bind(this));
-
-		this.localUser().isWatcher.subscribe(function () {
-			this.localUser().broadcast();
-		}.bind(this));
 
 		socket.emit(
 			"join",

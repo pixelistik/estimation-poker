@@ -5,6 +5,8 @@ Tools.readCookie = function () {
 	return "stub cookie";
 }
 
+Tools.createCookie = function () { }
+
 // socket.io stub
 var io = {
 	connect: function () {}

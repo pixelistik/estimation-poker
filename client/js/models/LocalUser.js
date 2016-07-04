@@ -18,6 +18,18 @@ var LocalUserFactory = function (User) {
 			this.broadcast();
 		}.bind(user));
 
+        socket.on("connect", function () {
+			this.isConnected(true);
+		}.bind(user));
+
+		socket.on("disconnect", function () {
+			this.isConnected(false);
+		}.bind(user));
+
+		socket.on("reconnect", function () {
+			this.isConnected(true);
+		}.bind(user));
+
         return user;
     };
 

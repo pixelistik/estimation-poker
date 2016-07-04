@@ -211,16 +211,6 @@ var PokerViewFactory = function (ko, Tools, User, io, window, LocalUser) {
 			this.users(users);
 		}.bind(this);
 
-		socket.on("connect", function () {
-			this.localUser().isConnected(true);
-		}.bind(this));
-		socket.on("disconnect", function () {
-			this.localUser().isConnected(false);
-		}.bind(this));
-		socket.on("reconnect", function () {
-			this.localUser().isConnected(true);
-		}.bind(this));
-
 		socket.on("update", function (data) {
 			update(data);
 		}.bind(this));

@@ -117,6 +117,40 @@ describe("Model", function () {
 		});
 	});
 
+	describe("LocalUser", function () {
+		var localUser;
+
+		beforeEach(function () {
+			localUser = new LocalUser(socketMock);
+		});
+
+		it("should broadcast and save name changes", function () {
+			spyOn(localUser, "broadcast");
+			spyOn(localUser, "saveToCookie");
+
+			localUser.name("my new name");
+
+			expect(localUser.broadcast).toHaveBeenCalled();
+			expect(localUser.saveToCookie).toHaveBeenCalled();
+		});
+
+		it("should broadcast estimation changes", function () {
+			spyOn(localUser, "broadcast");
+
+			localUser.estimation(2);
+
+			expect(localUser.broadcast).toHaveBeenCalled();
+		});
+
+		it("should broadcast watcher state changes", function () {
+			spyOn(localUser, "broadcast");
+
+			localUser.isWatcher(true);
+
+			expect(localUser.broadcast).toHaveBeenCalled();
+		});
+	});
+
 	describe("PokerView", function () {
 		var user;
 

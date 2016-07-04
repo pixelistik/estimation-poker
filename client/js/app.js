@@ -5,7 +5,7 @@ var io = require("socket.io-client");
 
 var Tools = require("./tools.js");
 var User = require("./models/User.js")(ko, Tools);
-var LocalUser = require("./models/User.js")(User);
+var LocalUser = require("./models/LocalUser.js")(User);
 var PokerView = require("./models/PokerView.js")(ko, Tools, User, io, window, LocalUser);
 
 if(location.hash === "") {

@@ -30,6 +30,10 @@ var LocalUserFactory = function (User) {
 			this.isConnected(true);
 		}.bind(user));
 
+        user.toggleWatcher = function () {
+			this.isWatcher(!this.isWatcher());
+		}.bind(user);
+
         return user;
     };
 

@@ -158,10 +158,6 @@ var PokerViewFactory = function (ko, Tools, User, io, window, LocalUser) {
 			this.displaySharingQrCode(!this.displaySharingQrCode());
 		};
 
-		this.toggleWatcher = function () {
-			this.localUser().isWatcher(!this.localUser().isWatcher());
-		};
-
 		var broadcast = function () {
 			var me = {
 				storyTitle: this.storyTitle(),

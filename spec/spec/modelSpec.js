@@ -149,6 +149,16 @@ describe("Model", function () {
 
 			expect(localUser.broadcast).toHaveBeenCalled();
 		});
+
+		it("should be able to toggle the watcher state", function () {
+			localUser.isWatcher(false);
+
+			localUser.toggleWatcher();
+			expect(localUser.isWatcher()).toBeTruthy();
+
+			localUser.toggleWatcher();
+			expect(localUser.isWatcher()).toBeFalsy();
+		});
 	});
 
 	describe("PokerView", function () {

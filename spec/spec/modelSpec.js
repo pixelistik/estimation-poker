@@ -559,7 +559,7 @@ describe("Model", function () {
 			});
 
 			it("triggered by event: should reset local user's estimation", function () {
-				var user1 = new User();
+				var user1 = new LocalUser(socketMock);
 				user1.estimation(3);
 				pokerView.localUser(user1);
 

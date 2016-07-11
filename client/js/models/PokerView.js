@@ -234,9 +234,6 @@ var PokerViewFactory = function (ko, Tools, User, io, window, LocalUser) {
 			removeUser(data);
 		});
 
-		socket.on("new round", function () {
-			this.localUser().estimation(false);
-		}.bind(this));
 	};
 
 	return PokerView;

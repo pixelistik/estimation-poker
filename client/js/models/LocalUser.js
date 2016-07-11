@@ -42,6 +42,6 @@ var LocalUserFactory = function (User) {
     };
 
     return LocalUser;
-}
+};
 
 module.exports = LocalUserFactory;

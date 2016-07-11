@@ -50,7 +50,7 @@ var PokerViewFactory = function (ko, Tools, User, io, window, LocalUser) {
 
 			this.initNewRound();
 			this.pokerValues(valueSet.values);
-		};
+		}.bind(this);
 
 		this.promptForCustomPokerValues = function () {
 			var currentRangePrefill = this.pokerValues().join(";");

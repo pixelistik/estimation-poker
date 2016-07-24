@@ -466,6 +466,23 @@ describe("Model", function () {
 		});
 
 		describe("Remote users", function () {
+			describe("connect", function () {
+				it("should add a new user", function () {
+					socketMock.callHandler("update", '{"uuid": "user-one"}');
+
+					expect(pokerView.users().length).toEqual(1);
+					expect(pokerView.users()[0].uuid).toEqual("user-one");
+				});
+
+				it("should not add a known user again", function () {
+					socketMock.callHandler("update", '{"uuid": "user-one"}');
+					socketMock.callHandler("update", '{"uuid": "user-one"}');
+
+					expect(pokerView.users().length).toEqual(1);
+					expect(pokerView.users()[0].uuid).toEqual("user-one");
+				});
+			});
+			
 			describe("disconnect", function () {
 				it("should remove a remote user", function () {
 					pokerView = new PokerView();

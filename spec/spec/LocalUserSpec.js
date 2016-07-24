@@ -20,7 +20,6 @@ var SocketMock = require("../helpers/SocketMock.js");
 
 var User = require("../../client/js/models/User.js")(ko, Tools);
 var LocalUser = require("../../client/js/models/LocalUser.js")(User);
-var PokerView = require("../../client/js/models/PokerView.js")(ko, Tools, User, io, windowStub, LocalUser);
 
 var socketMock;
 

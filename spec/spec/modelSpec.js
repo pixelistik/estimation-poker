@@ -16,6 +16,7 @@ var windowStub = {
 	location: "http://stub.example.com",
 	prompt: jasmine.createSpy("prompt")
 };
+var SocketMock = require("../helpers/SocketMock.js");
 
 var User = require("../../client/js/models/User.js")(ko, Tools);
 var LocalUser = require("../../client/js/models/LocalUser.js")(User);
@@ -25,27 +26,7 @@ describe("Model", function () {
 	var socketMock;
 
 	beforeEach(function () {
-		// Mock the essential parts of socket.io by
-		// returning a mock socket on io.connect().
-		socketMock = {
-			handlers: {}
-		};
-
-		socketMock.on = jasmine.createSpy("on")
-			.and.callFake(function (eventName, handler) {
-				// Store references to all callback functions:
-				this.handlers[eventName] = this.handlers[eventName] || [];
-				this.handlers[eventName].push(handler);
-			});
-
-		// Helper to call all stored references to handlers for an event
-		socketMock.callHandler = function (eventName, arg) {
-			this.handlers[eventName].forEach(function (handler) {
-				handler(arg);
-			});
-		};
-
-		socketMock.emit = jasmine.createSpy("emit");
+		socketMock = new SocketMock();
 
 		spyOn(io, "connect").and.returnValue(socketMock);
 	});

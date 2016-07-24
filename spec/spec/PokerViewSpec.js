@@ -283,45 +283,7 @@ describe("Completed estimations", function () {
 	});
 });
 
-describe("Local user", function () {
-	it("should broadcast and save to cookie when the name changes", function () {
-		var localUser = pokerView.localUser();
-		spyOn(localUser, "broadcast");
-		spyOn(localUser, "saveToCookie");
-
-		pokerView.localUser().name("An updated test name");
-
-		expect(localUser.broadcast).toHaveBeenCalled();
-		expect(localUser.saveToCookie).toHaveBeenCalled();
-	});
-
-	it("should know its current connection state", function () {
-		var localUser = pokerView.localUser();
-
-		expect(localUser.isConnected()).toBeFalsy();
-
-		socketMock.callHandler("connect");
-		expect(localUser.isConnected()).toBeTruthy();
-
-		socketMock.callHandler("disconnect");
-		expect(localUser.isConnected()).toBeFalsy();
-
-		socketMock.callHandler("reconnect");
-		expect(localUser.isConnected()).toBeTruthy();
-	});
-
-	it("should be able to reconnect", function () {
-		var localUser = pokerView.localUser();
-		localUser.uuid = "re-join-test"
-
-		socketMock.emit.calls.reset();
-		localUser.joinGroup("test-group-name")
-
-		expect(socketMock.emit.calls.allArgs()[0][0]).toEqual("join");
-		expect(socketMock.emit.calls.allArgs()[0][1].groupName).toEqual("test-group-name");
-		expect(socketMock.emit.calls.allArgs()[0][1].userUuid).toEqual("re-join-test");
-	});
-
+describe("Local user handling", function () {
 	it("should re-join the group after reconnect", function () {
 		var localUser = pokerView.localUser();
 
@@ -336,7 +298,7 @@ describe("Local user", function () {
 	});
 });
 
-describe("Remote users", function () {
+describe("Remote users handling", function () {
 	describe("connect", function () {
 		it("should add a new user", function () {
 			socketMock.callHandler("update", '{"uuid": "user-one"}');

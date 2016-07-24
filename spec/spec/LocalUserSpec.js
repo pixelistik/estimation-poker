@@ -71,4 +71,28 @@ describe("LocalUser", function () {
 		localUser.toggleWatcher();
 		expect(localUser.isWatcher()).toBeFalsy();
 	});
+
+	it("should know its current connection state", function () {
+		expect(localUser.isConnected()).toBeFalsy();
+
+		socketMock.callHandler("connect");
+		expect(localUser.isConnected()).toBeTruthy();
+
+		socketMock.callHandler("disconnect");
+		expect(localUser.isConnected()).toBeFalsy();
+
+		socketMock.callHandler("reconnect");
+		expect(localUser.isConnected()).toBeTruthy();
+	});
+
+	it("should be able to reconnect", function () {
+		localUser.uuid = "re-join-test"
+
+		socketMock.emit.calls.reset();
+		localUser.joinGroup("test-group-name")
+
+		expect(socketMock.emit.calls.allArgs()[0][0]).toEqual("join");
+		expect(socketMock.emit.calls.allArgs()[0][1].groupName).toEqual("test-group-name");
+		expect(socketMock.emit.calls.allArgs()[0][1].userUuid).toEqual("re-join-test");
+	});
 });

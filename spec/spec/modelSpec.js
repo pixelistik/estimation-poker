@@ -619,6 +619,16 @@ describe("Model", function () {
 					expect(pokerView.mailtoHref()).toBe("safe-mailto");
 				});
 			});
+
+			it("should be able to toggle the QR code display", function () {
+				pokerView.displaySharingQrCode(false);
+
+				pokerView.toggleDisplaySharingQrCode();
+				expect(pokerView.displaySharingQrCode()).toBeTruthy();
+
+				pokerView.toggleDisplaySharingQrCode();
+				expect(pokerView.displaySharingQrCode()).toBeFalsy();
+			});
 		});
 
 		describe("Custom value set", function () {

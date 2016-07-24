@@ -439,16 +439,29 @@ describe("Model", function () {
 				expect(localUser.isConnected()).toBeTruthy();
 			});
 
-			it("should re-join the group after reconnect", function () {
+			it("should be able to reconnect", function () {
 				var localUser = pokerView.localUser();
 				localUser.uuid = "re-join-test"
 
 				socketMock.emit.calls.reset();
-				socketMock.callHandler("reconnect");
-				
+				localUser.joinGroup("test-group-name")
+
 				expect(socketMock.emit.calls.allArgs()[0][0]).toEqual("join");
 				expect(socketMock.emit.calls.allArgs()[0][1].groupName).toEqual("test-group-name");
 				expect(socketMock.emit.calls.allArgs()[0][1].userUuid).toEqual("re-join-test");
+			});
+
+			it("should re-join the group after reconnect", function () {
+				var localUser = pokerView.localUser();
+
+				spyOn(localUser, "joinGroup");
+				spyOn(localUser, "broadcast");
+
+				socketMock.emit.calls.reset();
+				socketMock.callHandler("reconnect");
+
+				expect(localUser.joinGroup).toHaveBeenCalledWith("test-group-name");
+				expect(localUser.broadcast).toHaveBeenCalled();
 			});
 		});
 

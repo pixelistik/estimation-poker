@@ -172,6 +172,14 @@ describe("Model", function () {
 			expect(pokerView).toBeDefined();
 		});
 
+		it("should be able to broadcast the state when requested by new users", function () {
+			spyOn(pokerView.localUser(), "broadcast");
+
+			socketMock.callHandler("who is there");
+
+			expect(pokerView.localUser().broadcast).toHaveBeenCalled();
+		});
+
 		describe("Highest and lowest estimation", function () {
 			it("should return false when there are no estimations", function () {
 				expect(pokerView.highestEstimation()).toBeFalsy();
@@ -482,7 +490,7 @@ describe("Model", function () {
 					expect(pokerView.users()[0].uuid).toEqual("user-one");
 				});
 			});
-			
+
 			describe("disconnect", function () {
 				it("should remove a remote user", function () {
 					pokerView = new PokerView();

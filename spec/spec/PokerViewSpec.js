@@ -1,12 +1,6 @@
 var ko = require("knockout");
 var Tools = require("../../client/js/tools.js");
 
-Tools.readCookie = function () {
-	return "stub cookie";
-}
-
-Tools.createCookie = function () { }
-
 // socket.io stub
 var io = {
 	connect: function () {}

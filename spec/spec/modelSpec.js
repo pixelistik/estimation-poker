@@ -165,7 +165,7 @@ describe("Model", function () {
 		var user;
 
 		beforeEach(function () {
-			pokerView = new PokerView();
+			pokerView = new PokerView("test-group-name");
 		});
 
 		it("should instantiate", function () {
@@ -437,6 +437,18 @@ describe("Model", function () {
 
 				socketMock.callHandler("reconnect");
 				expect(localUser.isConnected()).toBeTruthy();
+			});
+
+			it("should re-join the group after reconnect", function () {
+				var localUser = pokerView.localUser();
+				localUser.uuid = "re-join-test"
+
+				socketMock.emit.calls.reset();
+				socketMock.callHandler("reconnect");
+				
+				expect(socketMock.emit.calls.allArgs()[0][0]).toEqual("join");
+				expect(socketMock.emit.calls.allArgs()[0][1].groupName).toEqual("test-group-name");
+				expect(socketMock.emit.calls.allArgs()[0][1].userUuid).toEqual("re-join-test");
 			});
 		});
 

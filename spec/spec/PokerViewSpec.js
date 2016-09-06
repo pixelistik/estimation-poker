@@ -61,6 +61,21 @@ describe("Highest and lowest estimation", function () {
 		expect(pokerView.lowestEstimation()).toEqual(3);
 	});
 
+	it("should identify if max and min are the same", function () {
+		var user1 = new User();
+		var user2 = new User();
+
+		pokerView.users.push(user1);
+		pokerView.users.push(user2);
+
+		user1.estimation(5);
+		user2.estimation(5);
+		expect(pokerView.minMaxAreEqual()).toBeTruthy();
+
+		user2.estimation(3);
+		expect(pokerView.minMaxAreEqual()).toBeFalsy();
+	});
+
 	it("should return the correct value if one user has no estimation yet", function () {
 		var user1 = new User();
 		var user2 = new User();

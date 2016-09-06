@@ -119,6 +119,10 @@ var PokerViewFactory = function (ko, Tools, User, io, window, LocalUser) {
 			return result;
 		});
 
+		this.minMaxAreEqual = ko.computed(function () {
+			return this.highestEstimation() === this.lowestEstimation();
+		}.bind(this));
+
 		this.estimationsComplete = ko.computed(function () {
 			return this.users()
 				.concat(this.localUser())

@@ -109,6 +109,10 @@
 	 line-height: 3em;
  }
 
+ .estimations--incomplete .card__indicators {
+ 	visibility: hidden;
+ }
+
 .card__indicator
 {
     color: #f00;

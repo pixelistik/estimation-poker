@@ -91,7 +91,7 @@
     background: #DDD;
 }
 .estimations--incomplete .card__number {
-    visibility: hidden;
+    display: none;
 }
 
 .estimations--incomplete .summary__card {

@@ -1,4 +1,12 @@
 describe('Basic single user estimation', function () {
+    it('Should set the story', function () {
+        cy.visit('http://localhost:5000/#LNzruZcx');
+        cy.get('.story .et-hint').click();
+        cy.get('.story input').type('A good user story{enter}');
+        
+        cy.get('.story .et-label').contains('A good user story');
+    });
+    
     it('Should set the user name', function () {
         cy.visit('http://localhost:5000/#LNzruZcx');
         cy.contains('Estimation Poker');

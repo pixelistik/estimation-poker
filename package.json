@@ -12,7 +12,7 @@
     "express": "~4.16.4",
     "compression": "~1.7.4",
     "mustache-express": "~1.2.1",
-    "knockout": "~3.5.0",
+    "knockout": "~3.4.0",
     "browserify": "~16.2.3",
     "socket.io-client": "~2.2.0",
     "uglify-js": "~3.5.2",

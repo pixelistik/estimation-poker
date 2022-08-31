@@ -224,12 +224,14 @@
 		<div class="card" data-bind="
 			attr: {'class': 'card  card--'+user.estimation()},
 			css: {
-				'card--unplayed': user.estimation() === false,
-				'card--max': user.estimation() === $root.highestEstimation(),
-				'card--min': user.estimation() === $root.lowestEstimation()
+				'card--unplayed': user.estimation() === false
 			}
 		">
 			<div class="card__number" data-bind="text: $root.pokerValues()[user.estimation()]"></div>
+		</div>
+		<div class="card__indicators">
+			<span class="card__indicator  card__indicator--max" data-bind="visible: !$root.minMaxAreEqual() && user.estimation() === $root.highestEstimation()">←max</span>
+			<span class="card__indicator  card__indicator--min" data-bind="visible: !$root.minMaxAreEqual() && user.estimation() === $root.lowestEstimation()">←min</span>
 		</div>
 	</script>
 

@@ -2,7 +2,9 @@
   "spec_dir": "spec",
   "spec_files": [
     "spec/toolSpec.js",
-    "spec/modelSpec.js"
+    "spec/UserSpec.js",
+    "spec/LocalUserSpec.js",
+    "spec/PokerViewSpec.js"
   ],
   "helpers": [
   ],

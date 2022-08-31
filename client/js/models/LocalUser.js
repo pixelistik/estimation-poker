@@ -18,6 +18,16 @@ var LocalUserFactory = function (User) {
 			this.broadcast();
 		}.bind(user));
 
+        user.joinGroup = function (groupName) {
+            socket.emit(
+				"join",
+				{
+					groupName: groupName,
+					userUuid: this.uuid
+				}
+			);
+        }.bind(user);
+
         socket.on("connect", function () {
 			this.isConnected(true);
 		}.bind(user));

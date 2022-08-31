@@ -1,0 +1,25 @@
+{
+    "config": {
+        "target": "http://localhost:5000",
+        "phases": [
+            {
+                "duration": 120,
+                "arrivalRate": 100
+            }
+        ]
+    },
+    "scenarios": [
+        {
+            "engine": "socketio",
+            "flow": [
+                {"get": {"url": "/"}},
+                {
+                    "emit": {
+                        "channel": "update",
+                        "data": "{\"uuid\":\"99a70907-b298-4391-8537-e044e3265e91\",\"name\":\"test\",\"displayName\":\"pixelistik\",\"estimation\":3,\"isConnected\":true,\"isWatcher\":false}"
+                    }
+                }
+            ]
+        }
+    ]
+}

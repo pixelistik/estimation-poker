@@ -41,12 +41,13 @@
 
 
 .card {
-    width: 2em;
+	display: block;
+	float: left;
+    min-width: 2em;
     height: 3em;
     border: 0.2em solid #aaa;
     border-radius: 0.2em;
     background: #fefefe;
-    margin-right: 2em;
 }
 
 /*
@@ -67,6 +68,7 @@
 
 .card__number {
     line-height: 2.6em;
+	margin: 0 0.2em;
     text-align: center;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #333;
@@ -100,27 +102,22 @@
  * Highlight the highest and lowest card (but not if they are equal)
  */
 
-.card--min .card__number:after,
-.card--max .card__number:after
+ .card__indicators
+ {
+     display: inline-block;
+	 width: 2em;
+	 line-height: 3em;
+ }
+
+ .estimations--incomplete .card__indicators {
+ 	visibility: hidden;
+ }
+
+.card__indicator
 {
-    display: block;
-    margin-top: -2.8em;
-    margin-left: 2em;
     color: #f00;
     font-weight: normal;
 }
-.card--min .card__number:after {
-    content: "←min";
-}
-
-.card--max .card__number:after {
-    content: "←max";
-}
-
-.card--min.card--max .card__number:after{
-	display: none;
-}
-
 
 /*
  * Drop shadow for the cards

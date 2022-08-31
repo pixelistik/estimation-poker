@@ -119,6 +119,10 @@ var PokerViewFactory = function (ko, Tools, User, io, window, LocalUser) {
 			return result;
 		});
 
+		this.minMaxAreEqual = ko.computed(function () {
+			return this.highestEstimation() === this.lowestEstimation();
+		}.bind(this));
+
 		this.estimationsComplete = ko.computed(function () {
 			return this.users()
 				.concat(this.localUser())
@@ -219,13 +223,7 @@ var PokerViewFactory = function (ko, Tools, User, io, window, LocalUser) {
 		socket.on("reconnect", function () {
 			// The client has a different session ID after reconnect,
 			// so we need to re-join the group.
-			socket.emit(
-				"join",
-				{
-					groupName: groupName,
-					userUuid: this.localUser().uuid
-				}
-			);
+			this.localUser().joinGroup(groupName);
 			this.localUser().broadcast();
 			broadcast();
 		}.bind(this));

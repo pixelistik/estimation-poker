@@ -13,6 +13,7 @@
     "express": "^4.17.1",
     "knockout": "~3.4.0",
     "mustache-express": "~1.2.1",
+    "prom-client": "^14.1.0",
     "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0",
     "uglify-js": "^3.5.15",

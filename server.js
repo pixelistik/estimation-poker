@@ -6,6 +6,8 @@ var compression = require('compression');
 var mustacheExpress = require('mustache-express');
 var socketio = require("socket.io");
 
+const prometheusClient = require("prom-client");
+
 var port = Number(process.env.PORT || 5000);
 
 var app = express();
@@ -34,6 +36,10 @@ if (process.env.PRODUCTION_MODE) {
 	indexData.productionMode = true;
 }
 
+const gauge = new prometheusClient.Gauge({
+  name: "connected_sockets_count",
+  help: "number of currently connected websockets",
+});
 app.use(compression());
 
 app.get("/", function (request, response) {
@@ -41,6 +47,17 @@ app.get("/", function (request, response) {
 });
 
 app.use(express.static("./client", { maxAge: 1000 * 3600 * 24 * 365 }));
+
+app.get("/metrics", async function (request, response) {
+  var srvSockets = io.sockets.sockets;
+  const connectedUserCount = Object.keys(srvSockets).length;
+
+  gauge.set(connectedUserCount); // Set to 10
+
+  response.set("Content-Type", prometheusClient.register.contentType);
+  response.end(await prometheusClient.register.metrics());
+  //   response.send(connectedUserCount + "");
+});
 
 if (!process.env.PRODUCTION_MODE) {
 	// Automatic reloading for convenient dev environment

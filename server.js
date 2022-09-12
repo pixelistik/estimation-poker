@@ -13,6 +13,9 @@ var port = Number(process.env.PORT || 5000);
 var app = express();
 var server = app.listen(port);
 
+var monitoringApp = express();
+monitoringApp.listen(9091);
+
 var io = socketio.listen(server);
 
 app.engine("html", mustacheExpress());
@@ -48,7 +51,7 @@ app.get("/", function (request, response) {
 
 app.use(express.static("./client", { maxAge: 1000 * 3600 * 24 * 365 }));
 
-app.get("/metrics", async function (request, response) {
+monitoringApp.get("/metrics", async function (request, response) {
   var srvSockets = io.sockets.sockets;
   const connectedUserCount = Object.keys(srvSockets).length;
 

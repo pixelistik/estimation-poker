@@ -43,5 +43,5 @@ processes = []
     timeout = "2s"
 
 [metrics]
-  port = 9091 # default for most prometheus clients
-  path = "/metrics" # default for most prometheus clients
+  port = 9091
+  path = "/metrics"

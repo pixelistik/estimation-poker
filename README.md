@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/pixelistik/estimation-poker.svg?branch=develop)](https://travis-ci.org/pixelistik/estimation-poker) [![Greenkeeper badge](https://badges.greenkeeper.io/pixelistik/estimation-poker.svg)](https://greenkeeper.io/)
+[![Node.js CI](https://github.com/pixelistik/estimation-poker/actions/workflows/node.js.yml/badge.svg)](https://github.com/pixelistik/estimation-poker/actions/workflows/node.js.yml)
 
 ## What
 

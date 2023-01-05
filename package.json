@@ -10,7 +10,7 @@
   "dependencies": {
     "browserify": "^16.2.3",
     "compression": "^1.7.4",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "knockout": "~3.4.0",
     "mustache-express": "~1.2.1",
     "prom-client": "^14.1.0",

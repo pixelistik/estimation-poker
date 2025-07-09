@@ -6,3 +6,5 @@ client/js/bundle.js
 spec/testBundle.js
 coverage
 spec/performance/artillery_report_*
+cypress/videos
+cypress/screenshots

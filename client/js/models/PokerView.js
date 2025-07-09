@@ -232,6 +232,17 @@ var PokerViewFactory = function (ko, Tools, User, io, window, LocalUser) {
 			removeUser(data);
 		});
 
+		// 1) View-Methode, um per Klick den Kick-Request abzusetzen
+		this.kickUser = function(user) {
+			socket.emit("kick user", user.uuid);
+		}.bind(this);
+
+		// Nur der gekickte Client bekommt dieses Event → einfach Socket trennen
+		socket.on("kick user", function() {
+			socket.disconnect();
+      		alert("You were kicked from the poker. Reload to reconnect.");
+		});
+
 	};
 
 	return PokerView;

@@ -89,4 +89,16 @@ io.sockets.on("connection", function (socket) {
   socket.on("new round", function () {
     socket.broadcast.to(group).emit("new round");
   });
+
+  socket.on("kick user", function (targetUuid) {
+    // Nur dem gezielten Nutzer das Kick-Event senden:
+    var allSockets = io.sockets.sockets;
+    for (var id in allSockets) {
+      var s = allSockets[id];
+      if (s.userUuid === targetUuid) {
+        s.emit("kick user");
+        break;
+      }
+    }
+  });
 });
